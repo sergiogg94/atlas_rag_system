@@ -4,4 +4,9 @@ version = "0.1.0"
 description = "Develpment of my own RAG System"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "colorlog>=6.10.1",
+    "fastapi>=0.135.3",
+    "python-dotenv>=1.2.2",
+    "uvicorn>=0.44.0",
+]
