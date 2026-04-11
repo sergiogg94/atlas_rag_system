@@ -11,7 +11,7 @@ custom_dict = {
     "formatters": {
         "default": {
             "()": colorlog.ColoredFormatter,
-            "format": "[%(asctime)s] [%(log_color)s%(levelname)-4s%(reset)s] [%(module)s] [%(funcName)s] >> %(message)s",
+            "format": "%(log_color)s%(levelname)-4s%(reset)s (%(asctime)s) (%(module)s %(funcName)s): %(message)s",
             "datefmt": "%Y-%m-%d %H:%M:%S",
         }
     },
