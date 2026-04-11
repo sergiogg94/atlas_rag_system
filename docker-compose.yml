@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  db:
+    image: ankane/pgvector:latest
+    container_name: atlas_pgvector_db
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db_data:
+    name: atlas_pgvector_data
