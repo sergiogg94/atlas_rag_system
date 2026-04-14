@@ -5,6 +5,14 @@ from sqlalchemy.dialects.postgresql import ARRAY
 
 
 class Document(Base):
+    """Represents a document in the database.
+
+    Attributes::
+        id (int): The primary key of the document.
+        title (str): The title of the document.
+        chunks (List[Chunk]): A list of associated chunks for the document.
+    """
+
     __tablename__ = "documents"
 
     id = Column(Integer, primary_key=True)
@@ -14,6 +22,15 @@ class Document(Base):
 
 
 class Chunk(Base):
+    """Represents a chunk of text associated with a document.
+
+    Attributes::
+        id (int): The primary key of the chunk.
+        document_id (int): The foreign key referencing the associated document.
+        content (str): The content of the chunk.
+        embedding (List[float]): The embedding vector for the chunk.
+    """
+
     __tablename__ = "chunks"
 
     id = Column(Integer, primary_key=True)

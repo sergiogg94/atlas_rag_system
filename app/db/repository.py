@@ -5,7 +5,17 @@ import numpy as np
 
 
 class Repository:
-    async def create_document(self, title: str):
+    """Repository class for managing database interactions."""
+
+    async def create_document(self, title: str) -> Document:
+        """Create a new document record in the database.
+
+        Args:
+            title (str): The title of the document to create.
+
+        Returns:
+            Document: The created Document instance.
+        """
         async with SessionLocal() as session:
             document = Document(title=title)
             session.add(document)
@@ -14,12 +24,28 @@ class Repository:
             return document
 
     async def add_chunk(self, document_id: int, content: str, embedding: list[float]):
+        """Add a new chunk associated with a document.
+
+        Args:
+            document_id (int): The ID of the parent document.
+            content (str): The text content of the chunk.
+            embedding (list[float]): The vector embedding for the chunk.
+        """
         async with SessionLocal() as session:
             chunk = Chunk(document_id=document_id, content=content, embedding=embedding)
             session.add(chunk)
             await session.commit()
 
-    async def search(self, query_embedding: list[float], top_k: int = 5):
+    async def search(self, query_embedding: list[float], top_k: int = 5) -> list[str]:
+        """Search stored chunks by cosine similarity against the query embedding.
+
+        Args:
+            query_embedding (list[float]): The embedding vector for the query.
+            top_k (int, optional): The number of top matching chunks to return. Defaults to 5.
+
+        Returns:
+            list[str]: A list of chunk contents ranked by similarity to the query.
+        """
         async with SessionLocal() as session:
             result = await session.execute(select(Chunk))
             chunks = result.scalars().all()

@@ -1,10 +1,8 @@
 import logging
 import logging.config
-from dotenv import load_dotenv
-import os
 import colorlog
+from app.core.config import settings
 
-load_dotenv()
 
 custom_dict = {
     "version": 1,
@@ -24,7 +22,7 @@ custom_dict = {
     "loggers": {
         "": {
             "handlers": ["console"],
-            "level": os.getenv("LOG_LEVEL", "INFO"),
+            "level": settings.log_level,
         }
     },
 }

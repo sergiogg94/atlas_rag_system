@@ -5,6 +5,11 @@ load_dotenv()
 
 
 class Settings:
+    """Application configuration loaded from environment variables.
+
+    This class reads environment variables for the application environment.
+    """
+
     def __init__(self):
         # Basic settings
         self.app_env = os.getenv("APP_ENV", "dev")
