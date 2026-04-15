@@ -34,3 +34,42 @@ class QueryResponse(BaseModel):
         [],
         description="List of sources used to generate the answer",
     )
+
+
+class IngestRequest(BaseModel):
+    """Request model for ingesting a new document into the RAG system.
+
+    Attributes:
+        title (str): The title of the document to be ingested.
+        content (str): The content of the document to be ingested.
+    """
+
+    title: str = Field(
+        ...,
+        description="Title of the document to be ingested",
+        example="Geography for dummies",
+        min_length=1,
+        max_length=200,
+    )
+    content: str = Field(
+        ...,
+        description="Content of the document to be ingested",
+        example="France is a country in Europe. The capital of France is Paris.",
+        min_length=1,
+    )
+
+
+class SearchRequest(BaseModel):
+    """Request model for searching documents in the RAG system.
+
+    Attributes:
+        query (str): The search query to find relevant documents.
+    """
+
+    query: str = Field(
+        ...,
+        description="Search query to find relevant documents",
+        example="capital of France",
+        min_length=1,
+        max_length=500,
+    )

@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from app.core.logging import logger
 from app.services.rag_service import RAGService
-from app.models.schemas import QueryRequest, QueryResponse
+from app.models.schemas import QueryRequest, QueryResponse, IngestRequest, SearchRequest
 
 router = APIRouter()
 rag_service = RAGService()
@@ -31,3 +31,32 @@ async def query(payload: QueryRequest) -> QueryResponse:
     logger.info(f"Received query: {payload.question}")
     response = await rag_service.query(payload.question)
     return QueryResponse(response=response, sources=[])
+
+
+@router.post("/ingest")
+async def ingest(playload: IngestRequest) -> dict:
+    """Ingest a new document into the RAG system.
+
+    Args:
+        playload (IngestRequest): The request payload containing the title
+            and content of the document to be ingested.
+
+    Returns:
+        dict: A dictionary containing the status of the ingestion.
+    """
+    await rag_service.ingest(title=playload.title, content=playload.content)
+    return {"status": "ok"}
+
+
+@router.get("/search")
+async def search(payload: SearchRequest) -> dict:
+    """Search for relevant documents in the RAG system based on a query.
+
+    Args:
+        payload (SearchRequest): The request payload containing the search query.
+
+    Returns:
+        dict: A dictionary containing the search results.
+    """
+    results = await rag_service.search(payload.query)
+    return {"results": results}
