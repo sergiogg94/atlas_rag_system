@@ -2,6 +2,7 @@ from sqlalchemy import select
 from app.db.engine import SessionLocal
 from app.db.models import Document, Chunk
 import numpy as np
+from app.core.logging import logger
 
 
 class Repository:
@@ -17,10 +18,12 @@ class Repository:
             Document: The created Document instance.
         """
         async with SessionLocal() as session:
+            logger.info(f"Creating document with title: {title}")
             document = Document(title=title)
             session.add(document)
             await session.commit()
             await session.refresh(document)
+            logger.info(f"Document created with ID: {document.id}")
             return document
 
     async def add_chunk(self, document_id: int, content: str, embedding: list[float]):

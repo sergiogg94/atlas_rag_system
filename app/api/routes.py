@@ -28,7 +28,7 @@ async def query(payload: QueryRequest) -> QueryResponse:
     Returns:
         QueryResponse: The response from the RAG service, including the answer and source metadata.
     """
-    logger.info(f"Received query: {payload.question}")
+    logger.info(f"Received question: {payload.question}")
     response = await rag_service.query(payload.question)
     return QueryResponse(response=response, sources=[])
 
@@ -44,6 +44,7 @@ async def ingest(playload: IngestRequest) -> dict:
     Returns:
         dict: A dictionary containing the status of the ingestion.
     """
+    logger.info("Ingest document called")
     await rag_service.ingest(title=playload.title, content=playload.content)
     return {"status": "ok"}
 
@@ -58,5 +59,6 @@ async def search(payload: SearchRequest) -> dict:
     Returns:
         dict: A dictionary containing the search results.
     """
+    logger.info(f"Search called with query: {payload.query}")
     results = await rag_service.search(payload.query)
     return {"results": results}

@@ -1,4 +1,5 @@
 import random
+from app.core.logging import logger
 
 
 class RAGService:
@@ -9,6 +10,7 @@ class RAGService:
         return [random.random() for _ in range(768)]
 
     def fake_chunking(self, content: str):
+        logger.info("Chunking content...")
         # This is a placeholder for an actual chunking function
         return [content[i : i + 100] for i in range(0, len(content), 100)]
 
@@ -16,6 +18,7 @@ class RAGService:
         return "Not implemented"
 
     async def ingest(self, title: str, content: str):
+        logger.info("Ingest document process started")
         from app.db.repository import Repository
 
         repo = Repository()
@@ -26,8 +29,10 @@ class RAGService:
         for chunk in chunks:
             embedding = self.fake_embedding(chunk)
             await repo.add_chunk(document_id=doc.id, content=chunk, embedding=embedding)
+        logger.info("Document ingestion completed successfully.")
 
     async def search(self, query: str):
+        logger.info("Search process started")
         from app.db.repository import Repository
 
         repo = Repository()
