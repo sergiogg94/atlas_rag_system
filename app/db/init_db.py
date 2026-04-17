@@ -1,4 +1,5 @@
 import asyncio
+from app.db.models import Document, Chunk
 from app.db.engine import engine, Base
 
 
