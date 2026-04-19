@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field
+from typing import Optional
 
 
 class QueryRequest(BaseModel):
@@ -72,4 +73,19 @@ class SearchRequest(BaseModel):
         example="capital of France",
         min_length=1,
         max_length=500,
+    )
+
+
+class UploadRequest(BaseModel):
+    """Request model for uploading and ingesting a document into the RAG system.
+
+    Attributes:
+        title (Optional[str]): Optional title for the uploaded document. If not provided, the filename will be used.
+    """
+
+    title: Optional[str] = Field(
+        None,
+        description="Optional title for the uploaded document",
+        example="Geography for dummies",
+        max_length=200,
     )
