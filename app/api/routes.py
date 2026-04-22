@@ -1,5 +1,10 @@
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 from app.core.logging import logger
+from app.core.exceptions import (
+    DocumentValidationError,
+    DocumentParsingError,
+    UploadProcessError,
+)
 from app.services.rag_service import RAGService
 from app.services.upload_service import UploadService
 from app.models.schemas import (
@@ -83,14 +88,24 @@ async def upload(
         dict: A dictionary containing the status and title of the ingested document.
     """
     logger.info(f"Upload document called with file: {file.filename}")
-    upload_service = UploadService()
-    return await upload_service.process_upload(
-        file=file,
-        title=title,
-        chunk_size=chunk_size,
-        chunk_overlap=chunk_overlap,
-        min_chunk_size=min_chunk_size,
-    )
+    try:
+        upload_service = UploadService()
+        return await upload_service.process_upload(
+            file=file,
+            title=title,
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap,
+            min_chunk_size=min_chunk_size,
+        )
+    except DocumentValidationError as e:
+        logger.error(f"Document validation error: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
+    except DocumentParsingError as e:
+        logger.error(f"Document parsing error: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
+    except UploadProcessError as e:
+        logger.error(f"Upload process error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.get("/search")

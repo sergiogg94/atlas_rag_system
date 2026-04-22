@@ -1,5 +1,10 @@
-from fastapi import UploadFile, HTTPException
+from fastapi import UploadFile
 from app.core.logging import logger
+from app.core.exceptions import (
+    DocumentValidationError,
+    DocumentParsingError,
+    UploadProcessError,
+)
 from app.services.rag_service import RAGService
 from app.services.validators import validate_document
 from app.services.parsers import DocumentParser
@@ -37,7 +42,9 @@ class UploadService:
             dict: A dictionary containing the status and title of the ingested document.
 
         Raises:
-            HTTPException: If file validation, parsing, or ingestion fails.
+            DocumentValidationError: If file validation fails.
+            DocumentParsingError: If document parsing fails.
+            UploadProcessError: If document ingestion fails.
         """
         logger.info(f"Upload document process started with file: {file.filename}")
 
@@ -56,15 +63,13 @@ class UploadService:
             is_valid, error_message = self.validator(file_path)
             if not is_valid:
                 logger.error(f"Document validation failed: {error_message}")
-                raise HTTPException(status_code=400, detail=error_message)
+                raise DocumentValidationError(error_message)
 
             # Parse the document
             parsed_content = self.parser.parse(file_path)
             if parsed_content is None:
                 logger.error("Failed to parse document")
-                raise HTTPException(
-                    status_code=400, detail="Failed to parse the document."
-                )
+                raise DocumentParsingError("Failed to parse the document.")
 
             # Use provided title or fall back to filename
             document_title = title or file.filename
@@ -82,11 +87,13 @@ class UploadService:
             )
             return {"status": "ok", "title": document_title}
 
-        except HTTPException:
+        except DocumentValidationError:
+            raise
+        except DocumentParsingError:
             raise
         except Exception as e:
             logger.error(f"Error during document upload: {e}")
-            raise HTTPException(status_code=500, detail=str(e))
+            raise UploadProcessError(str(e))
 
         finally:
             # Clean up the temporary file
