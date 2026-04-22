@@ -3,6 +3,8 @@ import re
 
 
 class TextChunker:
+    """Utility class for chunking text into manageable pieces for RAG processing."""
+
     def __init__(
         self, chunk_size: int = 500, chunk_overlap: int = 50, min_chunk_size: int = 100
     ):
@@ -11,7 +13,14 @@ class TextChunker:
         self.min_chunk_size = min_chunk_size
 
     def clean_text(self, text: str) -> str:
-        """Clean and normalize text"""
+        """Clean text to remove aditional spaces and newlines.
+
+        Args:
+            text (str): Text to clean.
+
+        Returns:
+            str: Cleaned text.
+        """
         # Remove multiple spaces
         text = re.sub(r"\s+", " ", text)
         # Remove multiple newlines
@@ -19,8 +28,13 @@ class TextChunker:
         return text.strip()
 
     def chunk_by_characters(self, text: str) -> List[str]:
-        """
-        Simple character-based chunking with overlap
+        """Chunk text by character count, trying to break at sentence boundaries when possible.
+
+        Args:
+            text (str): Text to chunk.
+
+        Returns:
+            List[str]: List of text chunks.
         """
         text = self.clean_text(text)
         chunks = []
@@ -54,7 +68,14 @@ class TextChunker:
         return chunks
 
     def get_chunk_stats(self, chunks: List[str]) -> dict:
-        """Get statistics about chunks"""
+        """Generates statistics abput chunks.
+
+        Args:
+            chunks (List[str]): List of text chunks.
+
+        Returns:
+            dict: A dictionary containing statistics about the chunks.
+        """
         if not chunks:
             return {}
 

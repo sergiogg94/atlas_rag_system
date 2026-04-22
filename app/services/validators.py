@@ -7,6 +7,15 @@ MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
 
 
 def validate_document(file_path: Path) -> Tuple[bool, Optional[str]]:
+    """Validate a document file for ingestion.
+
+    Args:
+        file_path (Path): Path to the document file to validate.
+
+    Returns:
+        Tuple[bool, Optional[str]]: A tuple containing a boolean indicating if the document is valid,
+            and an optional error message if the document is invalid.
+    """
     logger.info(f"Validating document: {file_path}")
 
     # Check if the file exists

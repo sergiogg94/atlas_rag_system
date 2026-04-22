@@ -23,7 +23,13 @@ class RAGService:
     async def query(self, question: str):
         return "Not implemented"
 
-    async def ingest(self, title: str, content: str):
+    async def ingest(self, title: str, content: str) -> None:
+        """Ingest a document to the database
+
+        Args:
+            title (str): Title of the document.
+            content (str): Content of the document.
+        """
         logger.info("Ingest document process started")
         from app.db.repository import Repository
 
