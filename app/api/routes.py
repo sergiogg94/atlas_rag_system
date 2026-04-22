@@ -50,13 +50,18 @@ async def ingest(playload: IngestRequest) -> dict:
     """Ingest a new document into the RAG system.
 
     Args:
-        playload (IngestRequest): The request payload containing the title
-            and content of the document to be ingested.
+        playload (IngestRequest): The request payload containing the title,
+            content, and chunking parameters for the document to be ingested.
 
     Returns:
         dict: A dictionary containing the status of the ingestion.
     """
     logger.info("Ingest document called")
+    rag_service = RAGService(
+        chunk_size=playload.chunk_size,
+        chunk_overlap=playload.chunk_overlap,
+        min_chunk_size=playload.min_chunk_size,
+    )
     await rag_service.ingest(title=playload.title, content=playload.content)
     return {"status": "ok"}
 
@@ -65,11 +70,19 @@ async def ingest(playload: IngestRequest) -> dict:
 async def upload(
     file: UploadFile = File(...),
     title: Optional[str] = Form(None),
+    chunk_size: int = Form(500),
+    chunk_overlap: int = Form(50),
+    min_chunk_size: int = Form(100),
 ) -> dict:
     logger.info(f"Upload document called with file: {file.filename}")
 
     # Validate input using UploadRequest schema
-    upload_request = UploadRequest(title=title)
+    upload_request = UploadRequest(
+        title=title,
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
+        min_chunk_size=min_chunk_size,
+    )
 
     # Create a temporary directory and save the file
     temp_dir = tempfile.gettempdir()
@@ -99,6 +112,11 @@ async def upload(
         document_title = upload_request.title or file.filename
 
         # Ingest the parsed content
+        rag_service = RAGService(
+            chunk_size=upload_request.chunk_size,
+            chunk_overlap=upload_request.chunk_overlap,
+            min_chunk_size=upload_request.min_chunk_size,
+        )
         await rag_service.ingest(title=document_title, content=parsed_content)
 
         logger.info(f"Document '{document_title}' uploaded and ingested successfully.")

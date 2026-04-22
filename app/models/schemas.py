@@ -43,6 +43,9 @@ class IngestRequest(BaseModel):
     Attributes:
         title (str): The title of the document to be ingested.
         content (str): The content of the document to be ingested.
+        chunk_size (int): The size of text chunks for processing. Defaults to 500.
+        chunk_overlap (int): The overlap between chunks. Defaults to 50.
+        min_chunk_size (int): The minimum size for a chunk. Defaults to 100.
     """
 
     title: str = Field(
@@ -57,6 +60,21 @@ class IngestRequest(BaseModel):
         description="Content of the document to be ingested",
         example="France is a country in Europe. The capital of France is Paris.",
         min_length=1,
+    )
+    chunk_size: int = Field(
+        500,
+        description="Size of text chunks for processing",
+        ge=1,
+    )
+    chunk_overlap: int = Field(
+        50,
+        description="Overlap between chunks",
+        ge=0,
+    )
+    min_chunk_size: int = Field(
+        100,
+        description="Minimum size for a chunk",
+        ge=1,
     )
 
 
@@ -81,6 +99,9 @@ class UploadRequest(BaseModel):
 
     Attributes:
         title (Optional[str]): Optional title for the uploaded document. If not provided, the filename will be used.
+        chunk_size (int): The size of text chunks for processing. Defaults to 500.
+        chunk_overlap (int): The overlap between chunks. Defaults to 50.
+        min_chunk_size (int): The minimum size for a chunk. Defaults to 100.
     """
 
     title: Optional[str] = Field(
@@ -88,4 +109,19 @@ class UploadRequest(BaseModel):
         description="Optional title for the uploaded document",
         example="Geography for dummies",
         max_length=200,
+    )
+    chunk_size: int = Field(
+        500,
+        description="Size of text chunks for processing",
+        ge=1,
+    )
+    chunk_overlap: int = Field(
+        50,
+        description="Overlap between chunks",
+        ge=0,
+    )
+    min_chunk_size: int = Field(
+        100,
+        description="Minimum size for a chunk",
+        ge=1,
     )
