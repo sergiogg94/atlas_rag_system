@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 from app.core.logging import logger
 from app.services.rag_service import RAGService
+from app.services.upload_service import UploadService
 from app.models.schemas import (
     QueryRequest,
     QueryResponse,
@@ -8,11 +9,6 @@ from app.models.schemas import (
     SearchRequest,
     UploadRequest,
 )
-from app.services.validators import validate_document
-from app.services.parsers import DocumentParser
-from pathlib import Path
-import tempfile
-import os
 from typing import Optional
 
 router = APIRouter()
@@ -74,68 +70,27 @@ async def upload(
     chunk_overlap: int = Form(50),
     min_chunk_size: int = Form(100),
 ) -> dict:
-    logger.info(f"Upload document called with file: {file.filename}")
+    """Upload and ingest a document into the RAG system.
 
-    # Validate input using UploadRequest schema
-    upload_request = UploadRequest(
+    Args:
+        file (UploadFile): The file to upload.
+        title (Optional[str]): Optional title for the document.
+        chunk_size (int): Size of text chunks for processing. Defaults to 500.
+        chunk_overlap (int): Overlap between chunks. Defaults to 50.
+        min_chunk_size (int): Minimum size for a chunk. Defaults to 100.
+
+    Returns:
+        dict: A dictionary containing the status and title of the ingested document.
+    """
+    logger.info(f"Upload document called with file: {file.filename}")
+    upload_service = UploadService()
+    return await upload_service.process_upload(
+        file=file,
         title=title,
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
         min_chunk_size=min_chunk_size,
     )
-
-    # Create a temporary directory and save the file
-    temp_dir = tempfile.gettempdir()
-    file_path = Path(temp_dir) / file.filename
-
-    try:
-        # Save the uploaded file to the temporary directory
-        logger.info(f"Saving file to temporary location: {file_path}")
-        with open(file_path, "wb") as temp_file:
-            content = await file.read()
-            temp_file.write(content)
-
-        # Validate the document
-        is_valid, error_message = validate_document(file_path)
-        if not is_valid:
-            logger.error(f"Document validation failed: {error_message}")
-            raise HTTPException(status_code=400, detail=error_message)
-
-        # Parse the document
-        parser = DocumentParser()
-        parsed_content = parser.parse(file_path)
-        if parsed_content is None:
-            logger.error("Failed to parse document")
-            raise HTTPException(status_code=400, detail="Failed to parse the document.")
-
-        # Use provided title or fall back to filename
-        document_title = upload_request.title or file.filename
-
-        # Ingest the parsed content
-        rag_service = RAGService(
-            chunk_size=upload_request.chunk_size,
-            chunk_overlap=upload_request.chunk_overlap,
-            min_chunk_size=upload_request.min_chunk_size,
-        )
-        await rag_service.ingest(title=document_title, content=parsed_content)
-
-        logger.info(f"Document '{document_title}' uploaded and ingested successfully.")
-        return {"status": "ok", "title": document_title}
-
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Error during document upload: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-    finally:
-        # Clean up the temporary file
-        if file_path.exists():
-            try:
-                os.remove(file_path)
-                logger.info(f"Temporary file removed: {file_path}")
-            except Exception as e:
-                logger.warning(f"Failed to remove temporary file {file_path}: {e}")
 
 
 @router.get("/search")
