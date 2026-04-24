@@ -1,6 +1,7 @@
 import random
 from app.core.logging import logger
 from app.services.chunking import TextChunker
+from app.services.embeddings import EmbeddingsService
 
 
 class RAGService:
@@ -11,14 +12,12 @@ class RAGService:
         chunk_overlap: int = 50,
         min_chunk_size: int = 100,
     ):
-        self.chunk_size = chunk_size
-        self.chunk_overlap = chunk_overlap
-        self.min_chunk_size = min_chunk_size
-
-    # TODO: Implement this fake methods as a separate services
-    def fake_embedding(self, text: str):
-        # This is a placeholder for an actual embedding function
-        return [random.random() for _ in range(768)]
+        self.chunker = TextChunker(
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap,
+            min_chunk_size=min_chunk_size,
+        )
+        self.embeddings_service = EmbeddingsService()
 
     async def query(self, question: str):
         return "Not implemented"
@@ -37,14 +36,9 @@ class RAGService:
 
         doc = await repo.create_document(title=title)
 
-        chunker = TextChunker(
-            chunk_size=self.chunk_size,
-            chunk_overlap=self.chunk_overlap,
-            min_chunk_size=self.min_chunk_size,
-        )
-        chunks = chunker.chunk_by_characters(content)
+        chunks = self.chunker.chunk_by_characters(content)
         for chunk in chunks:
-            embedding = self.fake_embedding(chunk)
+            embedding = await self.embeddings_service.encode(chunk)
             await repo.add_chunk(document_id=doc.id, content=chunk, embedding=embedding)
         logger.info("Document ingestion completed successfully.")
 
@@ -54,6 +48,6 @@ class RAGService:
 
         repo = Repository()
 
-        query_embedding = self.fake_embedding(query)
+        query_embedding = await self.embeddings_service.encode(query)
         results = await repo.search(query_embedding=query_embedding, top_k=5)
         return results
