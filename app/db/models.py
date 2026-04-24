@@ -1,13 +1,13 @@
-from sqlalchemy import Column, Integer, Text, ForeignKey, Float
+from sqlalchemy import Column, Integer, Text, ForeignKey, Index
 from sqlalchemy.orm import relationship
 from app.db.engine import Base
-from sqlalchemy.dialects.postgresql import ARRAY
+from pgvector.sqlalchemy import Vector
 
 
 class Document(Base):
     """Represents a document in the database.
 
-    Attributes::
+    Attributes:
         id (int): The primary key of the document.
         title (str): The title of the document.
         chunks (List[Chunk]): A list of associated chunks for the document.
@@ -24,11 +24,11 @@ class Document(Base):
 class Chunk(Base):
     """Represents a chunk of text associated with a document.
 
-    Attributes::
+    Attributes:
         id (int): The primary key of the chunk.
         document_id (int): The foreign key referencing the associated document.
         content (str): The content of the chunk.
-        embedding (List[float]): The embedding vector for the chunk.
+        embedding (Vector(256)): The embedding vector for the chunk.
     """
 
     __tablename__ = "chunks"
@@ -36,6 +36,15 @@ class Chunk(Base):
     id = Column(Integer, primary_key=True)
     document_id = Column(Integer, ForeignKey("documents.id"), nullable=False)
     content = Column(Text)
-    embedding = Column(ARRAY(Float))
+    embedding = Column(Vector(256))
 
     document = relationship("Document", back_populates="chunks")
+
+    # Create index for similarity search
+    __table_args__ = Index(
+        "chunks_embedding_idx",
+        "embedding",
+        postgresql_using="ivfflat",
+        postgresql_ops={"embedding": "vector_cosine_ops"},
+        postgresql_with={"lists": 100},
+    )

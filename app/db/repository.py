@@ -50,18 +50,11 @@ class Repository:
             list[str]: A list of chunk contents ranked by similarity to the query.
         """
         async with SessionLocal() as session:
-            result = await session.execute(select(Chunk))
+
+            result = await session.execute(
+                select(Chunk)
+                .order_by(Chunk.embedding.cosine_distance(query_embedding))
+                .limit(top_k)
+            )
             chunks = result.scalars().all()
-
-            # Simple cosine similarity search (for demonstration purposes)
-            def sim_cos(a, b):
-                a = np.array(a)
-                b = np.array(b)
-                return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
-
-            scored_chunks = [
-                (chunk, sim_cos(query_embedding, chunk.embedding)) for chunk in chunks
-            ]
-            scored_chunks.sort(key=lambda x: x[1], reverse=True)
-
-            return [c.content for c, _ in scored_chunks[:top_k]]
+            return [chunk.content for chunk in chunks]
