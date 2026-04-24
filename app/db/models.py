@@ -41,10 +41,12 @@ class Chunk(Base):
     document = relationship("Document", back_populates="chunks")
 
     # Create index for similarity search
-    __table_args__ = Index(
-        "chunks_embedding_idx",
-        "embedding",
-        postgresql_using="ivfflat",
-        postgresql_ops={"embedding": "vector_cosine_ops"},
-        postgresql_with={"lists": 100},
+    __table_args__ = (
+        Index(
+            "chunks_embedding_idx",
+            "embedding",
+            postgresql_using="ivfflat",
+            postgresql_ops={"embedding": "vector_cosine_ops"},
+            postgresql_with={"lists": 100},
+        ),
     )
