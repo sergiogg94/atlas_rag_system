@@ -39,7 +39,9 @@ class RAGService:
         chunks = self.chunker.chunk_by_characters(content)
         for chunk in chunks:
             embedding = await self.embeddings_service.encode(chunk)
-            await repo.add_chunk(document_id=doc.id, content=chunk, embedding=embedding)
+            await repo.add_chunk(
+                document_id=doc.id, content=chunk, embedding=embedding[0]
+            )
         logger.info("Document ingestion completed successfully.")
 
     async def search(self, query: str):
