@@ -22,5 +22,8 @@ class Settings:
         self.postgres_host = os.getenv("POSTGRES_HOST", "localhost")
         self.postgres_port = os.getenv("POSTGRES_PORT", "5432")
 
+        # API key's
+        self.voyage_api_key = os.getenv("VOYAGE_API_KEY")
+
 
 settings = Settings()
