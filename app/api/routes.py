@@ -119,5 +119,10 @@ async def search(payload: SearchRequest) -> dict:
         dict: A dictionary containing the search results.
     """
     logger.info(f"Search called with query: {payload.query}")
-    results = await rag_service.search(payload.query)
+    results = await rag_service.search(
+        query=payload.query,
+        top_k=payload.top_k,
+        probes=payload.probes,
+        max_distance=payload.max_distance,
+    )
     return {"results": results}

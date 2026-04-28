@@ -83,6 +83,9 @@ class SearchRequest(BaseModel):
 
     Attributes:
         query (str): The search query to find relevant documents.
+        top_k (int): The number of top matching chunks to return. Defaults to 5.
+        probes (int): The number of probes to use for the search. Defaults to 10.
+        max_distance (float): The maximum cosine distance for a chunk to be considered a match. Defaults to 0.5.
     """
 
     query: str = Field(
@@ -91,6 +94,27 @@ class SearchRequest(BaseModel):
         example="capital of France",
         min_length=1,
         max_length=500,
+    )
+
+    top_k: int = Field(
+        5,
+        description="Number of top matching chunks to return",
+        ge=1,
+        le=100,
+    )
+
+    probes: int = Field(
+        10,
+        description="Number of probes to use for the search",
+        ge=1,
+        le=100,
+    )
+
+    max_distance: float = Field(
+        0.5,
+        description="Maximum cosine distance for a chunk to be considered a match",
+        ge=0.0,
+        le=1.0,
     )
 
 
