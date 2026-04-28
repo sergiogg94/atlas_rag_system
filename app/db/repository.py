@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlalchemy import select, text
 from app.db.engine import SessionLocal
 from app.db.models import Document, Chunk
 import numpy as np
@@ -39,22 +39,45 @@ class Repository:
             session.add(chunk)
             await session.commit()
 
-    async def search(self, query_embedding: list[float], top_k: int = 5) -> list[str]:
+    async def search(
+        self,
+        query_embedding: list[float],
+        top_k: int = 5,
+        probes: int = 10,
+        max_distance: float = 0.5,
+    ) -> list[str]:
         """Search stored chunks by cosine similarity against the query embedding.
 
         Args:
             query_embedding (list[float]): The embedding vector for the query.
             top_k (int, optional): The number of top matching chunks to return. Defaults to 5.
+            probes (int, optional): The number of probes to use for the search. Defaults to 10.
+            max_distance (float, optional): The maximum cosine distance for a chunk to be considered a match. Defaults to 0.5.
 
         Returns:
             list[str]: A list of chunk contents ranked by similarity to the query.
         """
         async with SessionLocal() as session:
+            # Configure the number of probes for the search
+            await session.execute(text(f"SET ivfflat.probes = {probes}"))
+
+            # Add distance column
+            distance_col = Chunk.embedding.cosine_distance(query_embedding).label(
+                "distance"
+            )
 
             result = await session.execute(
-                select(Chunk)
-                .order_by(Chunk.embedding.cosine_distance(query_embedding))
+                select(Chunk, distance_col)
+                .where(distance_col <= max_distance)
+                .order_by(distance_col)
                 .limit(top_k)
             )
-            chunks = result.scalars().all()
-            return [chunk.content for chunk in chunks]
+
+            return [
+                {
+                    "content": chunk.content,
+                    "distance": float(distance),
+                    "id": chunk.id,
+                }
+                for chunk, distance in result.all()
+            ]
