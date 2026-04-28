@@ -3,11 +3,7 @@ from typing import Optional
 
 
 class QueryRequest(BaseModel):
-    """Request model for a question to query the RAG service.
-
-    Attributes:
-        question (str): The user's question to process.
-    """
+    """Request model for a question to query the RAG service."""
 
     question: str = Field(
         ...,
@@ -19,12 +15,7 @@ class QueryRequest(BaseModel):
 
 
 class QueryResponse(BaseModel):
-    """Response model returned by the RAG service.
-
-    Attributes:
-        response (str): The generated answer text.
-        sources (list[str]): A list of sources used to generate the answer.
-    """
+    """Response model returned by the RAG service."""
 
     response: str = Field(
         ...,
@@ -38,15 +29,7 @@ class QueryResponse(BaseModel):
 
 
 class IngestRequest(BaseModel):
-    """Request model for ingesting a new document into the RAG system.
-
-    Attributes:
-        title (str): The title of the document to be ingested.
-        content (str): The content of the document to be ingested.
-        chunk_size (int): The size of text chunks for processing. Defaults to 500.
-        chunk_overlap (int): The overlap between chunks. Defaults to 50.
-        min_chunk_size (int): The minimum size for a chunk. Defaults to 100.
-    """
+    """Request model for ingesting a new document into the RAG system."""
 
     title: str = Field(
         ...,
@@ -79,14 +62,7 @@ class IngestRequest(BaseModel):
 
 
 class SearchRequest(BaseModel):
-    """Request model for searching documents in the RAG system.
-
-    Attributes:
-        query (str): The search query to find relevant documents.
-        top_k (int): The number of top matching chunks to return. Defaults to 5.
-        probes (int): The number of probes to use for the search. Defaults to 10.
-        max_distance (float): The maximum cosine distance for a chunk to be considered a match. Defaults to 0.5.
-    """
+    """Request model for searching documents in the RAG system."""
 
     query: str = Field(
         ...,
@@ -119,14 +95,7 @@ class SearchRequest(BaseModel):
 
 
 class UploadRequest(BaseModel):
-    """Request model for uploading and ingesting a document into the RAG system.
-
-    Attributes:
-        title (Optional[str]): Optional title for the uploaded document. If not provided, the filename will be used.
-        chunk_size (int): The size of text chunks for processing. Defaults to 500.
-        chunk_overlap (int): The overlap between chunks. Defaults to 50.
-        min_chunk_size (int): The minimum size for a chunk. Defaults to 100.
-    """
+    """Request model for uploading and ingesting a document into the RAG system."""
 
     title: Optional[str] = Field(
         None,
