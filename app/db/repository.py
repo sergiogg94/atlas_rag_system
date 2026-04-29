@@ -75,9 +75,10 @@ class Repository:
 
             return [
                 {
+                    "document_id": chunk.document_id,
+                    "chunk_id": chunk.id,
                     "content": chunk.content,
                     "distance": float(distance),
-                    "id": chunk.id,
                 }
                 for chunk, distance in result.all()
             ]

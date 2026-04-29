@@ -22,7 +22,7 @@ class RAGService:
     async def query(self, question: str):
         return "Not implemented"
 
-    async def ingest(self, title: str, content: str) -> None:
+    async def ingest(self, title: str, content: str) -> tuple:
         """Ingest a document to the database
 
         Args:
@@ -43,6 +43,8 @@ class RAGService:
                 document_id=doc.id, content=chunk, embedding=embedding[0]
             )
         logger.info("Document ingestion completed successfully.")
+
+        return doc, len(chunks)
 
     async def search(
         self, query: str, top_k: int = 5, probes: int = 10, max_distance: float = 0.5

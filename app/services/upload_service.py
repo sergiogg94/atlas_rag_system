@@ -28,7 +28,7 @@ class UploadService:
         chunk_size: int = 500,
         chunk_overlap: int = 50,
         min_chunk_size: int = 100,
-    ) -> dict:
+    ) -> tuple:
         """Process an uploaded file and ingest it into the RAG system.
 
         Args:
@@ -39,7 +39,7 @@ class UploadService:
             min_chunk_size (int): Minimum size for a chunk. Defaults to 100.
 
         Returns:
-            dict: A dictionary containing the status and title of the ingested document.
+            tuple: A tuple containing the ingested document, chunk count, and title.
 
         Raises:
             DocumentValidationError: If file validation fails.
@@ -80,12 +80,14 @@ class UploadService:
                 chunk_overlap=chunk_overlap,
                 min_chunk_size=min_chunk_size,
             )
-            await rag_service.ingest(title=document_title, content=parsed_content)
+            doc, chunk_count = await rag_service.ingest(
+                title=document_title, content=parsed_content
+            )
 
             logger.info(
                 f"Document '{document_title}' uploaded and ingested successfully."
             )
-            return {"status": "ok", "title": document_title}
+            return doc, chunk_count, file.filename
 
         except DocumentValidationError:
             raise
