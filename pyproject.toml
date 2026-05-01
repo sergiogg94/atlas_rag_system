@@ -20,3 +20,8 @@ dependencies = [
     "uvicorn>=0.44.0",
     "voyageai>=0.3.7",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+]
