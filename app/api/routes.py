@@ -86,7 +86,6 @@ async def ingest(payload: IngestRequest) -> IngestResponse:
         rag_service = RAGService(
             chunk_size=payload.chunk_size,
             chunk_overlap=payload.chunk_overlap,
-            min_chunk_size=payload.min_chunk_size,
         )
         doc, chunk_count = await rag_service.ingest(
             title=payload.title, content=payload.content

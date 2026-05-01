@@ -10,12 +10,10 @@ class RAGService:
         self,
         chunk_size: int = 500,
         chunk_overlap: int = 50,
-        min_chunk_size: int = 100,
     ):
         self.chunker = TextChunker(
             chunk_size=chunk_size,
             chunk_overlap=chunk_overlap,
-            min_chunk_size=min_chunk_size,
         )
         self.embeddings_service = EmbeddingsService()
 
@@ -36,7 +34,7 @@ class RAGService:
 
         doc = await repo.create_document(title=title)
 
-        chunks = self.chunker.chunk_by_characters(content)
+        chunks = self.chunker.chunk_text(content)
         for chunk in chunks:
             embedding = await self.embeddings_service.encode(chunk)
             await repo.add_chunk(

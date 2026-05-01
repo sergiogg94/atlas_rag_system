@@ -27,7 +27,6 @@ class UploadService:
         title: Optional[str] = None,
         chunk_size: int = 500,
         chunk_overlap: int = 50,
-        min_chunk_size: int = 100,
     ) -> tuple:
         """Process an uploaded file and ingest it into the RAG system.
 
@@ -36,7 +35,6 @@ class UploadService:
             title (Optional[str]): Optional title for the document. Defaults to filename.
             chunk_size (int): Size of text chunks for processing. Defaults to 500.
             chunk_overlap (int): Overlap between chunks. Defaults to 50.
-            min_chunk_size (int): Minimum size for a chunk. Defaults to 100.
 
         Returns:
             tuple: A tuple containing the ingested document, chunk count, and title.
@@ -78,7 +76,6 @@ class UploadService:
             rag_service = RAGService(
                 chunk_size=chunk_size,
                 chunk_overlap=chunk_overlap,
-                min_chunk_size=min_chunk_size,
             )
             doc, chunk_count = await rag_service.ingest(
                 title=document_title, content=parsed_content
