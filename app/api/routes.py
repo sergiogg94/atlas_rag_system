@@ -129,7 +129,6 @@ async def upload(
     title: Optional[str] = Form(None, description="Optional document title"),
     chunk_size: int = Form(500, ge=100, le=2000),
     chunk_overlap: int = Form(50, ge=0, le=500),
-    min_chunk_size: int = Form(100, ge=50, le=1000),
 ) -> UploadResponse:
     """Upload and ingest a document into the RAG system.
 
@@ -138,7 +137,6 @@ async def upload(
         title (Optional[str]): Optional title for the document.
         chunk_size (int): Size of text chunks for processing. Defaults to 500.
         chunk_overlap (int): Overlap between chunks. Defaults to 50.
-        min_chunk_size (int): Minimum size for a chunk. Defaults to 100.
 
     Returns:
         UploadResponse: The response containing the status and title of the ingested document.
@@ -153,7 +151,6 @@ async def upload(
             title=title,
             chunk_size=chunk_size,
             chunk_overlap=chunk_overlap,
-            min_chunk_size=min_chunk_size,
         )
 
         latency_ms = round((perf_counter() - start_time) * 1000, 2)
