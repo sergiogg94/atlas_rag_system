@@ -18,28 +18,29 @@ services:
       start_period: 10s
     restart: unless-stopped
 
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: atlas_api
-    env_file:
-      - .env
-    ports:
-      - "${API_PORT:-8000}:8000"
-    depends_on:
-      db:
-        condition: service_healthy
-    networks:
-      - atlas_network
-    command: uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload # ONLY FOR DEV USAGE
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    restart: unless-stopped
+  # FIXME: Save this code for future deployment
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: atlas_api
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - "${API_PORT:-8000}:8000"
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #   networks:
+  #     - atlas_network
+  #   command: uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload # ONLY FOR DEV USAGE
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #     start_period: 40s
+  #   restart: unless-stopped
 
 volumes:
   db_data:
