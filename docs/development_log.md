@@ -1,6 +1,6 @@
 # 📋 Development Log
 
-A detailed documentation of the development process for the Atlas RAG System, including challenges encountered and solutions implemented.
+A detailed documentation of the development process for the project, including challenges encountered and solutions implemented.
 
 ---
 
@@ -53,7 +53,7 @@ This week focused on implementing the embedding generation service and validatin
 
 1. **Embedding Generation Service**: Developed embedding generation functionality using the VoyageAI API to convert text chunks into semantic vector representations. Future iterations will explore alternative providers (OpenAI, Hugging Face) for comparative analysis.
 
-2. **Vector Database Integration**: Extended database models to persist embeddings with pgvector, enabling efficient semantic similarity searches—a critical component for RAG-based information retrieval.
+2. **Vector Database Integration**: Extended database models to persist embeddings with pgvector, enabling efficient semantic similarity searches-a critical component for RAG-based information retrieval.
 
 3. **End-to-End Pipeline Testing**: Executed comprehensive testing of the complete workflow from document upload through embedding generation and database persistence. Identified and resolved integration issues between embedding service and database layer through systematic debugging.
 
@@ -63,3 +63,35 @@ This week focused on implementing the embedding generation service and validatin
 - ✅ End-to-end system testing and debugging methodologies
 - ✅ Production-readiness considerations for multi-stage data pipelines
 
+---
+
+## 🔧 **Week 4: Advanced Chunking & Infrastructure Optimization**
+
+This week focused on improving the text chunking algorithm,
+enhancing the infrastructure with Docker containerization,
+and expanding the upload workflow with automation and testing.
+
+### Key Implementations:
+
+1. **API Contract Standardization**: Refactored API endpoints to follow
+consistent request/response patterns and enriched responses with additional
+metadata for better client usability.
+
+2. **Advanced Text Chunking**: Migrated from a basic length-based chunking approach
+to LangChain's RecursiveCharacterTextSplitter. Also added a full test script.
+
+3. **Docker Infrastructure**: Created a production-ready Dockerfile and Docker
+Compose configuration to contenerize the application and its dependencies. But
+decided to keep this out of the development workflow for now to avoid complexity.
+
+4. **Bulk Upload Automation**: Developed a command-line utility script
+to automate uploading multiple files from a directory and added fictitious
+retailer dataset for testing.
+
+### 📚 Key Learning Outcomes:
+
+- ✅ Understanding of advanced text splitting strategies and their impact on RAG system quality
+- ✅ Test-driven development practices for critical pipeline components
+- ✅ Docker best practices for containerized Python applications
+- ❌ It's too early to implement Docker containerization
+- ✅ API design principles for consistency and maintainability
