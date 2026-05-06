@@ -148,7 +148,7 @@ class SearchRequest(BaseModel):
     )
 
     max_distance: float = Field(
-        0.5,
+        1.0,
         description="Maximum cosine distance for a chunk to be considered a match",
         ge=0.0,
         le=1.0,

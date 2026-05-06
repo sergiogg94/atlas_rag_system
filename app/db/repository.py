@@ -44,7 +44,7 @@ class Repository:
         query_embedding: list[float],
         top_k: int = 5,
         probes: int = 10,
-        max_distance: float = 0.5,
+        max_distance: float = 1.0,
     ) -> list[str]:
         """Search stored chunks by cosine similarity against the query embedding.
 
@@ -66,6 +66,7 @@ class Repository:
                 "distance"
             )
 
+            logger.info("Executing search")
             result = await session.execute(
                 select(Chunk, distance_col)
                 .where(distance_col <= max_distance)

@@ -45,14 +45,15 @@ class RAGService:
         return doc, len(chunks)
 
     async def search(
-        self, query: str, top_k: int = 5, probes: int = 10, max_distance: float = 0.5
+        self, query: str, top_k: int = 5, probes: int = 10, max_distance: float = 1.0
     ):
         logger.info("Search process started")
         from app.db.repository import Repository
 
         repo = Repository()
 
-        query_embedding = await self.embeddings_service.encode(query)
+        query_embedding = (await self.embeddings_service.encode(query))[0]
+        logger.info("Query embedding generated successfully")
         results = await repo.search(
             query_embedding=query_embedding,
             top_k=top_k,
