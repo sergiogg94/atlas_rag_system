@@ -11,6 +11,7 @@ dependencies = [
     "langchain>=1.2.17",
     "langchain-text-splitters>=1.1.2",
     "numpy>=2.4.4",
+    "openai>=2.36.0",
     "pgvector>=0.4.2",
     "psycopg[binary]>=3.3.3",
     "pymupdf>=1.27.2.2",
@@ -23,5 +24,6 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "isort>=8.0.1",
     "pytest>=9.0.3",
 ]

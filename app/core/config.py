@@ -24,6 +24,7 @@ class Settings:
 
         # API key's
         self.voyage_api_key = os.getenv("VOYAGE_API_KEY")
+        self.hf_token = os.getenv("HF_TOKEN")
 
 
 settings = Settings()
