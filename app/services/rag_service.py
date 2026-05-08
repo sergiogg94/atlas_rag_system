@@ -1,7 +1,7 @@
-import random
 from app.core.logging import logger
 from app.services.chunking import TextChunker
 from app.services.embeddings import EmbeddingsService
+from app.services.llm_service import LLMService
 
 
 class RAGService:
@@ -16,9 +16,7 @@ class RAGService:
             chunk_overlap=chunk_overlap,
         )
         self.embeddings_service = EmbeddingsService()
-
-    async def query(self, question: str):
-        return "Not implemented"
+        self.llm_service = LLMService()
 
     async def ingest(self, title: str, content: str) -> tuple:
         """Ingest a document to the database
@@ -61,3 +59,27 @@ class RAGService:
             max_distance=max_distance,
         )
         return results
+
+    def _build_context(self, search_results: list) -> str:
+        """Build the context for the LLM based on the search results."""
+        context_parts = []
+        for i, chunk in enumerate(search_results, 1):
+            # Formato simple
+            context_parts.append(f"[{i}] {chunk.get('content')}")
+
+        return "\n\n".join(context_parts)
+
+    async def query(self, question: str):
+        logger.info(f"Query process started for question: {question[:50]}...")
+
+        # Search for relevant chunks in the database
+        search_results = await self.search(question)
+
+        # Build context for the LLM based on the search results
+        context = self._build_context(search_results)
+
+        # Generate an answer using the LLM based on the question and the context
+        answer = await self.llm_service.get_answer(query=question, context=context)
+        logger.info(f"Query process completed successfully")
+
+        return answer
