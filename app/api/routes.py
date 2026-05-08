@@ -41,7 +41,7 @@ async def health() -> HealthResponse:
     )
 
 
-@router.get(
+@router.post(
     "/query",
     response_model=QueryResponse,
     summary="Query the RAG system",
