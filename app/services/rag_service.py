@@ -69,17 +69,31 @@ class RAGService:
 
         return "\n\n".join(context_parts)
 
-    async def query(self, question: str):
+    async def query(
+        self,
+        question: str,
+        top_k: int = 5,
+        max_distance: float = 1.0,
+        temperature: float = 0.7,
+        max_tokens: int = 512,
+    ) -> str:
         logger.info(f"Query process started for question: {question[:50]}...")
 
         # Search for relevant chunks in the database
-        search_results = await self.search(question)
+        search_results = await self.search(
+            query=question, top_k=top_k, max_distance=max_distance
+        )
 
         # Build context for the LLM based on the search results
         context = self._build_context(search_results)
 
         # Generate an answer using the LLM based on the question and the context
-        answer = await self.llm_service.get_answer(query=question, context=context)
+        answer = await self.llm_service.get_answer(
+            query=question,
+            context=context,
+            temperature=temperature,
+            max_tokens=max_tokens,
+        )
         logger.info(f"Query process completed successfully")
 
         return answer

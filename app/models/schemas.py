@@ -51,6 +51,34 @@ class QueryRequest(BaseModel):
         max_length=500,
     )
 
+    top_k: int = Field(
+        5,
+        description="Number of top matching chunks to return",
+        ge=1,
+        le=100,
+    )
+
+    max_distance: float = Field(
+        1.0,
+        description="Maximum cosine distance for a chunk to be considered a match",
+        ge=0.0,
+        le=1.0,
+    )
+
+    temperature: float = Field(
+        0.7,
+        description="Temperature for LLM response generation (0.0 to 1.0)",
+        ge=0.0,
+        le=1.0,
+    )
+
+    max_tokens: int = Field(
+        512,
+        description="Maximum number of tokens for the LLM response",
+        ge=1,
+        le=2048,
+    )
+
 
 class QueryResponse(BaseResponseWithMetadata):
     """Response model returned by the RAG service."""

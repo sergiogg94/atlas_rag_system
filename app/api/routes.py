@@ -58,7 +58,13 @@ async def query(payload: QueryRequest) -> QueryResponse:
     start_time = perf_counter()
 
     try:
-        response = await rag_service.query(payload.question)
+        response = await rag_service.query(
+            question=payload.question,
+            top_k=payload.top_k,
+            max_distance=payload.max_distance,
+            temperature=payload.temperature,
+            max_tokens=payload.max_tokens,
+        )
 
         latency_ms = round((perf_counter() - start_time) * 1000, 2)
         logger.info(f"Query completed in {latency_ms} ms")
