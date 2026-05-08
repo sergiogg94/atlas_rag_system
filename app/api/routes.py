@@ -55,8 +55,27 @@ async def health() -> HealthResponse:
 async def query(payload: QueryRequest) -> QueryResponse:
     """Query the RAG service with the provided question."""
     logger.info(f"Received question: {payload.question}")
-    response = await rag_service.query(payload.question)
-    return QueryResponse(response=response, sources=[])
+    start_time = perf_counter()
+
+    try:
+        response = await rag_service.query(payload.question)
+
+        latency_ms = round((perf_counter() - start_time) * 1000, 2)
+        logger.info(f"Query completed in {latency_ms} ms")
+
+        return QueryResponse(
+            response=response,
+            sources=["Not implemented"],
+            metadata={
+                "latency_ms": latency_ms,
+            },
+        )
+    except Exception as e:
+        logger.error(f"Error during query: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e),
+        )
 
 
 @router.post(

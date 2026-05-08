@@ -52,7 +52,7 @@ class QueryRequest(BaseModel):
     )
 
 
-class QueryResponse(BaseResponse):
+class QueryResponse(BaseResponseWithMetadata):
     """Response model returned by the RAG service."""
 
     response: str = Field(
