@@ -68,7 +68,8 @@ class Repository:
 
             logger.info("Executing search")
             result = await session.execute(
-                select(Chunk, distance_col)
+                select(Chunk, Document.title, distance_col)
+                .join(Document, Chunk.document_id == Document.id)
                 .where(distance_col <= max_distance)
                 .order_by(distance_col)
                 .limit(top_k)
@@ -77,9 +78,10 @@ class Repository:
             return [
                 {
                     "document_id": chunk.document_id,
+                    "document_title": title,
                     "chunk_id": chunk.id,
                     "content": chunk.content,
                     "distance": float(distance),
                 }
-                for chunk, distance in result.all()
+                for chunk, title, distance in result.all()
             ]

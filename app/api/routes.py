@@ -58,7 +58,7 @@ async def query(payload: QueryRequest) -> QueryResponse:
     start_time = perf_counter()
 
     try:
-        response = await rag_service.query(
+        result = await rag_service.query(
             question=payload.question,
             top_k=payload.top_k,
             max_distance=payload.max_distance,
@@ -70,8 +70,8 @@ async def query(payload: QueryRequest) -> QueryResponse:
         logger.info(f"Query completed in {latency_ms} ms")
 
         return QueryResponse(
-            response=response,
-            sources=["Not implemented"],
+            response=result["answer"],
+            sources=result["sources"],
             metadata={
                 "latency_ms": latency_ms,
             },

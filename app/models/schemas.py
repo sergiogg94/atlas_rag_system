@@ -80,6 +80,18 @@ class QueryRequest(BaseModel):
     )
 
 
+class SourceReference(BaseModel):
+    """Reference to a source chunk used in the answer."""
+
+    chunk_id: int = Field(..., description="ID of the chunk")
+    document_id: int = Field(..., description="ID of the document")
+    document_title: str = Field(..., description="Title of the document")
+    distance: float = Field(..., description="Cosine distance (relevance score)")
+    content: Optional[str] = Field(
+        None, description="Excerpt of the chunk content", max_length=200
+    )
+
+
 class QueryResponse(BaseResponseWithMetadata):
     """Response model returned by the RAG service."""
 
@@ -88,7 +100,7 @@ class QueryResponse(BaseResponseWithMetadata):
         description="Answer generated",
         example="The capital of France is Paris.",
     )
-    sources: list[str] = Field(
+    sources: list[SourceReference] = Field(
         [],
         description="List of sources used to generate the answer",
     )

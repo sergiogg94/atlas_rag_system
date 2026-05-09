@@ -94,6 +94,20 @@ class RAGService:
             temperature=temperature,
             max_tokens=max_tokens,
         )
+
+        sources = [
+            {
+                "chunk_id": result["chunk_id"],
+                "document_id": result["document_id"],
+                "document_title": result["document_title"],
+                "distance": result["distance"],
+                "content": result["content"][:200],
+            }
+            for result in search_results
+        ]
         logger.info(f"Query process completed successfully")
 
-        return answer
+        return {
+            "answer": answer,
+            "sources": sources,
+        }
