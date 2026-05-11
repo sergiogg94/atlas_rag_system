@@ -95,3 +95,34 @@ retailer dataset for testing.
 - ✅ Docker best practices for containerized Python applications
 - ❌ It's too early to implement Docker containerization
 - ✅ API design principles for consistency and maintainability
+
+---
+
+## 🎯 **Week 5: Query Endpoint & RAG Pipeline Completion**
+
+This week focused on implementing the LLM service, building the query functionality
+in the RAG service, and creating a complete query endpoint with semantic search capabilities.
+
+### Key Implementations:
+
+1. **LLM Service Integration**: Created the LLM service module to handle
+language model interactions, enabling the system to generate responses based on
+retrieved context from the vector database.
+
+2. **RAG Query Method**: Implemented the core query method in the RAG service
+that orchestrates semantic similarity search, document retrieval, and LLM
+response generation. Refined query parameters for optimal relevance.
+
+3. **Query API Endpoint**: Developed a POST endpoint for handling user queries
+with metadata enrichment, including response timestamps and retrieval configuration options.
+
+4. **Enhanced Result Delivery**: Extended the query endpoint to return source
+documents alongside responses, providing transparency about information
+provenance and enabling users to verify retrieved context.
+
+### 📚 Key Learning Outcomes:
+
+- ✅ Building complete end-to-end RAG workflows from query to response
+- ✅ Semantic search integration with vector databases for information retrieval
+- ✅ Proper HTTP method selection (POST for query operations) based on semantics
+- ✅ Source attribution and transparency in AI-generated responses
