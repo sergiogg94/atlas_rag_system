@@ -1,0 +1,156 @@
+{
+  "test_cases": [
+    {
+        "id": "ship_001",
+        "category": "shipping_policy",
+        "question": "What is the minimum amount for free shipping at SprintStep?",
+        "expected_answer": "$100 USD before taxes",
+        "difficulty": "easy",
+        "query_type": "factual"
+    },
+    {
+        "id": "ship_002",
+        "category": "shipping_policy",
+        "question": "How long does standard shipping take to continental United States?",
+        "expected_answer": "3-7 business days",
+        "difficulty": "easy",
+        "query_type": "factual"
+    },
+    {
+        "id": "ship_003",
+        "category": "shipping_policy",
+        "question": "Does SprintStep offer express shipping to Alaska?",
+        "expected_answer": "No, Express shipping is not available for Alaska and Hawaii",
+        "difficulty": "medium",
+        "query_type": "negative"
+    },
+    {
+        "id": "ret_001",
+        "category": "return_policy",
+        "question": "How many days do I have to return a product?",
+        "expected_answer": "30 calendar days from the delivery date",
+        "difficulty": "easy",
+        "query_type": "factual"
+    },
+    {
+        "id": "ret_002",
+        "category": "return_policy",
+        "question": "Can I return shoes that I have already worn?",
+        "expected_answer": "No, shoes must be unused, with original box and no visible wear on the sole",
+        "difficulty": "easy",
+        "query_type": "negative"
+    },
+    {
+        "id": "ret_003",
+        "category": "return_policy",
+        "question": "How much does return shipping cost?",
+        "expected_answer": "$7.50 is deducted from the refund for returns in the USA, but shipping is free for exchanges",
+        "difficulty": "medium",
+        "query_type": "factual"
+    },
+    {
+        "id": "ret_004",
+        "category": "return_policy",
+        "question": "I bought shoes in December, until when can I return them?",
+        "expected_answer": "Purchases made between November 20 and December 24 can be returned until January 31",
+        "difficulty": "hard",
+        "query_type": "reasoning"
+    },
+    {
+        "id": "prod_001",
+        "category": "product_specs",
+        "question": "How much does the Velocity Pro 3 cost?",
+        "expected_answer": "$129.99",
+        "difficulty": "easy",
+        "query_type": "factual"
+    },
+    {
+        "id": "prod_002",
+        "category": "product_specs",
+        "question": "What is the weight and drop of the AeroLight 2.5?",
+        "expected_answer": "190g weight and 6mm drop",
+        "difficulty": "medium",
+        "query_type": "multi_fact"
+    },
+    {
+        "id": "prod_003",
+        "category": "product_specs",
+        "question": "What shoe is better for trail running?",
+        "expected_answer": "TerraGrip X2, which is designed for mud, gravel and mountain trails",
+        "difficulty": "medium",
+        "query_type": "reasoning"
+    },
+    {
+        "id": "prod_004",
+        "category": "product_specs",
+        "question": "Can I use the Velocity Pro 3 for trail running?",
+        "expected_answer": "No, the Velocity Pro 3 is designed only for road running, not for trail terrain",
+        "difficulty": "medium",
+        "query_type": "negative"
+    },
+    {
+        "id": "prod_005",
+        "category": "product_specs",
+        "question": "Are SprintStep shoes waterproof?",
+        "expected_answer": "Only TerraGrip models are water resistant, but no model is completely waterproof",
+        "difficulty": "hard",
+        "query_type": "reasoning"
+    },
+    {
+        "id": "warr_001",
+        "category": "warranty",
+        "question": "How long does the standard warranty last?",
+        "expected_answer": "6 months from the delivery date",
+        "difficulty": "easy",
+        "query_type": "factual"
+    },
+    {
+        "id": "warr_002",
+        "category": "warranty",
+        "question": "Does the warranty cover normal wear from use?",
+        "expected_answer": "No, the warranty does not cover normal wear, improper athletic use, water damage or cosmetic damage",
+        "difficulty": "medium",
+        "query_type": "negative"
+    },
+    {
+        "id": "pay_001",
+        "category": "payment_methods",
+        "question": "Does SprintStep accept cryptocurrencies?",
+        "expected_answer": "No, SprintStep does not accept cryptocurrencies",
+        "difficulty": "easy",
+        "query_type": "negative"
+    },
+    {
+        "id": "pay_002",
+        "category": "payment_methods",
+        "question": "What credit cards does SprintStep accept?",
+        "expected_answer": "Visa, Mastercard, American Express, PayPal, Apple Pay and Google Pay",
+        "difficulty": "easy",
+        "query_type": "factual"
+    },
+    {
+        "id": "edge_001",
+        "category": "edge_cases",
+        "question": "What happens if my package says 'Delivered' but I didn't receive it?",
+        "expected_answer": "Customers must contact support within 5 business days if the package is marked as delivered but not received",
+        "difficulty": "medium",
+        "query_type": "factual"
+    },
+    {
+        "id": "edge_002",
+        "category": "edge_cases",
+        "question": "I made an order for $600, do I need to do anything special?",
+        "expected_answer": "SprintStep may request additional identity verification for orders over $500",
+        "difficulty": "hard",
+        "query_type": "reasoning"
+    },
+    {
+        "id": "edge_003",
+        "category": "edge_cases",
+        "question": "How many times can I make an exchange from the same order?",
+        "expected_answer": "Exchanges are limited to one per order",
+        "difficulty": "medium",
+        "query_type": "factual"
+    }
+  ]
+}
