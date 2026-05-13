@@ -101,7 +101,7 @@ class RAGService:
                 "document_id": result["document_id"],
                 "document_title": result["document_title"],
                 "distance": result["distance"],
-                "content": result["content"][:200],
+                "content": result["content"],
             }
             for result in search_results
         ]
