@@ -1,0 +1,95 @@
+VENDOR SUPPLY AGREEMENT
+Agreement No: VSA-2024-089
+Effective Date: January 1, 2024
+Term: 24 months (renewal option)
+
+PARTIES:
+Supplier: [Vendor Name] ("Supplier")
+Purchaser: Athletic Footwear E-Commerce LLC ("Company")
+
+RECITALS:
+WHEREAS, Company operates an e-commerce platform specializing in athletic footwear;
+WHEREAS, Supplier manufactures and distributes athletic footwear products;
+WHEREAS, both parties desire to establish terms for ongoing supply relationship;
+
+NOW, THEREFORE, in consideration of mutual covenants herein:
+
+ARTICLE 1 - PRODUCTS & ORDERING
+
+1.1 Product Catalog: Supplier shall provide Company with access to current product catalog, updated quarterly. Catalog shall include: SKU numbers, wholesale pricing, size availability, minimum order quantities (MOQ), and lead times.
+
+1.2 Ordering Process:
+- Purchase orders submitted via Supplier Portal or EDI integration
+- Order confirmation required within 24 business hours
+- Minimum order value: $5,000 per purchase order
+- Payment terms: Net 45 days from delivery date
+
+1.3 Lead Times:
+- In-stock items: 7-10 business days to Company warehouse
+- Pre-order/seasonal items: 60-90 days from order placement
+- Rush orders (if available): 3-5 business days, subject to 15% surcharge
+
+ARTICLE 2 - PRICING & PAYMENT
+
+2.1 Wholesale Pricing: Supplier agrees to provide Company with wholesale pricing at [40-45%] off MSRP, based on volume tiers:
+- Tier 1: $50K-$100K annual: 40% off MSRP
+- Tier 2: $100K-$250K annual: 42% off MSRP  
+- Tier 3: $250K+ annual: 45% off MSRP
+
+2.2 Price Guarantees: Pricing locked for 6-month periods. Price increases require 60 days written notice.
+
+2.3 Payment Terms: Net 45 days. Early payment discount: 2% if paid within 10 days.
+
+2.4 Freight: FOB Destination - Supplier pays shipping to Company warehouse. Expedited shipping costs (if requested by Company) borne by Company.
+
+ARTICLE 3 - QUALITY ASSURANCE
+
+3.1 Standards: All products must meet Company quality standards (QA document QS-2024 attached). Defect rate not to exceed 1.5% per shipment.
+
+3.2 Inspection Rights: Company reserves right to inspect up to 20% of each shipment. Rejected goods returned at Supplier expense.
+
+3.3 Warranty: Supplier warrants products free from manufacturing defects for 12 months from date of manufacture.
+
+3.4 Defective Product Protocol: 
+- Company notifies Supplier within 14 days of discovering defect
+- Supplier issues RMA and prepaid return label within 48 hours
+- Replacement units shipped within 7 days of receiving defective goods
+- Credits issued for unrecoverable defective inventory
+
+ARTICLE 4 - RETURNS & STOCK BALANCING
+
+4.1 Seasonal Returns: Company may return up to 15% of seasonal purchase value for overstock items at end of season. Return period: 30 days after season end.
+
+4.2 Return Conditions: Products must be new, unsold, in original packaging. Credit issued at 80% of wholesale cost.
+
+4.3 Stock Rotation: Supplier agrees to accept slow-moving inventory returns (SKUs with <2 units sold per month over 120-day period) up to 5% of total annual purchases.
+
+ARTICLE 5 - MARKETING & BRAND SUPPORT
+
+5.1 Marketing Materials: Supplier provides product images, descriptions, videos at no cost. Company has license to use for marketing purposes.
+
+5.2 Cooperative Marketing: Supplier contributes 2% of gross purchases toward joint marketing initiatives (e.g., email campaigns, social media, influencer partnerships).
+
+5.3 Exclusivity: Non-exclusive agreement. Company may source similar products from other suppliers.
+
+ARTICLE 6 - TERM & TERMINATION
+
+6.1 Term: 24 months from effective date. Auto-renews for successive 12-month periods unless either party provides 90 days written notice.
+
+6.2 Termination for Cause: Either party may terminate with 30 days notice if other party breaches material term and fails to cure within 15 days.
+
+6.3 Termination Effects: Outstanding orders fulfilled; payment obligations survive termination.
+
+ARTICLE 7 - MISCELLANEOUS
+
+7.1 Governing Law: State of Delaware
+7.2 Dispute Resolution: Binding arbitration per AAA Commercial Rules
+7.3 Confidentiality: Terms of this agreement confidential
+7.4 Force Majeure: Standard force majeure provisions apply
+
+SIGNATURES:
+[Execution page follows]
+
+For questions regarding this agreement:
+Legal: legal@athleticfootwear.com
+Purchasing: purchasing@athleticfootwear.com

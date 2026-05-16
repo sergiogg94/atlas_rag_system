@@ -1,0 +1,44 @@
+INTERNAL LOGISTICS PROTOCOL - ATHLETIC FOOTWEAR E-COMMERCE
+Document ID: LOG-2024-001
+Last Updated: January 2024
+Classification: Internal Use Only
+
+=== WAREHOUSE OPERATIONS ===
+
+Receiving Process:
+- All shipments from vendors must be logged in WMS within 2 hours of arrival
+- Quality inspection required for 15% of each batch (random sampling)
+- Damaged goods protocol: photograph, report to vendor, quarantine location B-7
+- Standard processing time: 24-48 hours from dock to inventory availability
+
+Inventory Zones:
+- Zone A: High-velocity items (running shoes, training shoes) - Daily replenishment
+- Zone B: Seasonal products (cleats, specialty footwear) - Weekly cycle count
+- Zone C: Returns processing - 72-hour turnaround target
+- Zone D: Clearance and discontinued models - Monthly audit
+
+Picking & Packing Standards:
+- Priority orders (expedited): Pick within 2 hours
+- Standard orders: Pick within 12 hours
+- Box size optimization required - use smallest box that fits with 2" padding
+- Tissue paper wrapping mandatory for premium models ($150+)
+- Include promotional inserts based on customer segment (see Marketing guidelines)
+
+Shipping Cutoff Times:
+- Same-day processing: Orders placed before 2 PM EST
+- Next-day shipping availability: Orders confirmed before 6 PM EST
+- Weekend orders: Processed Monday morning (first priority)
+
+Returns Handling:
+- Inspect for wear, original packaging, tags attached
+- Grade A (resellable): Return to inventory within 24 hours
+- Grade B (minor box damage): Move to clearance
+- Grade C (worn/damaged): Document and dispose per policy
+
+Performance Metrics:
+- Pick accuracy target: 99.5%
+- Ship-same-day rate: >80% of eligible orders
+- Return processing time: <72 hours average
+- Inventory accuracy: 98% or higher (monthly audit)
+
+Contact: logistics@athleticfootwear.com | Ext. 3401
