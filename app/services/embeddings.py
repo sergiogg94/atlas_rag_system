@@ -9,8 +9,8 @@ class EmbeddingsService:
     # TODO: Implement also a version with OpenAI's embedding models and look up for more embedding models in the future, e.g. from Hugging Face.
     def __init__(self):
         self.client = AsyncClient(api_key=settings.voyage_api_key)
-        self.model = "voyage-4-lite"
-        self.embedding_dimension = 256
+        self.model = "voyage-4"
+        self.embedding_dimension = 1024
 
     async def encode(self, texts: List[str]) -> List[List[float]] | List[List[int]]:
         """Generates embeddings for the given texts.
