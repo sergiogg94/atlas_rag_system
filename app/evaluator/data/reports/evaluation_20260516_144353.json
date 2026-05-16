@@ -1,0 +1,1434 @@
+{
+  "experiment_info": {
+    "timestamp": "2026-05-16T14:43:53.893481",
+    "config": {
+      "collection_name": "sprintstep_mini",
+      "chunk_size": 500,
+      "chunk_overlap": 50,
+      "top_k": 5,
+      "max_distance": 0.98,
+      "correctness_threshold": 0.8
+    },
+    "total_cases": 19,
+    "successful_cases": 19,
+    "failed_cases": 0
+  },
+  "aggregate_metrics": {
+    "avg_precision@k": 0.2026315789473684,
+    "min_precision@k": 0.0,
+    "max_precision@k": 0.5,
+    "avg_recall@k": 0.42105263157894735,
+    "min_recall@k": 0.0,
+    "max_recall@k": 1.0,
+    "avg_hit@k": 0.631578947368421,
+    "min_hit@k": 0.0,
+    "max_hit@k": 1.0,
+    "avg_mrr": 0.4385964912280702,
+    "min_mrr": 0.0,
+    "max_mrr": 1.0,
+    "avg_map": 0.4166666666666667,
+    "min_map": 0.0,
+    "max_map": 1.0,
+    "avg_semantic_similarity": 0.6307467490342271,
+    "min_semantic_similarity": 0.32819892605101725,
+    "max_semantic_similarity": 0.9962956594091046,
+    "avg_answer_relevance": 0.5600297552508068,
+    "min_answer_relevance": 0.2419267389766101,
+    "max_answer_relevance": 0.884157546666108,
+    "avg_context_precision": 0.5097035501269883,
+    "min_context_precision": 0.3068626511819987,
+    "max_context_precision": 0.7189828015805004,
+    "avg_is_correct": 0.21052631578947367,
+    "min_is_correct": 0.0,
+    "max_is_correct": 1.0,
+    "avg_latency_ms": 1976.92,
+    "by_category": {
+      "product_specs": {
+        "avg_precision@k": 0.26666666666666666,
+        "min_precision@k": 0.0,
+        "max_precision@k": 0.5,
+        "avg_recall@k": 0.6,
+        "min_recall@k": 0.0,
+        "max_recall@k": 1.0,
+        "avg_hit@k": 0.6,
+        "min_hit@k": 0.0,
+        "max_hit@k": 1.0,
+        "avg_mrr": 0.35,
+        "min_mrr": 0.0,
+        "max_mrr": 1.0,
+        "avg_map": 0.31666666666666665,
+        "min_map": 0.0,
+        "max_map": 0.8333333333333333,
+        "avg_semantic_similarity": 0.539197925634516,
+        "min_semantic_similarity": 0.32819892605101725,
+        "max_semantic_similarity": 0.8969163008811659,
+        "avg_answer_relevance": 0.4440909089931485,
+        "min_answer_relevance": 0.2419267389766101,
+        "max_answer_relevance": 0.884157546666108,
+        "avg_context_precision": 0.42019721656316955,
+        "min_context_precision": 0.3068626511819987,
+        "max_context_precision": 0.5372992116528736,
+        "avg_is_correct": 0.2,
+        "min_is_correct": 0.0,
+        "max_is_correct": 1.0
+      },
+      "shipping_policy": {
+        "avg_precision@k": 0.17777777777777778,
+        "min_precision@k": 0.0,
+        "max_precision@k": 0.3333333333333333,
+        "avg_recall@k": 0.3333333333333333,
+        "min_recall@k": 0.0,
+        "max_recall@k": 0.5,
+        "avg_hit@k": 0.6666666666666666,
+        "min_hit@k": 0.0,
+        "max_hit@k": 1.0,
+        "avg_mrr": 0.4444444444444444,
+        "min_mrr": 0.0,
+        "max_mrr": 1.0,
+        "avg_map": 0.3611111111111111,
+        "min_map": 0.0,
+        "max_map": 0.75,
+        "avg_semantic_similarity": 0.6297569534835693,
+        "min_semantic_similarity": 0.5038309622349922,
+        "max_semantic_similarity": 0.7878080911351841,
+        "avg_answer_relevance": 0.5293463287157343,
+        "min_answer_relevance": 0.3142071893221673,
+        "max_answer_relevance": 0.8793046348920592,
+        "avg_context_precision": 0.4948752779616837,
+        "min_context_precision": 0.36104315653625735,
+        "max_context_precision": 0.5856305133910239,
+        "avg_is_correct": 0.0,
+        "min_is_correct": 0.0,
+        "max_is_correct": 0.0
+      },
+      "return_policy": {
+        "avg_precision@k": 0.125,
+        "min_precision@k": 0.0,
+        "max_precision@k": 0.25,
+        "avg_recall@k": 0.25,
+        "min_recall@k": 0.0,
+        "max_recall@k": 0.5,
+        "avg_hit@k": 0.5,
+        "min_hit@k": 0.0,
+        "max_hit@k": 1.0,
+        "avg_mrr": 0.3125,
+        "min_mrr": 0.0,
+        "max_mrr": 1.0,
+        "avg_map": 0.3125,
+        "min_map": 0.0,
+        "max_map": 1.0,
+        "avg_semantic_similarity": 0.7417170358440554,
+        "min_semantic_similarity": 0.6393111153024633,
+        "max_semantic_similarity": 0.8581755398299933,
+        "avg_answer_relevance": 0.6922509230189454,
+        "min_answer_relevance": 0.5681779824207966,
+        "max_answer_relevance": 0.8005254469013863,
+        "avg_context_precision": 0.6163326494491848,
+        "min_context_precision": 0.5004777385158217,
+        "max_context_precision": 0.7189828015805004,
+        "avg_is_correct": 0.5,
+        "min_is_correct": 0.0,
+        "max_is_correct": 1.0
+      },
+      "warranty": {
+        "avg_precision@k": 0.2,
+        "min_precision@k": 0.2,
+        "max_precision@k": 0.2,
+        "avg_recall@k": 0.5,
+        "min_recall@k": 0.5,
+        "max_recall@k": 0.5,
+        "avg_hit@k": 1.0,
+        "min_hit@k": 1.0,
+        "max_hit@k": 1.0,
+        "avg_mrr": 0.75,
+        "min_mrr": 0.5,
+        "max_mrr": 1.0,
+        "avg_map": 0.75,
+        "min_map": 0.5,
+        "max_map": 1.0,
+        "avg_semantic_similarity": 0.5014778384527036,
+        "min_semantic_similarity": 0.3887033491460426,
+        "max_semantic_similarity": 0.6142523277593644,
+        "avg_answer_relevance": 0.5801404367079667,
+        "min_answer_relevance": 0.3853433070430621,
+        "max_answer_relevance": 0.7749375663728713,
+        "avg_context_precision": 0.5317250979339774,
+        "min_context_precision": 0.4285575727465371,
+        "max_context_precision": 0.6348926231214177,
+        "avg_is_correct": 0.0,
+        "min_is_correct": 0.0,
+        "max_is_correct": 0.0
+      },
+      "payment_methods": {
+        "avg_precision@k": 0.41666666666666663,
+        "min_precision@k": 0.3333333333333333,
+        "max_precision@k": 0.5,
+        "avg_recall@k": 0.75,
+        "min_recall@k": 0.5,
+        "max_recall@k": 1.0,
+        "avg_hit@k": 1.0,
+        "min_hit@k": 1.0,
+        "max_hit@k": 1.0,
+        "avg_mrr": 1.0,
+        "min_mrr": 1.0,
+        "max_mrr": 1.0,
+        "avg_map": 1.0,
+        "min_map": 1.0,
+        "max_map": 1.0,
+        "avg_semantic_similarity": 0.7462728530309364,
+        "min_semantic_similarity": 0.4962500466527683,
+        "max_semantic_similarity": 0.9962956594091046,
+        "avg_answer_relevance": 0.5315846633940526,
+        "min_answer_relevance": 0.43576042068909604,
+        "max_answer_relevance": 0.6274089060990091,
+        "avg_context_precision": 0.5406955906606887,
+        "min_context_precision": 0.524426544974219,
+        "max_context_precision": 0.5569646363471585,
+        "avg_is_correct": 0.5,
+        "min_is_correct": 0.0,
+        "max_is_correct": 1.0
+      },
+      "edge_cases": {
+        "avg_precision@k": 0.08333333333333333,
+        "min_precision@k": 0.0,
+        "max_precision@k": 0.25,
+        "avg_recall@k": 0.16666666666666666,
+        "min_recall@k": 0.0,
+        "max_recall@k": 0.5,
+        "avg_hit@k": 0.3333333333333333,
+        "min_hit@k": 0.0,
+        "max_hit@k": 1.0,
+        "avg_mrr": 0.16666666666666666,
+        "min_mrr": 0.0,
+        "max_mrr": 0.5,
+        "avg_map": 0.16666666666666666,
+        "min_map": 0.0,
+        "max_map": 0.5,
+        "avg_semantic_similarity": 0.6455194055611738,
+        "min_semantic_similarity": 0.5678267564799485,
+        "max_semantic_similarity": 0.7760531063497096,
+        "avg_answer_relevance": 0.6132059754575208,
+        "min_answer_relevance": 0.2650016780295616,
+        "max_answer_relevance": 0.8299947360443194,
+        "avg_context_precision": 0.49619452024193506,
+        "min_context_precision": 0.39547932904831307,
+        "max_context_precision": 0.6199489087809299,
+        "avg_is_correct": 0.0,
+        "min_is_correct": 0.0,
+        "max_is_correct": 0.0
+      }
+    },
+    "by_difficulty": {
+      "medium": {
+        "avg_precision@k": 0.22291666666666665,
+        "min_precision@k": 0.0,
+        "max_precision@k": 0.5,
+        "avg_recall@k": 0.4375,
+        "min_recall@k": 0.0,
+        "max_recall@k": 1.0,
+        "avg_hit@k": 0.625,
+        "min_hit@k": 0.0,
+        "max_hit@k": 1.0,
+        "avg_mrr": 0.46875,
+        "min_mrr": 0.0,
+        "max_mrr": 1.0,
+        "avg_map": 0.4375,
+        "min_map": 0.0,
+        "max_map": 1.0,
+        "avg_semantic_similarity": 0.6429696151013755,
+        "min_semantic_similarity": 0.3818277908981567,
+        "max_semantic_similarity": 0.8969163008811659,
+        "avg_answer_relevance": 0.5089141783015882,
+        "min_answer_relevance": 0.2419267389766101,
+        "max_answer_relevance": 0.884157546666108,
+        "avg_context_precision": 0.5338263344448418,
+        "min_context_precision": 0.3068626511819987,
+        "max_context_precision": 0.7189828015805004,
+        "avg_is_correct": 0.25,
+        "min_is_correct": 0.0,
+        "max_is_correct": 1.0
+      },
+      "easy": {
+        "avg_precision@k": 0.15416666666666667,
+        "min_precision@k": 0.0,
+        "max_precision@k": 0.5,
+        "avg_recall@k": 0.3125,
+        "min_recall@k": 0.0,
+        "max_recall@k": 1.0,
+        "avg_hit@k": 0.5,
+        "min_hit@k": 0.0,
+        "max_hit@k": 1.0,
+        "avg_mrr": 0.3541666666666667,
+        "min_mrr": 0.0,
+        "max_mrr": 1.0,
+        "avg_map": 0.3541666666666667,
+        "min_map": 0.0,
+        "max_map": 1.0,
+        "avg_semantic_similarity": 0.6631368141257348,
+        "min_semantic_similarity": 0.34347509272515925,
+        "max_semantic_similarity": 0.9962956594091046,
+        "avg_answer_relevance": 0.5944637006319397,
+        "min_answer_relevance": 0.27240812354726673,
+        "max_answer_relevance": 0.8793046348920592,
+        "avg_context_precision": 0.488235679281902,
+        "min_context_precision": 0.33889283052745556,
+        "max_context_precision": 0.6575707906499968,
+        "avg_is_correct": 0.25,
+        "min_is_correct": 0.0,
+        "max_is_correct": 1.0
+      },
+      "hard": {
+        "avg_precision@k": 0.27777777777777773,
+        "min_precision@k": 0.25,
+        "max_precision@k": 0.3333333333333333,
+        "avg_recall@k": 0.6666666666666666,
+        "min_recall@k": 0.5,
+        "max_recall@k": 1.0,
+        "avg_hit@k": 1.0,
+        "min_hit@k": 1.0,
+        "max_hit@k": 1.0,
+        "avg_mrr": 0.5833333333333334,
+        "min_mrr": 0.25,
+        "max_mrr": 1.0,
+        "avg_map": 0.5277777777777778,
+        "min_map": 0.25,
+        "max_map": 0.8333333333333333,
+        "avg_semantic_similarity": 0.511778932611143,
+        "min_semantic_similarity": 0.32819892605101725,
+        "max_semantic_similarity": 0.6393111153024633,
+        "avg_answer_relevance": 0.6045141060990349,
+        "min_answer_relevance": 0.4153695998319886,
+        "max_answer_relevance": 0.8299947360443194,
+        "avg_context_precision": 0.502623780866275,
+        "min_context_precision": 0.44641675265184305,
+        "max_context_precision": 0.5882992670504199,
+        "avg_is_correct": 0.0,
+        "min_is_correct": 0.0,
+        "max_is_correct": 0.0
+      }
+    }
+  },
+  "individual_results": [
+    {
+      "test_id": "ship_001",
+      "category": "shipping_policy",
+      "difficulty": "easy",
+      "query_type": "factual",
+      "question": "What is the minimum amount for free shipping at SprintStep?",
+      "expected_answer": "$100 USD before taxes",
+      "generated_answer": "$100",
+      "sources": [
+        {
+          "chunk_id": 15,
+          "document_id": 2,
+          "document_title": "promotions_coupons_policy.txt",
+          "distance": 0.45859927926080724,
+          "content": "C. Free Shipping Offers\n   - Applies to standard shipping only (upgrades to expedited shipping will incur additional charge)\n   - May have minimum purchase requirement\n   - Does not apply to international or special handling (e.g., Alaska/Hawaii may have restrictions)\n   - Cannot be combined with other free shipping offers"
+        },
+        {
+          "chunk_id": 94,
+          "document_id": 8,
+          "document_title": "sales_policy.pdf",
+          "distance": 0.5021492988511531,
+          "content": "Warranty Exclusions: - Normal wear and tear - Damage from sports misuse -\nWater damage unless product is labeled “Water-Resistant” - Accidental damage\nWarranty Claim Requirements: - Proof of purchase - Photos of defect - Order\nnumber\nWarranty Reference Code: SS-WAR-6M-2026\n9. FAQ Snippets (RAG Testing Purposes)\nQ: Does SprintStep offer free shipping?\nA: Yes, on orders over $100 before taxes.\nQ: How long is the warranty?\nA: 6 months from the delivery date.\nQ: Can I return worn shoes?"
+        },
+        {
+          "chunk_id": 14,
+          "document_id": 2,
+          "document_title": "promotions_coupons_policy.txt",
+          "distance": 0.6111927976137835,
+          "content": "B. Dollar-Amount Discounts (e.g., \"$15 Off $75\")\n   - Minimum purchase amount must be met BEFORE discount is applied (excluding taxes and shipping)\n   - If order total falls below minimum after discount, code will not apply\n   - Cannot be combined with other dollar-amount codes"
+        },
+        {
+          "chunk_id": 17,
+          "document_id": 2,
+          "document_title": "promotions_coupons_policy.txt",
+          "distance": 0.614638589940149,
+          "content": "E. Gift with Purchase (GWP)\n   - Free gift automatically added to cart when purchase threshold is met\n   - Gifts are while supplies last; if out of stock, substitution may occur\n   - Gift has no cash value and cannot be exchanged\n   - If order is returned and falls below threshold, gift must be returned or charged to customer"
+        },
+        {
+          "chunk_id": 131,
+          "document_id": 12,
+          "document_title": "shipping_carrier_agreement_USPS.txt",
+          "distance": 0.6172884423045057,
+          "content": "Priority Mail:\n- 1-3 business day delivery  \n- Target: 93% on-time delivery\n- Tracking included\n- Insurance: Up to $50 included; additional available\n\nFirst-Class Package:\n- 2-5 business day delivery\n- Best value for lightweight items under 1 lb\n- Tracking included\n\nOPERATIONAL REQUIREMENTS:\n\nPickup Services:\n- Daily pickup at Company warehouse: Monday-Saturday, 4:00 PM EST\n- No pickup fees (waived due to volume)\n- Backup pickup window: Before 6:00 PM if needed"
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.0,
+        "recall@k": 0.0,
+        "hit@k": 0.0,
+        "mrr": 0.0,
+        "map": 0.0,
+        "semantic_similarity": 0.7878080911351841,
+        "answer_relevance": 0.3142071893221673,
+        "context_precision": 0.36104315653625735,
+        "is_correct": 0.0
+      },
+      "latency_ms": 8594.94,
+      "status": "success"
+    },
+    {
+      "test_id": "ship_002",
+      "category": "shipping_policy",
+      "difficulty": "easy",
+      "query_type": "factual",
+      "question": "How long does standard shipping take to continental United States?",
+      "expected_answer": "3-7 business days",
+      "generated_answer": "The text doesn't specify how long standard shipping takes to the continental US. It mentions that it applies to 'standard shipping only' but doesn't give specific times for this type of shipping.",
+      "sources": [
+        {
+          "chunk_id": 15,
+          "document_id": 2,
+          "document_title": "promotions_coupons_policy.txt",
+          "distance": 0.38094635236902363,
+          "content": "C. Free Shipping Offers\n   - Applies to standard shipping only (upgrades to expedited shipping will incur additional charge)\n   - May have minimum purchase requirement\n   - Does not apply to international or special handling (e.g., Alaska/Hawaii may have restrictions)\n   - Cannot be combined with other free shipping offers"
+        },
+        {
+          "chunk_id": 43,
+          "document_id": 4,
+          "document_title": "help_center_articles.txt",
+          "distance": 0.381418810059878,
+          "content": "**How do I track my order?**\nYou'll receive tracking number via email once package ships. Click the link or paste number into tracking page on our website. Updates typically within 24 hours of shipment.\n\n**My tracking hasn't updated in days. What's wrong?**\nTracking can sometimes lag, especially over weekends. If no update after 3 business days from ship date, contact us – we'll investigate with the carrier."
+        },
+        {
+          "chunk_id": 151,
+          "document_id": 13,
+          "document_title": "returns_shipping.txt",
+          "distance": 0.43271962209226855,
+          "content": "Average response time: 24–48 business hours."
+        },
+        {
+          "chunk_id": 135,
+          "document_id": 12,
+          "document_title": "shipping_carrier_agreement_USPS.txt",
+          "distance": 0.4472482204437256,
+          "content": "Lost Package Protocol:\n- Priority Mail: Report after 7 days from ship date\n- First-Class/Parcel Select: Report after 14 days  \n- USPS conducts trace; result within 7 business days\n\nDamage Claims:\n- Inspect package within 24 hours of delivery\n- Photograph all sides of box + contents\n- Submit claim with supporting docs\n- Approval rate target: 90% for valid claims"
+        },
+        {
+          "chunk_id": 167,
+          "document_id": 14,
+          "document_title": "terms_and_conditions.txt",
+          "distance": 0.47319907269488526,
+          "content": "6.3 Delivery: You are responsible for providing a valid, deliverable shipping address. If a package is returned due to an incorrect address, you will be responsible for reshipping costs.\n\n7. RETURNS AND REFUNDS"
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.2,
+        "recall@k": 0.5,
+        "hit@k": 1.0,
+        "mrr": 0.3333333333333333,
+        "map": 0.3333333333333333,
+        "semantic_similarity": 0.5976318070805314,
+        "answer_relevance": 0.8793046348920592,
+        "context_precision": 0.5379521639577698,
+        "is_correct": 0.0
+      },
+      "latency_ms": 1851.66,
+      "status": "success"
+    },
+    {
+      "test_id": "ship_003",
+      "category": "shipping_policy",
+      "difficulty": "medium",
+      "query_type": "negative",
+      "question": "Does SprintStep offer express shipping to Alaska?",
+      "expected_answer": "No, Express shipping is not available for Alaska and Hawaii",
+      "generated_answer": "No",
+      "sources": [
+        {
+          "chunk_id": 144,
+          "document_id": 13,
+          "document_title": "returns_shipping.txt",
+          "distance": 0.398240327835083,
+          "content": "Alaska & Hawaii:\n- Standard Shipping: 5–10 business days\n- Express not available.\n\nCanada:\n- Standard International: 5–10 business days\n\nFree Shipping Policy:\n- Free standard shipping applies to orders over $100 USD (before tax).\n- Orders under $100 incur a $9.99 shipping fee.\n\nIMPORTANT:\nDelivery times are estimates and not guaranteed unless Overnight Shipping is selected.\n\nCarrier partners:\n- UPS\n- FedEx\n- USPS"
+        },
+        {
+          "chunk_id": 91,
+          "document_id": 8,
+          "document_title": "sales_policy.pdf",
+          "distance": 0.43596671330829573,
+          "content": "PM EST)\nCanada Shipping: - Standard International: 5–10 business days\nFree Standard Shipping: - Orders over $100 (before tax)\nTracking numbers are automatically sent via email once the order ships.\nShipping Carrier Partners: - UPS - FedEx - USPS\n5. Delivery Exceptions\nSprintStep is not responsible for delays caused by: - Severe weather - Customs\nprocessing (Canada) - Incorrect shipping addresses - Carrier service interrup-\ntions"
+        },
+        {
+          "chunk_id": 130,
+          "document_id": 12,
+          "document_title": "shipping_carrier_agreement_USPS.txt",
+          "distance": 0.49631494239746476,
+          "content": "Additional Incentives:\n- Volume bonus: Additional 2% discount if monthly volume exceeds 22,000 packages\n- On-time delivery guarantee: Credit issued for packages not delivered within promised window (Priority Express only)\n\nSERVICE LEVEL AGREEMENTS (SLAs):\n\nPriority Mail Express:\n- Overnight to 2-day delivery to most US addresses\n- Guarantee: 95% on-time delivery rate\n- Tracking updates: Every scan event, real-time\n- Insurance included: Up to $100"
+        },
+        {
+          "chunk_id": 145,
+          "document_id": 13,
+          "document_title": "returns_shipping.txt",
+          "distance": 0.5138851267592703,
+          "content": "Carrier partners:\n- UPS\n- FedEx\n- USPS\n\n----------------------------------------\nSECTION 3 — PAYMENT METHODS\n----------------------------------------\n\nAccepted payment methods:\n- Visa\n- Mastercard\n- American Express\n- PayPal\n- Apple Pay\n- Google Pay\n\nPayments are charged immediately upon order confirmation.\n\nFraud Prevention:\nSprintStep reserves the right to request additional identity verification for high-value orders (above $500)."
+        },
+        {
+          "chunk_id": 141,
+          "document_id": 12,
+          "document_title": "shipping_carrier_agreement_USPS.txt",
+          "distance": 0.5472576888050018,
+          "content": "Sustainability:\n- USPS commits to carbon-neutral delivery where available\n- Company may opt into eco-friendly packaging program (discounted rates on recycled materials)\n\nCONTACT INFORMATION:\nUSPS Account Management: accountrep@usps.gov | 1-800-XXX-XXXX\nCompany Logistics: logistics@athleticfootwear.com | Ext. 3401\n\nAgreement executed electronically with digital signatures.\n[Signature page follows]"
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.3333333333333333,
+        "recall@k": 0.5,
+        "hit@k": 1.0,
+        "mrr": 1.0,
+        "map": 0.75,
+        "semantic_similarity": 0.5038309622349922,
+        "answer_relevance": 0.3945271619329762,
+        "context_precision": 0.5856305133910239,
+        "is_correct": 0.0
+      },
+      "latency_ms": 1413.13,
+      "status": "success"
+    },
+    {
+      "test_id": "ret_001",
+      "category": "return_policy",
+      "difficulty": "easy",
+      "query_type": "factual",
+      "question": "How many days do I have to return a product?",
+      "expected_answer": "30 calendar days from the delivery date",
+      "generated_answer": "The standard return window is 60 days from the delivery date. For VIP members, it's extended to 90 days.",
+      "sources": [
+        {
+          "chunk_id": 168,
+          "document_id": 14,
+          "document_title": "terms_and_conditions.txt",
+          "distance": 0.3895020302981741,
+          "content": "7. RETURNS AND REFUNDS\n\nOur Return & Exchange Policy (version 2.1, incorporated by reference) governs returns, exchanges, and refunds. Key points:\n- 60-day return window (90 days for VIP members)\n- Free return shipping\n- Products must be in unworn or lightly worn condition\n- Certain items marked \"Final Sale\" are non-returnable\n\nSee full Return Policy at [link] for complete terms.\n\n8. INTELLECTUAL PROPERTY"
+        },
+        {
+          "chunk_id": 31,
+          "document_id": 3,
+          "document_title": "return_policy_v2.1_CURRENT.txt",
+          "distance": 0.39378548749424813,
+          "content": "RETURN & EXCHANGE POLICY - Version 2.1\nEffective: October 2023\nLast Updated: January 2024\n\nOUR PROMISE:\nWe want you to love your shoes. If they're not perfect, we make returns easy and free.\n\nRETURN WINDOW:\n- Standard: 60 days from delivery date (extended from 45 days)\n- VIP members: 90 days\n- Holiday purchases (Nov-Dec): Returns accepted until January 31st"
+        },
+        {
+          "chunk_id": 47,
+          "document_id": 4,
+          "document_title": "help_center_articles.txt",
+          "distance": 0.4050554278525954,
+          "content": "**Can I return without a receipt?**\nYes! We can look up your order with email address or order number. Gift recipients can return for store credit.\n\n**When will I get my refund?**\n3-5 business days after we receive your return. You'll get email confirmation when refund processes. Bank may take additional 1-3 days to post to account."
+        },
+        {
+          "chunk_id": 36,
+          "document_id": 3,
+          "document_title": "return_policy_v2.1_CURRENT.txt",
+          "distance": 0.41205495595932007,
+          "content": "Changes from v1.8: Extended window to 60 days, free return shipping, removed restocking fees, added partner drop-off locations, instant store credit option, exchange improvements."
+        },
+        {
+          "chunk_id": 123,
+          "document_id": 11,
+          "document_title": "return_policy_v1.8_DEPRECATED.txt",
+          "distance": 0.4196333384950909,
+          "content": "RETURN & EXCHANGE POLICY - Version 1.8\nEffective: March 2022 - September 2023\nStatus: SUPERSEDED - For reference only\n\nRETURN POLICY:\nCustomers may return unworn, unwashed merchandise within 45 days of purchase date with original receipt and packaging. Shoes must have all original tags attached and be in resaleable condition.\n\nReturn Methods:\n1. Mail returns: Customer pays return shipping ($8.95 flat rate)\n2. In-store returns: Not available (online only business)"
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.0,
+        "recall@k": 0.0,
+        "hit@k": 0.0,
+        "mrr": 0.0,
+        "map": 0.0,
+        "semantic_similarity": 0.6664173020949565,
+        "answer_relevance": 0.6511573172316609,
+        "context_precision": 0.5004777385158217,
+        "is_correct": 0.0
+      },
+      "latency_ms": 1656.97,
+      "status": "success"
+    },
+    {
+      "test_id": "ret_002",
+      "category": "return_policy",
+      "difficulty": "easy",
+      "query_type": "negative",
+      "question": "Can I return shoes that I have already worn?",
+      "expected_answer": "No, shoes must be unused, with original box and no visible wear on the sole",
+      "generated_answer": "Yes! You can return shoes that you have already worn as long as they meet the conditions of being light wear (indoors or one short run), clean, and in resellable condition.",
+      "sources": [
+        {
+          "chunk_id": 49,
+          "document_id": 4,
+          "document_title": "help_center_articles.txt",
+          "distance": 0.35254029661896924,
+          "content": "**What if shoes are defective?**\nContact us immediately with photos. We'll send replacement right away – no need to return defective pair first. Manufacturing defects covered 100%.\n\n**I wore them once and they hurt. Can I return?**\nYes! We understand you need to test shoes. Light wear (indoors or one short run) is acceptable for returns. Just make sure they're clean and in resellable condition.\n\n---\n\nARTICLE: SIZING & FIT\nCategory: Product Info | Updated: Jan 2024"
+        },
+        {
+          "chunk_id": 34,
+          "document_id": 3,
+          "document_title": "return_policy_v2.1_CURRENT.txt",
+          "distance": 0.3674939651790867,
+          "content": "EXCHANGES:\nWrong size? Wrong color? We'll cover shipping both ways for exchanges. New item ships before you return the original (we trust you!).\n\nNO RESTOCKING FEES. EVER.\n\nEXCLUSIONS (Very few):\n- Items marked \"Final Sale\" at checkout (you'll see a warning)\n- Shoes worn outdoors extensively (mud, significant scuffing, etc.)\n- Items damaged beyond normal try-on wear"
+        },
+        {
+          "chunk_id": 146,
+          "document_id": 13,
+          "document_title": "returns_shipping.txt",
+          "distance": 0.36752299263936217,
+          "content": "----------------------------------------\nSECTION 4 — RETURNS\n----------------------------------------\n\nReturn Window:\nCustomers may return products within 30 calendar days of delivery.\n\nHoliday Extended Returns:\nOrders placed between November 20 and December 24 may be returned until January 31.\n\nReturn Conditions:\n- Shoes must be unworn.\n- Original box must be included.\n- No visible sole wear.\n- Proof of purchase required."
+        },
+        {
+          "chunk_id": 123,
+          "document_id": 11,
+          "document_title": "return_policy_v1.8_DEPRECATED.txt",
+          "distance": 0.3801772141245304,
+          "content": "RETURN & EXCHANGE POLICY - Version 1.8\nEffective: March 2022 - September 2023\nStatus: SUPERSEDED - For reference only\n\nRETURN POLICY:\nCustomers may return unworn, unwashed merchandise within 45 days of purchase date with original receipt and packaging. Shoes must have all original tags attached and be in resaleable condition.\n\nReturn Methods:\n1. Mail returns: Customer pays return shipping ($8.95 flat rate)\n2. In-store returns: Not available (online only business)"
+        },
+        {
+          "chunk_id": 125,
+          "document_id": 11,
+          "document_title": "return_policy_v1.8_DEPRECATED.txt",
+          "distance": 0.4129933714866638,
+          "content": "EXCLUSIONS:\n- Sale items marked \"Final Sale\" (25% off or more) cannot be returned\n- Clearance items (50% off or more) are final sale\n- Custom or personalized footwear: No returns\n- Items without original packaging: Reduced refund (30% restocking fee)\n\nDEFECTIVE MERCHANDISE:\nManufacturing defects covered for 60 days. Customer must provide photos. Prepaid return label issued after review. Replacement shipped after defective item received (7-10 day process)."
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.0,
+        "recall@k": 0.0,
+        "hit@k": 0.0,
+        "mrr": 0.0,
+        "map": 0.0,
+        "semantic_similarity": 0.8029641861488085,
+        "answer_relevance": 0.8005254469013863,
+        "context_precision": 0.6575707906499968,
+        "is_correct": 1.0
+      },
+      "latency_ms": 1959.78,
+      "status": "success"
+    },
+    {
+      "test_id": "ret_003",
+      "category": "return_policy",
+      "difficulty": "medium",
+      "query_type": "factual",
+      "question": "How much does return shipping cost?",
+      "expected_answer": "$7.50 is deducted from the refund for returns in the USA, but shipping is free for exchanges",
+      "generated_answer": "The text states that the return shipping fee is $7.50 unless exchanged.",
+      "sources": [
+        {
+          "chunk_id": 4,
+          "document_id": 1,
+          "document_title": "knowledge_base.md",
+          "distance": 0.3406075448703014,
+          "content": "---\n\n# SHIPPING QUICK REFERENCE\n\nFree shipping threshold:\n$120 USD (before tax).\n\nStandard Shipping:\n3–7 business days (U.S. mainland).\n\nPeak Season Note:\nNovember 15 – December 31 may experience delays.\n\n---\n\n# RETURNS QUICK REFERENCE\n\nReturn window:\n30 days from delivery.\n\nHoliday exception:\nReturns allowed until January 31 for late November and December purchases.\n\nReturn shipping fee:\n$7.50 unless exchange.\n\n---\n\n# WARRANTY QUICK REFERENCE"
+        },
+        {
+          "chunk_id": 32,
+          "document_id": 3,
+          "document_title": "return_policy_v2.1_CURRENT.txt",
+          "distance": 0.40458924715646716,
+          "content": "RETURN CONDITIONS:\n✓ Shoes must be unworn or lightly worn (we get it - you need to test them!)\n✓ Original packaging preferred but not required\n✓ No receipt needed (we can look up your order with email)\n\nHOW TO RETURN:\n\nOption 1 - Free Mail Returns:\n1. Log into your account > Orders > Select item > \"Start Return\"\n2. Print prepaid return label (FREE - we cover shipping)\n3. Drop off at any USPS, UPS, or FedEx location\n4. Track your return online"
+        },
+        {
+          "chunk_id": 46,
+          "document_id": 4,
+          "document_title": "help_center_articles.txt",
+          "distance": 0.407818979723956,
+          "content": "**What is your return policy?**\n60 days to return from delivery date (90 days for VIP members). Shoes must be unworn or lightly worn. We provide free return shipping.\n\n**How do I start a return?**\n1. Log into account > Orders\n2. Select item > \"Start Return\"\n3. Choose reason (helps us improve!)\n4. Print prepaid return label  \n5. Pack item securely (original box preferred but not required)\n6. Drop off at USPS, UPS, or FedEx"
+        },
+        {
+          "chunk_id": 124,
+          "document_id": 11,
+          "document_title": "return_policy_v1.8_DEPRECATED.txt",
+          "distance": 0.40881828692013855,
+          "content": "Refund Processing:\n- Refunds issued to original payment method within 10-14 business days\n- Store credit option: Issued immediately upon receipt\n- Return shipping costs are non-refundable\n\nEXCHANGE POLICY:\nExchanges for different size or color accepted within 45-day window. Customer must pay shipping costs both ways ($8.95 each direction). Exchanges processed as return + new order."
+        },
+        {
+          "chunk_id": 48,
+          "document_id": 4,
+          "document_title": "help_center_articles.txt",
+          "distance": 0.40977481545359895,
+          "content": "**What about exchanges?**\nWe'll ship your exchange as soon as we receive your return – no need to wait for refund and reorder! Choose \"Exchange\" option when starting return.\n\n**Can I return sale items?**\nYes, unless marked \"Final Sale\" at time of purchase. Final Sale items are clearly labeled and you'll see warning at checkout."
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.25,
+        "recall@k": 0.5,
+        "hit@k": 1.0,
+        "mrr": 1.0,
+        "map": 1.0,
+        "semantic_similarity": 0.8581755398299933,
+        "answer_relevance": 0.7491429455219378,
+        "context_precision": 0.7189828015805004,
+        "is_correct": 1.0
+      },
+      "latency_ms": 1540.25,
+      "status": "success"
+    },
+    {
+      "test_id": "ret_004",
+      "category": "return_policy",
+      "difficulty": "hard",
+      "query_type": "reasoning",
+      "question": "I bought shoes in December, until when can I return them?",
+      "expected_answer": "Purchases made between November 20 and December 24 can be returned until January 31",
+      "generated_answer": "The return window is 30 calendar days from the delivery date. For VIP members, it's 60 days.",
+      "sources": [
+        {
+          "chunk_id": 146,
+          "document_id": 13,
+          "document_title": "returns_shipping.txt",
+          "distance": 0.30138949172369545,
+          "content": "----------------------------------------\nSECTION 4 — RETURNS\n----------------------------------------\n\nReturn Window:\nCustomers may return products within 30 calendar days of delivery.\n\nHoliday Extended Returns:\nOrders placed between November 20 and December 24 may be returned until January 31.\n\nReturn Conditions:\n- Shoes must be unworn.\n- Original box must be included.\n- No visible sole wear.\n- Proof of purchase required."
+        },
+        {
+          "chunk_id": 92,
+          "document_id": 8,
+          "document_title": "sales_policy.pdf",
+          "distance": 0.39469513766649233,
+          "content": "tions\nIf a package is marked “Delivered” but not received, customers must contact\nsupport within 5 business days.\n6. Returns Policy\nReturn Window: 30 calendar days from delivery date.\nReturn Conditions: - Shoes must be unworn - Original box required - Proof of\npurchase mandatory\nNon-Returnable Items: - Final Sale products - Gift cards - Customized or per-\nsonalized shoes\nRefund Timeline: - 5–10 business days after warehouse inspection\nReturn Authorization Code Required: RA-SS-XXXX\n7. Exchanges"
+        },
+        {
+          "chunk_id": 46,
+          "document_id": 4,
+          "document_title": "help_center_articles.txt",
+          "distance": 0.4006011070433224,
+          "content": "**What is your return policy?**\n60 days to return from delivery date (90 days for VIP members). Shoes must be unworn or lightly worn. We provide free return shipping.\n\n**How do I start a return?**\n1. Log into account > Orders\n2. Select item > \"Start Return\"\n3. Choose reason (helps us improve!)\n4. Print prepaid return label  \n5. Pack item securely (original box preferred but not required)\n6. Drop off at USPS, UPS, or FedEx"
+        },
+        {
+          "chunk_id": 32,
+          "document_id": 3,
+          "document_title": "return_policy_v2.1_CURRENT.txt",
+          "distance": 0.4506052405002613,
+          "content": "RETURN CONDITIONS:\n✓ Shoes must be unworn or lightly worn (we get it - you need to test them!)\n✓ Original packaging preferred but not required\n✓ No receipt needed (we can look up your order with email)\n\nHOW TO RETURN:\n\nOption 1 - Free Mail Returns:\n1. Log into your account > Orders > Select item > \"Start Return\"\n2. Print prepaid return label (FREE - we cover shipping)\n3. Drop off at any USPS, UPS, or FedEx location\n4. Track your return online"
+        },
+        {
+          "chunk_id": 148,
+          "document_id": 13,
+          "document_title": "returns_shipping.txt",
+          "distance": 0.4531207298852231,
+          "content": "Size exchanges are allowed once per order.\n\nIf the requested size is unavailable:\n- Customer may select a different model.\n- Or receive a full refund.\n\nExchanges ship within 3-5 business days after return inspection.\n\n----------------------------------------\nSECTION 6 — WARRANTY\n----------------------------------------\n\nStandard Warranty:\n6-month limited warranty from delivery date.\n\nCovers:\n- Manufacturing defects\n- Sole separation\n- Stitching failures\n- Structural midsole defects"
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.25,
+        "recall@k": 0.5,
+        "hit@k": 1.0,
+        "mrr": 0.25,
+        "map": 0.25,
+        "semantic_similarity": 0.6393111153024633,
+        "answer_relevance": 0.5681779824207966,
+        "context_precision": 0.5882992670504199,
+        "is_correct": 0.0
+      },
+      "latency_ms": 1658.15,
+      "status": "success"
+    },
+    {
+      "test_id": "prod_001",
+      "category": "product_specs",
+      "difficulty": "easy",
+      "query_type": "factual",
+      "question": "How much does the Velocity Pro 3 cost?",
+      "expected_answer": "$129.99",
+      "generated_answer": "I don't found information in the disponible documents",
+      "sources": [
+        {
+          "chunk_id": 7,
+          "document_id": 2,
+          "document_title": "promotions_coupons_policy.txt",
+          "distance": 0.7077226464582937,
+          "content": "PROMOTIONS & COUPONS POLICY\nAthletic Footwear E-Commerce LLC\nVersion 1.3 | Effective: January 2024\n\n════════════════════════════════════════════════════════════\n\nPURPOSE:\nThis policy outlines the terms and conditions for promotional offers, discount codes, coupons, and special deals offered by Athletic Footwear E-Commerce LLC through various channels (website, email, social media, partner sites).\n\nGENERAL TERMS:"
+        },
+        {
+          "chunk_id": 29,
+          "document_id": 2,
+          "document_title": "promotions_coupons_policy.txt",
+          "distance": 0.7115751504897989,
+          "content": "CONTACT & QUESTIONS:\n\nQuestions about a specific promotion? Contact us:\n- Email: promotions@athleticfootwear.com\n- Live chat: Available 24/7 on website\n- Phone: 1-800-786-7463\n\nInclude promotional code and/or offer details in your inquiry.\n\nMODIFICATIONS:\n\nWe reserve the right to modify, suspend, or terminate any promotion at any time with or without notice. Continued use of promotional codes after policy changes constitutes acceptance of modifications."
+        },
+        {
+          "chunk_id": 174,
+          "document_id": 14,
+          "document_title": "terms_and_conditions.txt",
+          "distance": 0.7154324224333466,
+          "content": "IN NO EVENT SHALL OUR TOTAL LIABILITY EXCEED THE AMOUNT YOU PAID FOR THE PRODUCT OR SERVICE GIVING RISE TO THE CLAIM, OR $100, WHICHEVER IS GREATER.\n\nSome jurisdictions do not allow the exclusion or limitation of certain warranties or damages, so the above limitations may not apply to you.\n\n11. INDEMNIFICATION"
+        },
+        {
+          "chunk_id": 185,
+          "document_id": 14,
+          "document_title": "terms_and_conditions.txt",
+          "distance": 0.7336727698239344,
+          "content": "20. CONTACT INFORMATION\n\nFor questions about these Terms, please contact us:\n\nAthletic Footwear E-Commerce LLC\nLegal Department\nEmail: legal@athleticfootwear.com\nPhone: 1-800-786-7463\nAddress: 123 Commerce Street, Suite 400, Wilmington, DE 19801\n\n═══════════════════════════════════════════════════════════\n\nBY USING THE SERVICES, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE BOUND BY THESE TERMS AND CONDITIONS.\n\nDocument Version: 2.0\nEffective: January 1, 2024"
+        },
+        {
+          "chunk_id": 120,
+          "document_id": 10,
+          "document_title": "store_credit_policy.txt",
+          "distance": 0.7362656671921652,
+          "content": "9. CUSTOMER SERVICE & DISPUTES\n\nQuestions about your store credit balance?\n- Check balance: Log into account > \"My Account\" > \"Store Credit\"\n- Transaction history: View all credit issued and redeemed in account dashboard\n\nDiscrepancy in balance?\nContact customer service immediately:\n- Email: support@athleticfootwear.com (include order numbers and details)\n- Live Chat: 24/7 on website\n- Phone: 1-800-786-7463\n\nWe'll investigate and resolve within 2-3 business days.\n\n10. POLICY CHANGES"
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.0,
+        "recall@k": 0.0,
+        "hit@k": 0.0,
+        "mrr": 0.0,
+        "map": 0.0,
+        "semantic_similarity": 0.34347509272515925,
+        "answer_relevance": 0.27240812354726673,
+        "context_precision": 0.33889283052745556,
+        "is_correct": 0.0
+      },
+      "latency_ms": 1545.69,
+      "status": "success"
+    },
+    {
+      "test_id": "prod_002",
+      "category": "product_specs",
+      "difficulty": "medium",
+      "query_type": "multi_fact",
+      "question": "What is the weight and drop of the AeroLight 2.5?",
+      "expected_answer": "190g weight and 6mm drop",
+      "generated_answer": "I don't found information in the disponible documents",
+      "sources": [
+        {
+          "chunk_id": 129,
+          "document_id": 12,
+          "document_title": "shipping_carrier_agreement_USPS.txt",
+          "distance": 0.652185419332112,
+          "content": "VOLUME COMMITMENTS & DISCOUNTS:\n\nProjected Monthly Volume: 15,000-20,000 packages\nAverage Package Weight: 2.5 lbs\nAverage Dimensions: 14\" x 10\" x 5\"\n\nNegotiated Discounts (from retail rates):\n- Priority Mail: 35% discount\n- Priority Mail Express: 28% discount  \n- First-Class Package: 40% discount\n- Parcel Select Ground: 45% discount"
+        },
+        {
+          "chunk_id": 161,
+          "document_id": 14,
+          "document_title": "terms_and_conditions.txt",
+          "distance": 0.7576317714939048,
+          "content": "4. PRODUCT INFORMATION AND PRICING\n\n4.1 Product Descriptions: We strive to provide accurate product descriptions, specifications, and images. However, we do not warrant that product descriptions, colors, sizing information, or other content on the Site is accurate, complete, reliable, current, or error-free. Product images are for illustrative purposes; actual products may vary slightly."
+        },
+        {
+          "chunk_id": 15,
+          "document_id": 2,
+          "document_title": "promotions_coupons_policy.txt",
+          "distance": 0.780927260435168,
+          "content": "C. Free Shipping Offers\n   - Applies to standard shipping only (upgrades to expedited shipping will incur additional charge)\n   - May have minimum purchase requirement\n   - Does not apply to international or special handling (e.g., Alaska/Hawaii may have restrictions)\n   - Cannot be combined with other free shipping offers"
+        },
+        {
+          "chunk_id": 81,
+          "document_id": 7,
+          "document_title": "blog_posts_collection.txt",
+          "distance": 0.7921116984982737,
+          "content": "**Step 1: Know Your Foot Type**\n\n*The Wet Test:*\nWet your foot, step on a paper bag or dark pavement, and look at your footprint:\n- **Flat foot:** Full footprint (you probably overpronate)\n- **Neutral arch:** Moderate curve on inside (neutral pronation)  \n- **High arch:** Big gap between heel and forefoot (underpronation/supination)\n\n**Step 2: Understand Pronation**"
+        },
+        {
+          "chunk_id": 135,
+          "document_id": 12,
+          "document_title": "shipping_carrier_agreement_USPS.txt",
+          "distance": 0.8021163434420926,
+          "content": "Lost Package Protocol:\n- Priority Mail: Report after 7 days from ship date\n- First-Class/Parcel Select: Report after 14 days  \n- USPS conducts trace; result within 7 business days\n\nDamage Claims:\n- Inspect package within 24 hours of delivery\n- Photograph all sides of box + contents\n- Submit claim with supporting docs\n- Approval rate target: 90% for valid claims"
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.0,
+        "recall@k": 0.0,
+        "hit@k": 0.0,
+        "mrr": 0.0,
+        "map": 0.0,
+        "semantic_similarity": 0.3818277908981567,
+        "answer_relevance": 0.2419267389766101,
+        "context_precision": 0.3068626511819987,
+        "is_correct": 0.0
+      },
+      "latency_ms": 1615.35,
+      "status": "success"
+    },
+    {
+      "test_id": "prod_003",
+      "category": "product_specs",
+      "difficulty": "medium",
+      "query_type": "reasoning",
+      "question": "What shoe is better for trail running?",
+      "expected_answer": "TerraGrip X2, which is designed for mud, gravel and mountain trails",
+      "generated_answer": "TerraGrip X2",
+      "sources": [
+        {
+          "chunk_id": 83,
+          "document_id": 7,
+          "document_title": "blog_posts_collection.txt",
+          "distance": 0.30683682283272784,
+          "content": "**Step 3: Consider Your Running Style**\n\n- **Road running:** Lightweight, cushioned shoes\n- **Trail running:** Aggressive tread, stability features, toe protection  \n- **Track/speed work:** Minimal cushioning, responsive, lightweight\n- **Long distance:** Maximum cushioning, comfort over speed\n\n**Step 4: Get the Right Fit**"
+        },
+        {
+          "chunk_id": 87,
+          "document_id": 7,
+          "document_title": "blog_posts_collection.txt",
+          "distance": 0.38099346700291215,
+          "content": "Ready to find your perfect pair? Browse our collection by foot type, running style, or brand.\n\nRun strong! 💪\nDr. Emily\n\nComments (18):\nRunnerGirl2024: \"This is so helpful! I've been buying shoes wrong for years...\"\n[Additional comments omitted for brevity]"
+        },
+        {
+          "chunk_id": 82,
+          "document_id": 7,
+          "document_title": "blog_posts_collection.txt",
+          "distance": 0.38982571989817016,
+          "content": "**Step 2: Understand Pronation**\n\n*Overpronation:* Foot rolls inward excessively – look for stability or motion-control shoes\n*Neutral pronation:* Even foot roll – neutral/cushioned shoes work great\n*Underpronation:* Foot rolls outward – need extra cushioning\n\n**Step 3: Consider Your Running Style**"
+        },
+        {
+          "chunk_id": 2,
+          "document_id": 1,
+          "document_title": "knowledge_base.md",
+          "distance": 0.3924837655588531,
+          "content": "Midsole: HyperFoam X\nOutsole: Carbon-infused rubber\nUpper: Engineered breathable mesh\n\nWarranty: 6 months standard.\n\n---\n\n### AeroLight 2.5\nRelease Date: October 2025\nPrice: $109.99\nWeight: 190g\nDrop: 6mm\nBest For: Speed workouts\n\nNot recommended for trail terrain.\n\n---\n\n## Trail Shoes\n\n### TerraGrip X2\nRelease Date: February 2026\nPrice: $139.99\nWater Resistant: Yes\nWeight: 285g\nDrop: 5mm\n\nDesigned for mud, gravel, and mountain trails.\nNot waterproof, only water-resistant.\n\n---\n\n## Basketball"
+        },
+        {
+          "chunk_id": 85,
+          "document_id": 7,
+          "document_title": "blog_posts_collection.txt",
+          "distance": 0.4161292488536439,
+          "content": "**Step 5: Test Before Buying**\n\nRun around the store. Seriously. Walk, jog, test on different surfaces if possible. Many specialty running stores have treadmills – use them! Our return policy gives you 60 days to test them on actual runs (just keep them clean).\n\n**Don't Fall for These Myths:**\n\n❌ \"Break-in period\" – Running shoes should feel good from day one\n❌ \"More expensive = better\" – Most important is fit for YOUR foot\n❌ \"I'll get used to it\" – Discomfort means wrong shoe"
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.5,
+        "recall@k": 1.0,
+        "hit@k": 1.0,
+        "mrr": 0.25,
+        "map": 0.25,
+        "semantic_similarity": 0.7455715176170807,
+        "answer_relevance": 0.406592535943769,
+        "context_precision": 0.5372992116528736,
+        "is_correct": 0.0
+      },
+      "latency_ms": 1472.51,
+      "status": "success"
+    },
+    {
+      "test_id": "prod_004",
+      "category": "product_specs",
+      "difficulty": "medium",
+      "query_type": "negative",
+      "question": "Can I use the Velocity Pro 3 for trail running?",
+      "expected_answer": "No, the Velocity Pro 3 is designed only for road running, not for trail terrain",
+      "generated_answer": "Yes, you can use the Velocity Pro 3 for trail running.",
+      "sources": [
+        {
+          "chunk_id": 83,
+          "document_id": 7,
+          "document_title": "blog_posts_collection.txt",
+          "distance": 0.46376754019566024,
+          "content": "**Step 3: Consider Your Running Style**\n\n- **Road running:** Lightweight, cushioned shoes\n- **Trail running:** Aggressive tread, stability features, toe protection  \n- **Track/speed work:** Minimal cushioning, responsive, lightweight\n- **Long distance:** Maximum cushioning, comfort over speed\n\n**Step 4: Get the Right Fit**"
+        },
+        {
+          "chunk_id": 1,
+          "document_id": 1,
+          "document_title": "knowledge_base.md",
+          "distance": 0.5115900503978206,
+          "content": "# SprintStep Knowledge Base\nInternal Product & Policy Reference\nVersion 1.4\nUpdated: April 2026\n\n---\n\n# COMPANY OVERVIEW\n\nSprintStep is an online-only athletic footwear retailer founded in 2018.\nHeadquarters: Austin, Texas, USA.\nPrimary market: United States.\n\n---\n\n# PRODUCT CATEGORIES\n\n## Running Shoes\n\n### Velocity Pro 3\nRelease Date: January 2026\nPrice: $129.99\nWeight: 225g\nDrop: 8mm\nBest For: Marathon training"
+        },
+        {
+          "chunk_id": 82,
+          "document_id": 7,
+          "document_title": "blog_posts_collection.txt",
+          "distance": 0.5631150175069229,
+          "content": "**Step 2: Understand Pronation**\n\n*Overpronation:* Foot rolls inward excessively – look for stability or motion-control shoes\n*Neutral pronation:* Even foot roll – neutral/cushioned shoes work great\n*Underpronation:* Foot rolls outward – need extra cushioning\n\n**Step 3: Consider Your Running Style**"
+        },
+        {
+          "chunk_id": 85,
+          "document_id": 7,
+          "document_title": "blog_posts_collection.txt",
+          "distance": 0.5715773872011074,
+          "content": "**Step 5: Test Before Buying**\n\nRun around the store. Seriously. Walk, jog, test on different surfaces if possible. Many specialty running stores have treadmills – use them! Our return policy gives you 60 days to test them on actual runs (just keep them clean).\n\n**Don't Fall for These Myths:**\n\n❌ \"Break-in period\" – Running shoes should feel good from day one\n❌ \"More expensive = better\" – Most important is fit for YOUR foot\n❌ \"I'll get used to it\" – Discomfort means wrong shoe"
+        },
+        {
+          "chunk_id": 87,
+          "document_id": 7,
+          "document_title": "blog_posts_collection.txt",
+          "distance": 0.6014780641923588,
+          "content": "Ready to find your perfect pair? Browse our collection by foot type, running style, or brand.\n\nRun strong! 💪\nDr. Emily\n\nComments (18):\nRunnerGirl2024: \"This is so helpful! I've been buying shoes wrong for years...\"\n[Additional comments omitted for brevity]"
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.5,
+        "recall@k": 1.0,
+        "hit@k": 1.0,
+        "mrr": 0.5,
+        "map": 0.5,
+        "semantic_similarity": 0.8969163008811659,
+        "answer_relevance": 0.884157546666108,
+        "context_precision": 0.4715146368016769,
+        "is_correct": 1.0
+      },
+      "latency_ms": 1558.0,
+      "status": "success"
+    },
+    {
+      "test_id": "prod_005",
+      "category": "product_specs",
+      "difficulty": "hard",
+      "query_type": "reasoning",
+      "question": "Are SprintStep shoes waterproof?",
+      "expected_answer": "Only TerraGrip models are water resistant, but no model is completely waterproof",
+      "generated_answer": "No.",
+      "sources": [
+        {
+          "chunk_id": 5,
+          "document_id": 1,
+          "document_title": "knowledge_base.md",
+          "distance": 0.3516577239852564,
+          "content": "---\n\n# WARRANTY QUICK REFERENCE\n\nStandard: 6 months.\nExtended: 12 months (optional add-on).\n\nCovers manufacturing defects.\n\nDoes not cover:\n- Sole wear from heavy use\n- Cosmetic scratches\n- Accidental damage\n\n---\n\n# COMMON CUSTOMER QUESTIONS\n\nQ: Are SprintStep shoes waterproof?\nA: Only TerraGrip models are water-resistant. No model is fully waterproof.\n\nQ: Can I use Velocity Pro 3 for trail running?\nA: No. It is designed for road running only."
+        },
+        {
+          "chunk_id": 85,
+          "document_id": 7,
+          "document_title": "blog_posts_collection.txt",
+          "distance": 0.5216644976539019,
+          "content": "**Step 5: Test Before Buying**\n\nRun around the store. Seriously. Walk, jog, test on different surfaces if possible. Many specialty running stores have treadmills – use them! Our return policy gives you 60 days to test them on actual runs (just keep them clean).\n\n**Don't Fall for These Myths:**\n\n❌ \"Break-in period\" – Running shoes should feel good from day one\n❌ \"More expensive = better\" – Most important is fit for YOUR foot\n❌ \"I'll get used to it\" – Discomfort means wrong shoe"
+        },
+        {
+          "chunk_id": 1,
+          "document_id": 1,
+          "document_title": "knowledge_base.md",
+          "distance": 0.5289657115936246,
+          "content": "# SprintStep Knowledge Base\nInternal Product & Policy Reference\nVersion 1.4\nUpdated: April 2026\n\n---\n\n# COMPANY OVERVIEW\n\nSprintStep is an online-only athletic footwear retailer founded in 2018.\nHeadquarters: Austin, Texas, USA.\nPrimary market: United States.\n\n---\n\n# PRODUCT CATEGORIES\n\n## Running Shoes\n\n### Velocity Pro 3\nRelease Date: January 2026\nPrice: $129.99\nWeight: 225g\nDrop: 8mm\nBest For: Marathon training"
+        },
+        {
+          "chunk_id": 83,
+          "document_id": 7,
+          "document_title": "blog_posts_collection.txt",
+          "distance": 0.5333447734508046,
+          "content": "**Step 3: Consider Your Running Style**\n\n- **Road running:** Lightweight, cushioned shoes\n- **Trail running:** Aggressive tread, stability features, toe protection  \n- **Track/speed work:** Minimal cushioning, responsive, lightweight\n- **Long distance:** Maximum cushioning, comfort over speed\n\n**Step 4: Get the Right Fit**"
+        },
+        {
+          "chunk_id": 49,
+          "document_id": 4,
+          "document_title": "help_center_articles.txt",
+          "distance": 0.5347282013135002,
+          "content": "**What if shoes are defective?**\nContact us immediately with photos. We'll send replacement right away – no need to return defective pair first. Manufacturing defects covered 100%.\n\n**I wore them once and they hurt. Can I return?**\nYes! We understand you need to test shoes. Light wear (indoors or one short run) is acceptable for returns. Just make sure they're clean and in resellable condition.\n\n---\n\nARTICLE: SIZING & FIT\nCategory: Product Info | Updated: Jan 2024"
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.3333333333333333,
+        "recall@k": 1.0,
+        "hit@k": 1.0,
+        "mrr": 1.0,
+        "map": 0.8333333333333333,
+        "semantic_similarity": 0.32819892605101725,
+        "answer_relevance": 0.4153695998319886,
+        "context_precision": 0.44641675265184305,
+        "is_correct": 0.0
+      },
+      "latency_ms": 1420.19,
+      "status": "success"
+    },
+    {
+      "test_id": "warr_001",
+      "category": "warranty",
+      "difficulty": "easy",
+      "query_type": "factual",
+      "question": "How long does the standard warranty last?",
+      "expected_answer": "6 months from the delivery date",
+      "generated_answer": "The standard warranty lasts for 6 months.",
+      "sources": [
+        {
+          "chunk_id": 101,
+          "document_id": 9,
+          "document_title": "vendor_supply_agreement.txt",
+          "distance": 0.4597668486764086,
+          "content": "3.3 Warranty: Supplier warrants products free from manufacturing defects for 12 months from date of manufacture.\n\n3.4 Defective Product Protocol: \n- Company notifies Supplier within 14 days of discovering defect\n- Supplier issues RMA and prepaid return label within 48 hours\n- Replacement units shipped within 7 days of receiving defective goods\n- Credits issued for unrecoverable defective inventory\n\nARTICLE 4 - RETURNS & STOCK BALANCING"
+        },
+        {
+          "chunk_id": 5,
+          "document_id": 1,
+          "document_title": "knowledge_base.md",
+          "distance": 0.46728382099559274,
+          "content": "---\n\n# WARRANTY QUICK REFERENCE\n\nStandard: 6 months.\nExtended: 12 months (optional add-on).\n\nCovers manufacturing defects.\n\nDoes not cover:\n- Sole wear from heavy use\n- Cosmetic scratches\n- Accidental damage\n\n---\n\n# COMMON CUSTOMER QUESTIONS\n\nQ: Are SprintStep shoes waterproof?\nA: Only TerraGrip models are water-resistant. No model is fully waterproof.\n\nQ: Can I use Velocity Pro 3 for trail running?\nA: No. It is designed for road running only."
+        },
+        {
+          "chunk_id": 94,
+          "document_id": 8,
+          "document_title": "sales_policy.pdf",
+          "distance": 0.49138359597080317,
+          "content": "Warranty Exclusions: - Normal wear and tear - Damage from sports misuse -\nWater damage unless product is labeled “Water-Resistant” - Accidental damage\nWarranty Claim Requirements: - Proof of purchase - Photos of defect - Order\nnumber\nWarranty Reference Code: SS-WAR-6M-2026\n9. FAQ Snippets (RAG Testing Purposes)\nQ: Does SprintStep offer free shipping?\nA: Yes, on orders over $100 before taxes.\nQ: How long is the warranty?\nA: 6 months from the delivery date.\nQ: Can I return worn shoes?"
+        },
+        {
+          "chunk_id": 31,
+          "document_id": 3,
+          "document_title": "return_policy_v2.1_CURRENT.txt",
+          "distance": 0.5222371260351688,
+          "content": "RETURN & EXCHANGE POLICY - Version 2.1\nEffective: October 2023\nLast Updated: January 2024\n\nOUR PROMISE:\nWe want you to love your shoes. If they're not perfect, we make returns easy and free.\n\nRETURN WINDOW:\n- Standard: 60 days from delivery date (extended from 45 days)\n- VIP members: 90 days\n- Holiday purchases (Nov-Dec): Returns accepted until January 31st"
+        },
+        {
+          "chunk_id": 125,
+          "document_id": 11,
+          "document_title": "return_policy_v1.8_DEPRECATED.txt",
+          "distance": 0.5546638071537018,
+          "content": "EXCLUSIONS:\n- Sale items marked \"Final Sale\" (25% off or more) cannot be returned\n- Clearance items (50% off or more) are final sale\n- Custom or personalized footwear: No returns\n- Items without original packaging: Reduced refund (30% restocking fee)\n\nDEFECTIVE MERCHANDISE:\nManufacturing defects covered for 60 days. Customer must provide photos. Prepaid return label issued after review. Replacement shipped after defective item received (7-10 day process)."
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.2,
+        "recall@k": 0.5,
+        "hit@k": 1.0,
+        "mrr": 0.5,
+        "map": 0.5,
+        "semantic_similarity": 0.6142523277593644,
+        "answer_relevance": 0.7749375663728713,
+        "context_precision": 0.4285575727465371,
+        "is_correct": 0.0
+      },
+      "latency_ms": 1496.99,
+      "status": "success"
+    },
+    {
+      "test_id": "warr_002",
+      "category": "warranty",
+      "difficulty": "medium",
+      "query_type": "negative",
+      "question": "Does the warranty cover normal wear from use?",
+      "expected_answer": "No, the warranty does not cover normal wear, improper athletic use, water damage or cosmetic damage",
+      "generated_answer": "No",
+      "sources": [
+        {
+          "chunk_id": 5,
+          "document_id": 1,
+          "document_title": "knowledge_base.md",
+          "distance": 0.4579810327348006,
+          "content": "---\n\n# WARRANTY QUICK REFERENCE\n\nStandard: 6 months.\nExtended: 12 months (optional add-on).\n\nCovers manufacturing defects.\n\nDoes not cover:\n- Sole wear from heavy use\n- Cosmetic scratches\n- Accidental damage\n\n---\n\n# COMMON CUSTOMER QUESTIONS\n\nQ: Are SprintStep shoes waterproof?\nA: Only TerraGrip models are water-resistant. No model is fully waterproof.\n\nQ: Can I use Velocity Pro 3 for trail running?\nA: No. It is designed for road running only."
+        },
+        {
+          "chunk_id": 94,
+          "document_id": 8,
+          "document_title": "sales_policy.pdf",
+          "distance": 0.46470932557310696,
+          "content": "Warranty Exclusions: - Normal wear and tear - Damage from sports misuse -\nWater damage unless product is labeled “Water-Resistant” - Accidental damage\nWarranty Claim Requirements: - Proof of purchase - Photos of defect - Order\nnumber\nWarranty Reference Code: SS-WAR-6M-2026\n9. FAQ Snippets (RAG Testing Purposes)\nQ: Does SprintStep offer free shipping?\nA: Yes, on orders over $100 before taxes.\nQ: How long is the warranty?\nA: 6 months from the delivery date.\nQ: Can I return worn shoes?"
+        },
+        {
+          "chunk_id": 49,
+          "document_id": 4,
+          "document_title": "help_center_articles.txt",
+          "distance": 0.508502334356294,
+          "content": "**What if shoes are defective?**\nContact us immediately with photos. We'll send replacement right away – no need to return defective pair first. Manufacturing defects covered 100%.\n\n**I wore them once and they hurt. Can I return?**\nYes! We understand you need to test shoes. Light wear (indoors or one short run) is acceptable for returns. Just make sure they're clean and in resellable condition.\n\n---\n\nARTICLE: SIZING & FIT\nCategory: Product Info | Updated: Jan 2024"
+        },
+        {
+          "chunk_id": 34,
+          "document_id": 3,
+          "document_title": "return_policy_v2.1_CURRENT.txt",
+          "distance": 0.5549742183135349,
+          "content": "EXCHANGES:\nWrong size? Wrong color? We'll cover shipping both ways for exchanges. New item ships before you return the original (we trust you!).\n\nNO RESTOCKING FEES. EVER.\n\nEXCLUSIONS (Very few):\n- Items marked \"Final Sale\" at checkout (you'll see a warning)\n- Shoes worn outdoors extensively (mud, significant scuffing, etc.)\n- Items damaged beyond normal try-on wear"
+        },
+        {
+          "chunk_id": 72,
+          "document_id": 7,
+          "document_title": "blog_posts_collection.txt",
+          "distance": 0.5566396215582183,
+          "content": "**1. The Mileage Test (300-500 miles)**\nMost running shoes have a lifespan of 300-500 miles. Keep a running log (pun intended) or use an app to track your mileage. If you run 20 miles per week, that's about 4-6 months.\n\n**2. Sole Wear Pattern**\nFlip your shoes over. See uneven wear? Bald spots on the outsole? That's your shoe telling you it's retirement time. The tread should be visible and even."
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.2,
+        "recall@k": 0.5,
+        "hit@k": 1.0,
+        "mrr": 1.0,
+        "map": 1.0,
+        "semantic_similarity": 0.3887033491460426,
+        "answer_relevance": 0.3853433070430621,
+        "context_precision": 0.6348926231214177,
+        "is_correct": 0.0
+      },
+      "latency_ms": 1424.88,
+      "status": "success"
+    },
+    {
+      "test_id": "pay_001",
+      "category": "payment_methods",
+      "difficulty": "easy",
+      "query_type": "negative",
+      "question": "Does SprintStep accept cryptocurrencies?",
+      "expected_answer": "No, SprintStep does not accept cryptocurrencies",
+      "generated_answer": "No",
+      "sources": [
+        {
+          "chunk_id": 145,
+          "document_id": 13,
+          "document_title": "returns_shipping.txt",
+          "distance": 0.4806001627624026,
+          "content": "Carrier partners:\n- UPS\n- FedEx\n- USPS\n\n----------------------------------------\nSECTION 3 — PAYMENT METHODS\n----------------------------------------\n\nAccepted payment methods:\n- Visa\n- Mastercard\n- American Express\n- PayPal\n- Apple Pay\n- Google Pay\n\nPayments are charged immediately upon order confirmation.\n\nFraud Prevention:\nSprintStep reserves the right to request additional identity verification for high-value orders (above $500)."
+        },
+        {
+          "chunk_id": 115,
+          "document_id": 10,
+          "document_title": "store_credit_policy.txt",
+          "distance": 0.5680454969406097,
+          "content": "6. TRANSFERABILITY\n\nStore credit is NON-TRANSFERABLE:\n- Tied to your account (email address) and cannot be transferred to another person\n- Cannot be sold, auctioned, or exchanged for cash\n- Cannot be divided between multiple accounts\n- Exception: If you close your account, credit can be transferred to new account with same name/email (contact customer service)\n\n7. CASH VALUE & REDEMPTION"
+        },
+        {
+          "chunk_id": 116,
+          "document_id": 10,
+          "document_title": "store_credit_policy.txt",
+          "distance": 0.5724010340094827,
+          "content": "7. CASH VALUE & REDEMPTION\n\nStore credit has NO CASH VALUE:\n- Cannot be redeemed for cash or check\n- Cannot be used at third-party retailers or partner stores (online use only)\n- If account is closed, credit is forfeited (not refunded in cash)\n\n8. SPECIAL CIRCUMSTANCES"
+        },
+        {
+          "chunk_id": 112,
+          "document_id": 10,
+          "document_title": "store_credit_policy.txt",
+          "distance": 0.613448106441014,
+          "content": "Important Notes:\n- Store credit applies to product cost only (not shipping or taxes, unless credit covers full order)\n- Cannot be used to purchase gift cards\n- Can be combined with promo codes, loyalty points, and other discounts\n- Partial use allowed – unused portion remains in account\n\n4. REFUNDS & EXCHANGES WITH STORE CREDIT"
+        },
+        {
+          "chunk_id": 110,
+          "document_id": 10,
+          "document_title": "store_credit_policy.txt",
+          "distance": 0.6208662503699571,
+          "content": "2. STORE CREDIT BALANCE & TRACKING\n\n- Store credit balance visible in your account under \"My Account > Store Credit\"\n- Email confirmation sent each time credit is issued or redeemed\n- Minimum redeemable amount: $1.00 (no maximum)\n- Balance never expires (see Expiration section below)\n\n3. HOW TO USE STORE CREDIT"
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.5,
+        "recall@k": 1.0,
+        "hit@k": 1.0,
+        "mrr": 1.0,
+        "map": 1.0,
+        "semantic_similarity": 0.4962500466527683,
+        "answer_relevance": 0.43576042068909604,
+        "context_precision": 0.5569646363471585,
+        "is_correct": 0.0
+      },
+      "latency_ms": 1407.14,
+      "status": "success"
+    },
+    {
+      "test_id": "pay_002",
+      "category": "payment_methods",
+      "difficulty": "easy",
+      "query_type": "factual",
+      "question": "What credit cards does SprintStep accept?",
+      "expected_answer": "Visa, Mastercard, American Express, PayPal, Apple Pay and Google Pay",
+      "generated_answer": "Visa, Mastercard, American Express, PayPal, Apple Pay, Google Pay",
+      "sources": [
+        {
+          "chunk_id": 145,
+          "document_id": 13,
+          "document_title": "returns_shipping.txt",
+          "distance": 0.3647399137991554,
+          "content": "Carrier partners:\n- UPS\n- FedEx\n- USPS\n\n----------------------------------------\nSECTION 3 — PAYMENT METHODS\n----------------------------------------\n\nAccepted payment methods:\n- Visa\n- Mastercard\n- American Express\n- PayPal\n- Apple Pay\n- Google Pay\n\nPayments are charged immediately upon order confirmation.\n\nFraud Prevention:\nSprintStep reserves the right to request additional identity verification for high-value orders (above $500)."
+        },
+        {
+          "chunk_id": 90,
+          "document_id": 8,
+          "document_title": "sales_policy.pdf",
+          "distance": 0.5297207516598178,
+          "content": "“Shipped”.\n3. Payment Methods\nAccepted Payment Methods: - Visa - Mastercard - American Express - PayPal\n- Apple Pay - Google Pay\nWe do NOT accept: - Bank transfers - Cryptocurrency - Cash on delivery\nAll transactions are secured using 256-bit SSL encryption.\nFraud Review Window: Up to 48 hours before approval.\n4. Shipping Policy\nDomestic Shipping (United States): - Standard: 3–7 business days - Express:\n2–3 business days - Next-Day: 1 business day (order must be placed before 12:00\n1"
+        },
+        {
+          "chunk_id": 95,
+          "document_id": 8,
+          "document_title": "sales_policy.pdf",
+          "distance": 0.5602347778994079,
+          "content": "Q: Can I return worn shoes?\nA: No, returns require unused condition.\nQ: Does SprintStep accept cryptocurrency?\nA: No.\nQ: What happens if my order is delayed due to weather?\nA: Delivery times may be extended and are outside SprintStep’s control.\n10. Contact Information\nEmail: support@sprintstep.com\nPhone: 1-800-555-STEP\nHours: Monday–Friday, 9 AM–6 PM EST\nAverage Response Time: 24–48 business hours.\nEnd of Document\nDocument Version: 2.1\nInternal Classification: Public Customer Policy\n3"
+        },
+        {
+          "chunk_id": 112,
+          "document_id": 10,
+          "document_title": "store_credit_policy.txt",
+          "distance": 0.5634131654008399,
+          "content": "Important Notes:\n- Store credit applies to product cost only (not shipping or taxes, unless credit covers full order)\n- Cannot be used to purchase gift cards\n- Can be combined with promo codes, loyalty points, and other discounts\n- Partial use allowed – unused portion remains in account\n\n4. REFUNDS & EXCHANGES WITH STORE CREDIT"
+        },
+        {
+          "chunk_id": 88,
+          "document_id": 8,
+          "document_title": "sales_policy.pdf",
+          "distance": 0.5688498020171997,
+          "content": "SprintStep Online Sales & Support Policy (RAG\nTest Version)\nLast Updated: February 2026\nDocument ID: SSP-ONLINE-2026-V2\n1. Company Overview\nSprintStep is an online-only retailer specializing in athletic footwear. We do not\noperate physical retail stores. All purchases must be completed through our\noﬀicial website: https://www.sprintstep.com.\nCustomer Support Reference Code: SS-SUPPORT-24H\n2. Ordering Policy\nOrders can be placed 24/7 through our website."
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.3333333333333333,
+        "recall@k": 0.5,
+        "hit@k": 1.0,
+        "mrr": 1.0,
+        "map": 1.0,
+        "semantic_similarity": 0.9962956594091046,
+        "answer_relevance": 0.6274089060990091,
+        "context_precision": 0.524426544974219,
+        "is_correct": 1.0
+      },
+      "latency_ms": 1571.24,
+      "status": "success"
+    },
+    {
+      "test_id": "edge_001",
+      "category": "edge_cases",
+      "difficulty": "medium",
+      "query_type": "factual",
+      "question": "What happens if my package says 'Delivered' but I didn't receive it?",
+      "expected_answer": "Customers must contact support within 5 business days if the package is marked as delivered but not received",
+      "generated_answer": "Customers must contact support within 5 business days.",
+      "sources": [
+        {
+          "chunk_id": 167,
+          "document_id": 14,
+          "document_title": "terms_and_conditions.txt",
+          "distance": 0.4660775146299566,
+          "content": "6.3 Delivery: You are responsible for providing a valid, deliverable shipping address. If a package is returned due to an incorrect address, you will be responsible for reshipping costs.\n\n7. RETURNS AND REFUNDS"
+        },
+        {
+          "chunk_id": 92,
+          "document_id": 8,
+          "document_title": "sales_policy.pdf",
+          "distance": 0.5375733055130583,
+          "content": "tions\nIf a package is marked “Delivered” but not received, customers must contact\nsupport within 5 business days.\n6. Returns Policy\nReturn Window: 30 calendar days from delivery date.\nReturn Conditions: - Shoes must be unworn - Original box required - Proof of\npurchase mandatory\nNon-Returnable Items: - Final Sale products - Gift cards - Customized or per-\nsonalized shoes\nRefund Timeline: - 5–10 business days after warehouse inspection\nReturn Authorization Code Required: RA-SS-XXXX\n7. Exchanges"
+        },
+        {
+          "chunk_id": 132,
+          "document_id": 12,
+          "document_title": "shipping_carrier_agreement_USPS.txt",
+          "distance": 0.5989605011414578,
+          "content": "Shipping Label Requirements:\n- Electronic manifest submission required by 2:00 PM daily\n- USPS-approved label format (4x6 thermal labels)\n- Intelligent Mail Barcode (IMB) required on all labels\n- Return address and customer service contact mandatory\n\nPackaging Standards:\n- Company responsible for packaging integrity\n- Boxes must meet USPS dimensional standards\n- Fragile items: Additional \"Fragile\" sticker recommended (provided by USPS)\n\nTRACKING & VISIBILITY:"
+        },
+        {
+          "chunk_id": 35,
+          "document_id": 3,
+          "document_title": "return_policy_v2.1_CURRENT.txt",
+          "distance": 0.6346993423225064,
+          "content": "DEFECTIVE ITEMS:\nManufacturing defect? We'll replace or refund immediately - no need to return first. Contact customer service with photos. We stand behind quality 100%.\n\nGIFT RETURNS:\nGift recipient can return for store credit without original receipt. Just need order number or packing slip.\n\nQUESTIONS?\nChat with us 24/7 or email returns@athleticfootwear.com\nAverage response time: Under 2 hours"
+        },
+        {
+          "chunk_id": 32,
+          "document_id": 3,
+          "document_title": "return_policy_v2.1_CURRENT.txt",
+          "distance": 0.6410196087313631,
+          "content": "RETURN CONDITIONS:\n✓ Shoes must be unworn or lightly worn (we get it - you need to test them!)\n✓ Original packaging preferred but not required\n✓ No receipt needed (we can look up your order with email)\n\nHOW TO RETURN:\n\nOption 1 - Free Mail Returns:\n1. Log into your account > Orders > Select item > \"Start Return\"\n2. Print prepaid return label (FREE - we cover shipping)\n3. Drop off at any USPS, UPS, or FedEx location\n4. Track your return online"
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.0,
+        "recall@k": 0.0,
+        "hit@k": 0.0,
+        "mrr": 0.0,
+        "map": 0.0,
+        "semantic_similarity": 0.7760531063497096,
+        "answer_relevance": 0.2650016780295616,
+        "context_precision": 0.6199489087809299,
+        "is_correct": 0.0
+      },
+      "latency_ms": 1801.18,
+      "status": "success"
+    },
+    {
+      "test_id": "edge_002",
+      "category": "edge_cases",
+      "difficulty": "hard",
+      "query_type": "reasoning",
+      "question": "I made an order for $600, do I need to do anything special?",
+      "expected_answer": "SprintStep may request additional identity verification for orders over $500",
+      "generated_answer": "No, there is no information in the available documents regarding special actions needed when making an order for $600.",
+      "sources": [
+        {
+          "chunk_id": 90,
+          "document_id": 8,
+          "document_title": "sales_policy.pdf",
+          "distance": 0.6166963120336905,
+          "content": "“Shipped”.\n3. Payment Methods\nAccepted Payment Methods: - Visa - Mastercard - American Express - PayPal\n- Apple Pay - Google Pay\nWe do NOT accept: - Bank transfers - Cryptocurrency - Cash on delivery\nAll transactions are secured using 256-bit SSL encryption.\nFraud Review Window: Up to 48 hours before approval.\n4. Shipping Policy\nDomestic Shipping (United States): - Standard: 3–7 business days - Express:\n2–3 business days - Next-Day: 1 business day (order must be placed before 12:00\n1"
+        },
+        {
+          "chunk_id": 143,
+          "document_id": 13,
+          "document_title": "returns_shipping.txt",
+          "distance": 0.6517336251418144,
+          "content": "During peak season (November 15 – December 31), processing time may increase to 2–3 business days.\n\nPre-orders:\nProducts labeled as \"Pre-Order\" ship on the release date specified on the product page.\n\n----------------------------------------\nSECTION 2 — SHIPPING POLICY\n----------------------------------------\n\nDomestic Shipping (USA):\n- Standard Shipping: 3–7 business days\n- Express Shipping: 2 business days\n- Overnight Shipping: 1 business day"
+        },
+        {
+          "chunk_id": 136,
+          "document_id": 12,
+          "document_title": "shipping_carrier_agreement_USPS.txt",
+          "distance": 0.6758091940993499,
+          "content": "LIABILITY LIMITATIONS:\n- Maximum liability: Insured value or $100 (whichever greater)\n- Consequential damages excluded\n- Company responsible for proper packaging\n\nBILLING & PAYMENT:\n\nBilling Cycle: Weekly billing, invoices issued Mondays\nPayment Terms: Net 15 days via ACH transfer\nPostage Account: Company maintains prepaid postage account; auto-refill at $5,000 balance"
+        },
+        {
+          "chunk_id": 20,
+          "document_id": 2,
+          "document_title": "promotions_coupons_policy.txt",
+          "distance": 0.7367396338867704,
+          "content": "❌ Gift cards\n❌ Items marked \"Final Sale\"\n❌ Previous purchases (codes apply to current orders only)\n❌ Shipping fees\n❌ Taxes\n❌ Special order or pre-order items (at our discretion)\n❌ Certain premium brands (listed in promo details if applicable)\n\nSTACKING & COMBINING:\n\nCan Be Combined:\n✓ Promo codes + Loyalty points/rewards\n✓ Promo codes + Gift cards\n✓ Free shipping offers + Percentage/dollar discounts (unless code specifically prohibits)"
+        },
+        {
+          "chunk_id": 8,
+          "document_id": 2,
+          "document_title": "promotions_coupons_policy.txt",
+          "distance": 0.7395640170834012,
+          "content": "GENERAL TERMS:\n\n1. Eligibility\n   - Promotions are valid for customers shipping to U.S. addresses only\n   - Some promotions may be limited to new customers, VIP members, or specific customer segments\n   - Employees and immediate family members of Athletic Footwear E-Commerce LLC are not eligible for promotions unless otherwise stated\n   - One promotional code per order unless explicitly stated otherwise"
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.25,
+        "recall@k": 0.5,
+        "hit@k": 1.0,
+        "mrr": 0.5,
+        "map": 0.5,
+        "semantic_similarity": 0.5678267564799485,
+        "answer_relevance": 0.8299947360443194,
+        "context_precision": 0.47315532289656226,
+        "is_correct": 0.0
+      },
+      "latency_ms": 1643.99,
+      "status": "success"
+    },
+    {
+      "test_id": "edge_003",
+      "category": "edge_cases",
+      "difficulty": "medium",
+      "query_type": "factual",
+      "question": "How many times can I make an exchange from the same order?",
+      "expected_answer": "Exchanges are limited to one per order",
+      "generated_answer": "The text states that if an exchange item is lower in price than the original purchase, then the difference is issued as store credit. However, it doesn't specify how many times one can make an exchange from the same order. Therefore, I don't have enough information to determine this limit.",
+      "sources": [
+        {
+          "chunk_id": 48,
+          "document_id": 4,
+          "document_title": "help_center_articles.txt",
+          "distance": 0.4410898159635286,
+          "content": "**What about exchanges?**\nWe'll ship your exchange as soon as we receive your return – no need to wait for refund and reorder! Choose \"Exchange\" option when starting return.\n\n**Can I return sale items?**\nYes, unless marked \"Final Sale\" at time of purchase. Final Sale items are clearly labeled and you'll see warning at checkout."
+        },
+        {
+          "chunk_id": 27,
+          "document_id": 2,
+          "document_title": "promotions_coupons_policy.txt",
+          "distance": 0.4448856446215116,
+          "content": "Examples of fraud/abuse:\n- Creating multiple accounts to use single-use codes multiple times\n- Using bots or automated tools to exploit promotions\n- Publicly sharing single-use codes intended for specific recipients\n- Reselling promotional products for profit\n- False identity or payment information\n\nRETURNS & EXCHANGES ON PROMOTIONAL ORDERS:"
+        },
+        {
+          "chunk_id": 115,
+          "document_id": 10,
+          "document_title": "store_credit_policy.txt",
+          "distance": 0.5384142994880643,
+          "content": "6. TRANSFERABILITY\n\nStore credit is NON-TRANSFERABLE:\n- Tied to your account (email address) and cannot be transferred to another person\n- Cannot be sold, auctioned, or exchanged for cash\n- Cannot be divided between multiple accounts\n- Exception: If you close your account, credit can be transferred to new account with same name/email (contact customer service)\n\n7. CASH VALUE & REDEMPTION"
+        },
+        {
+          "chunk_id": 107,
+          "document_id": 10,
+          "document_title": "store_credit_policy.txt",
+          "distance": 0.5442581746424324,
+          "content": "a) Returns\n   - When processing a return, you may choose store credit instead of refund to original payment method\n   - Benefit: Store credit is issued INSTANTLY (no waiting for bank processing)\n   - Bonus: 5% extra credit (e.g., $100 return = $105 store credit)\n   - See Return Policy for eligibility requirements\n\nb) Exchanges\n   - If exchanged item is lower in price than original, difference issued as store credit\n   - Example: Original purchase $120, exchange item $100 → $20 store credit"
+        },
+        {
+          "chunk_id": 112,
+          "document_id": 10,
+          "document_title": "store_credit_policy.txt",
+          "distance": 0.5471733482376717,
+          "content": "Important Notes:\n- Store credit applies to product cost only (not shipping or taxes, unless credit covers full order)\n- Cannot be used to purchase gift cards\n- Can be combined with promo codes, loyalty points, and other discounts\n- Partial use allowed – unused portion remains in account\n\n4. REFUNDS & EXCHANGES WITH STORE CREDIT"
+        }
+      ],
+      "metrics": {
+        "precision@k": 0.0,
+        "recall@k": 0.0,
+        "hit@k": 0.0,
+        "mrr": 0.0,
+        "map": 0.0,
+        "semantic_similarity": 0.5926783538538631,
+        "answer_relevance": 0.7446215122986812,
+        "context_precision": 0.39547932904831307,
+        "is_correct": 0.0
+      },
+      "latency_ms": 1929.44,
+      "status": "success"
+    }
+  ]
+}

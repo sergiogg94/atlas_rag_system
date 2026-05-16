@@ -10,11 +10,12 @@ async def main():
         chunk_size=500,
         chunk_overlap=50,
         top_k=5,
-        score_threshold=0.95,
+        max_distance=0.98,
+        correctness_threshold=0.8,
     )
 
     report = await evaluator.run_full_evaluation(
-        dataset_path="app/evaluation/data/test_dataset.json"
+        dataset_path="app/evaluator/data/test_dataset_sprintstep_mini.json"
     )
 
     logger.info(f"Successful cases: {report['experiment_info']['successful_cases']}")
