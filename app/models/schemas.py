@@ -88,7 +88,7 @@ class SourceReference(BaseModel):
     document_title: str = Field(..., description="Title of the document")
     distance: float = Field(..., description="Cosine distance (relevance score)")
     content: Optional[str] = Field(
-        None, description="Excerpt of the chunk content", max_length=200
+        None, description="Excerpt of the chunk content"  # , max_length=200
     )
 
 
