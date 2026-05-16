@@ -84,17 +84,17 @@ class RAGMetrics:
 
     ## Generation metrics
 
-    def similarity(self, text_1: str, text_2: str) -> float:
+    async def similarity(self, text_1: str, text_2: str) -> float:
         """Cosine similarity between two sentences"""
         # Encode text
-        embeddings = self.model.encode([text_1, text_2])
+        embeddings = await self.model.encode([text_1, text_2])
 
         # Calculate cosine similarity
         similarity_score = cosine_similarity([embeddings[0]], [embeddings[1]])[0][0]
 
         return similarity_score
 
-    def context_precision(
+    async def context_precision(
         self, expected_answer: str, retrieved_chunks: List[str]
     ) -> float:
         """Mean of the cosine similarity between the expected answer and the
@@ -105,9 +105,9 @@ class RAGMetrics:
             return 0.0
 
         # Encode text
-        answer_emb = self.model.encode([expected_answer])[0]
+        answer_emb = (await self.model.encode([expected_answer]))[0]
         # TODO: Get vectors from the database, implement query method in repository
-        chunks_embs = self.model.encode(retrieved_chunks)
+        chunks_embs = await self.model.encode(retrieved_chunks)
 
         # Similarities
         similarities = []
@@ -118,15 +118,15 @@ class RAGMetrics:
         # Return average similarity as context precision
         return sum(similarities) / len(similarities)
 
-    def answer_correctness(
+    async def answer_correctness(
         self, generated_aswer: str, expected_answer: str, threshold: float = 0.8
     ) -> bool:
         """Decides if the given answer is correct based on the cosine similarity"""
-        sim = self.similarity(generated_aswer, expected_answer)
+        sim = await self.similarity(generated_aswer, expected_answer)
 
         return sim >= threshold
 
-    def calculate_metrics(
+    async def calculate_metrics(
         self,
         query: str,
         generated_answer: str,
@@ -149,12 +149,16 @@ class RAGMetrics:
             "mrr": self.mean_reciprocal_rank(retrieved_docs, relevant_docs),
             "map": self.average_precision(retrieved_docs, relevant_docs),
             # Generation metrics
-            "semantic_similarity": self.similarity(generated_answer, expected_answer),
-            "answer_relevance": self.similarity(generated_answer, query),
-            "context_precision": self.context_precision(
+            "semantic_similarity": await self.similarity(
+                generated_answer, expected_answer
+            ),
+            "answer_relevance": await self.similarity(generated_answer, query),
+            "context_precision": await self.context_precision(
                 expected_answer, retrieved_chunks
             ),
             "is_correct": float(
-                self.answer_correctness(generated_answer, expected_answer, threshold)
+                await self.answer_correctness(
+                    generated_answer, expected_answer, threshold
+                )
             ),
         }

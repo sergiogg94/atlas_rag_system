@@ -54,7 +54,7 @@ class RAGEvaluator:
             )
 
             # Calculate metrics
-            metrics = self.metrics.calculate_metrics(
+            metrics = await self.metrics.calculate_metrics(
                 query=test_case["question"],
                 generated_answer=result["answer"],
                 expected_answer=test_case["expected_answer"],
@@ -171,7 +171,7 @@ class RAGEvaluator:
         """Calculate average, min, and max for each metric in a list of metric dictionaries"""
         aggregates = {}
 
-        for key in metrics.keys():
+        for key in metrics[0].keys():
             values = [r[key] for r in metrics]
             aggregates[f"avg_{key}"] = sum(values) / len(values)
             aggregates[f"min_{key}"] = min(values)
