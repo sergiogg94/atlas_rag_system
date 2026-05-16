@@ -12,6 +12,9 @@ from app.evaluator.metrics import RAGMetrics
 class RAGEvaluator:
     def __init__(
         self,
+        collection_name: str = "sprintstep_docs",
+        chunk_size: int = 500,
+        chunk_overlap: int = 50,
         top_k: int = 5,
         max_distance: float = 1.0,
         correctness_threshold: float = 0.8,
@@ -20,6 +23,11 @@ class RAGEvaluator:
         self.metrics = RAGMetrics()
 
         self.config = {
+            # Dataset config
+            "collection_name": collection_name,
+            "chunk_size": chunk_size,
+            "chunk_overlap": chunk_overlap,
+            # Search config
             "top_k": top_k,
             "max_distance": max_distance,
             "correctness_threshold": correctness_threshold,
@@ -85,7 +93,9 @@ class RAGEvaluator:
                 "latency_ms": latency_ms,
             }
 
-    async def run_full_evaluation(self, dataset_path: str, output_path: str):
+    async def run_full_evaluation(
+        self, dataset_path: str, output_path: str = "app/evaluator/data/reports"
+    ):
         """Runs the full evaluation process on a given dataset and saves the report"""
         logger.info("Starting full evaluation")
         # Load dataset
