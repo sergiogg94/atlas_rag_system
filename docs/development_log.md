@@ -126,3 +126,34 @@ provenance and enabling users to verify retrieved context.
 - ✅ Semantic search integration with vector databases for information retrieval
 - ✅ Proper HTTP method selection (POST for query operations) based on semantics
 - ✅ Source attribution and transparency in AI-generated responses
+
+---
+
+## 📊 **Week 6: Evaluation Framework & Performance Metrics**
+
+This week focused on implementing a comprehensive evaluation framework to measure RAG system performance,
+establishing a test dataset for consistent evaluation and construct a first aproach
+to a dashboard with the evaluation metrics.
+
+### Key Implementations:
+
+1. **Evaluation Framework**: Built an evaluator class with metrics calculation
+for both retrieval and generation quality.
+Implemented retrieval metrics to measure semantic relevance and generation metrics to assess response quality.
+
+2. **Metrics Dashboard**: Created the first version of a metrics dashboard using Streamlit to
+visualize evaluation results and track system performance over time.
+
+3. **Enhanced Test Dataset**: Extended the test dataset with question-answer pairs
+and dataset configuration for structured evaluation.
+Improved test data with additional documents for comprehensive testing coverage.
+
+4. **Model & Code Optimization**: Upgraded to a superior embeddings model for
+better semantic representation. Refactored codebase for improved modularity and maintainability.
+
+### 📚 Key Learning Outcomes:
+
+- ✅ Building robust evaluation frameworks for RAG system performance assessment
+- ✅ Metrics design for measuring both retrieval and generation quality
+- ✅ Test dataset creation and curation for reliable benchmarking
+- ⚠️ Test dataset and evaluation documents were generated with AI without human review—detailed validation and refinement needed in future iterations
