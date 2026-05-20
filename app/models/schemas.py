@@ -133,11 +133,6 @@ class IngestRequest(BaseModel):
         description="Overlap between chunks",
         ge=0,
     )
-    min_chunk_size: int = Field(
-        100,
-        description="Minimum size for a chunk",
-        ge=1,
-    )
 
 
 class IngestResponse(BaseResponseWithMetadata):
