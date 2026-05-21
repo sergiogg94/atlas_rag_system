@@ -1,11 +1,11 @@
 import asyncio
 import gradio as gr
 
-from app.frontend.api_client import AtlasAPICliet
+from app.frontend.api_client import AtlasAPIClient
 from app.frontend.config import DEFAULT_CHUNK_SIZE, DEFAULT_CHUNK_OVERLAP
 
 
-def create_ingest_tab(client: AtlasAPICliet):
+def create_ingest_tab(client: AtlasAPIClient):
     async def ingest_document(
         title: str,
         content: str,
@@ -44,10 +44,8 @@ def create_ingest_tab(client: AtlasAPICliet):
             details = f"**Error:** {str(e)}"
             return status, details
 
-    def sync_ingest(title, content, chunk_size, chunk_overlap, min_chunk_size):
-        return asyncio.run(
-            ingest_document(title, content, chunk_size, chunk_overlap, min_chunk_size)
-        )
+    def sync_ingest(title, content, chunk_size, chunk_overlap):
+        return asyncio.run(ingest_document(title, content, chunk_size, chunk_overlap))
 
     ## Start Gradio UI
     with gr.Tab("📝 Ingest Text"):

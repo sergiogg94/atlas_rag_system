@@ -3,11 +3,11 @@ from typing import Optional, List, Dict, Any
 from pathlib import Path
 
 
-class AtlasAPICliet:
+class AtlasAPIClient:
     """Client for interacting with the Atlas API"""
 
-    def __init__(self):
-        self.base_url = "http://localhost:8000"
+    def __init__(self, base_url: Optional[str] = None):
+        self.base_url = base_url or "http://localhost:8000"
         self.timeout = 300.0
 
     async def health_check(self) -> Dict[str, Any]:
