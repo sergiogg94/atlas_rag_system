@@ -11,6 +11,7 @@ from app.frontend.config import (
     DESCRIPTION,
 )
 from app.frontend.components.ingest import create_ingest_tab
+from app.frontend.components.upload import create_upload_tab
 
 custom_css = """
 #header {
@@ -62,6 +63,9 @@ def create_app():
         with gr.Tabs():
             # Ingest text
             create_ingest_tab(client)
+
+            # Upload file
+            create_upload_tab(client)
 
         # Footer
         with gr.Row(elem_id="footer"):
