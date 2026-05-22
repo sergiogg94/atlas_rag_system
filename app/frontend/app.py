@@ -13,6 +13,7 @@ from app.frontend.config import (
 from app.frontend.components.ingest import create_ingest_tab
 from app.frontend.components.upload import create_upload_tab
 from app.frontend.components.health import create_health_tab
+from app.frontend.components.search import create_search_tab
 
 custom_css = """
 #header {
@@ -67,6 +68,9 @@ def create_app():
 
             # Upload file
             create_upload_tab(client)
+
+            # Search documents
+            create_search_tab(client)
 
             # Health check
             create_health_tab(client)
