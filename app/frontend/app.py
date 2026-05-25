@@ -14,6 +14,7 @@ from app.frontend.components.ingest import create_ingest_tab
 from app.frontend.components.upload import create_upload_tab
 from app.frontend.components.health import create_health_tab
 from app.frontend.components.search import create_search_tab
+from app.frontend.components.chat import create_chat_tab
 
 custom_css = """
 #header {
@@ -63,6 +64,9 @@ def create_app():
 
         # Tabs
         with gr.Tabs():
+            # Chat with RAG system
+            create_chat_tab(client)
+
             # Ingest text
             create_ingest_tab(client)
 
