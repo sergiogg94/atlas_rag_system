@@ -157,3 +157,28 @@ better semantic representation. Refactored codebase for improved modularity and 
 - ✅ Metrics design for measuring both retrieval and generation quality
 - ✅ Test dataset creation and curation for reliable benchmarking
 - ⚠️ Test dataset and evaluation documents were generated with AI without human review—detailed validation and refinement needed in future iterations
+
+---
+
+## 🎨 **Week 7: Frontend UI & Interactive Demo**
+
+This week focused on building an interactive user interface using Gradio to demonstrate the complete RAG system functionality and enable users to interact with all core features through a unified demo application.
+
+### Key Implementations:
+
+1. **Gradio Frontend Framework**: Implemented a modern, responsive frontend using Gradio to provide an accessible user interface for the RAG system. Configured custom CSS styling for enhanced visual appearance and applied a cohesive theme across the entire application.
+
+2. **API Client Layer**: Developed an async HTTP client (`AtlasAPIClient`) to handle communication with the backend API. Implemented methods for all critical operations: health checks, queries, document ingestion, file uploads, and batch processing with proper error handling and timeouts.
+
+3. **Multi-Tab Interface & Interactive Components**: Designed a comprehensive tabbed interface with five distinct functional areas (Chat, Upload, Ingest, Search, and Health) built using modular Gradio components. Each tab provides specialized functionality for different RAG operations while maintaining consistent patterns for parameter configuration, error handling, and result presentation.
+
+4. **Centralized Configuration**: Created a dedicated configuration module to manage API endpoints, Gradio server settings, default parameters, and UI branding, enabling easy customization and environment-specific deployments.
+
+### 📚 Key Learning Outcomes:
+
+- ✅ Building responsive, user-friendly interfaces with Gradio for AI/ML applications
+- ✅ Async HTTP client patterns for robust backend communication in Python applications
+- ✅ Component-based UI architecture for maintainability and modularity
+- ✅ Parameter configuration UI patterns that expose advanced options while maintaining simplicity
+- ✅ Error handling and user feedback strategies for interactive applications
+- ✅ Metadata enrichment and transparency in RAG response presentation (source attribution, latency metrics)
