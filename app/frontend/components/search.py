@@ -5,7 +5,7 @@ from app.frontend.api_client import AtlasAPIClient
 from app.frontend.config import DEFAULT_TOP_K, DEFAULT_PROBES, DEFAULT_MAX_DISTANCE
 
 
-def create_seach_tab(client: AtlasAPIClient):
+def create_search_tab(client: AtlasAPIClient):
     async def search(
         query: str,
         top_k: int = DEFAULT_TOP_K,
