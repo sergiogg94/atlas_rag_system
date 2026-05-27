@@ -34,7 +34,6 @@ rag_service = RAGService()
 )
 async def health() -> HealthResponse:
     """Return a basic health status for the service."""
-    logger.info("Health check called")
     return HealthResponse(
         status="ok",
         version="1.0.0",
