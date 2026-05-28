@@ -2,8 +2,10 @@ services:
   db:
     image: ankane/pgvector:latest
     container_name: atlas_pgvector_db
-    env_file:
-      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-atlas_db}
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
@@ -18,29 +20,72 @@ services:
       start_period: 10s
     restart: unless-stopped
 
-  # FIXME: Save this code for future deployment
-  # api:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   container_name: atlas_api
-  #   env_file:
-  #     - .env
-  #   ports:
-  #     - "${API_PORT:-8000}:8000"
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
-  #   networks:
-  #     - atlas_network
-  #   command: uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload # ONLY FOR DEV USAGE
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-  #     interval: 30s
-  #     timeout: 10s
-  #     retries: 3
-  #     start_period: 40s
-  #   restart: unless-stopped
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: atlas_backend
+    environment:
+      # DB connection
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-atlas_db}
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      # Externals API Keys
+      VOYAGE_API_KEY: ${VOYAGE_API_KEY}
+      HF_TOKEN: ${HF_TOKEN}
+    ports:
+      - "${API_PORT:-8000}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - atlas_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    volumes:
+      - ./app:/app/app  # For hot reload in development
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: atlas_frontend
+    environment:
+      # API connection
+      API_BASE_URL: http://backend:8000
+      
+      # Gradio settings
+      GRADIO_SERVER_NAME: ${GRADIO_SERVER_NAME:-0.0.0.0}
+      GRADIO_SERVER_PORT: ${GRADIO_SERVER_PORT:-7860}
+      GRADIO_SHARE: ${GRADIO_SHARE:-False}
+    ports:
+      - "${GRADIO_SERVER_PORT:-7860}:7860"
+    depends_on:
+      - backend
+    networks:
+      - atlas_network
+    restart: unless-stopped
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    container_name: atlas_dashboard
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
+    networks:
+      - atlas_network
+    restart: unless-stopped
 
 volumes:
   db_data:
