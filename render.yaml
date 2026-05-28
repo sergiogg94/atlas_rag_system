@@ -1,20 +1,13 @@
-services:
-  # PostgreSQL Database con pgvector
-  - type: pserv
-    name: atlas-db
+databases:
+  # PostgreSQL Database
+  - name: atlas-db
     plan: free
-    env: docker
+    databaseName: atlas_db
+    user: atlas_user
     region: oregon
-    image:
-      url: ankane/pgvector:latest
-    envVars:
-      - key: POSTGRES_DB
-        value: atlas_db
-      - key: POSTGRES_USER
-        generateValue: true  # Random secure username
-      - key: POSTGRES_PASSWORD
-        generateValue: true  # Random secure password
+    ipAllowList: []
 
+services:
   # Backend API (FastAPI)
   - type: web
     name: atlas-backend
@@ -25,25 +18,23 @@ services:
     envVars:
       # Database connection
       - key: POSTGRES_USER
-        fromService:
-          type: pserv
+        fromDatabase:
           name: atlas-db
-          envVarKey: POSTGRES_USER
+          property: user
       - key: POSTGRES_PASSWORD
-        fromService:
-          type: pserv
+        fromDatabase:
           name: atlas-db
-          envVarKey: POSTGRES_PASSWORD
+          property: password
       - key: POSTGRES_DB
-        value: atlas_db
+        fromDatabase:
+          name: atlas-db
+          property: database
       - key: POSTGRES_HOST
-        fromService:
-          type: pserv
+        fromDatabase:
           name: atlas-db
           property: host
       - key: POSTGRES_PORT
-        fromService:
-          type: pserv
+        fromDatabase:
           name: atlas-db
           property: port
       
