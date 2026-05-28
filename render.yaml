@@ -14,10 +14,6 @@ services:
         generateValue: true  # Random secure username
       - key: POSTGRES_PASSWORD
         generateValue: true  # Random secure password
-    disk:
-      name: atlas-db-disk
-      mountPath: /var/lib/postgresql/data
-      sizeGB: 1
 
   # Backend API (FastAPI)
   - type: web
@@ -63,10 +59,7 @@ services:
       - key: LOG_LEVEL
         value: INFO
       - key: API_BASE_URL
-        fromService:
-          type: web
-          name: atlas-backend
-          property: url
+        value: "https://atlas-backend.onrender.com"
     
     healthCheckPath: /health
 
@@ -80,10 +73,7 @@ services:
     envVars:
       # API connection
       - key: API_BASE_URL
-        fromService:
-          type: web
-          name: atlas-backend
-          property: url
+        value: "https://atlas-backend.onrender.com"
       
       # Gradio settings
       - key: GRADIO_SERVER_NAME
@@ -102,7 +92,4 @@ services:
     dockerfilePath: ./Dockerfile.dashboard
     envVars:
       - key: API_BASE_URL
-        fromService:
-          type: web
-          name: atlas-dashboard
-          property: url
+        value: "https://atlas-backend.onrender.com"
