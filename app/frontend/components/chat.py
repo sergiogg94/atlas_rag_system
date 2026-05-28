@@ -24,7 +24,7 @@ def create_chat_tab(client: AtlasAPIClient):
 
         try:
             result = await client.query(
-                query=query,
+                question=query,
                 top_k=top_k,
                 max_distance=max_distance,
                 temperature=temperature,
