@@ -1,0 +1,108 @@
+services:
+  # PostgreSQL Database con pgvector
+  - type: pserv
+    name: atlas-db
+    plan: free
+    env: docker
+    region: oregon
+    image:
+      url: ankane/pgvector:latest
+    envVars:
+      - key: POSTGRES_DB
+        value: atlas_db
+      - key: POSTGRES_USER
+        generateValue: true  # Random secure username
+      - key: POSTGRES_PASSWORD
+        generateValue: true  # Random secure password
+    disk:
+      name: atlas-db-disk
+      mountPath: /var/lib/postgresql/data
+      sizeGB: 1
+
+  # Backend API (FastAPI)
+  - type: web
+    name: atlas-backend
+    plan: free
+    env: docker
+    region: oregon
+    dockerfilePath: ./Dockerfile.backend
+    envVars:
+      # Database connection
+      - key: POSTGRES_USER
+        fromService:
+          type: pserv
+          name: atlas-db
+          envVarKey: POSTGRES_USER
+      - key: POSTGRES_PASSWORD
+        fromService:
+          type: pserv
+          name: atlas-db
+          envVarKey: POSTGRES_PASSWORD
+      - key: POSTGRES_DB
+        value: atlas_db
+      - key: POSTGRES_HOST
+        fromService:
+          type: pserv
+          name: atlas-db
+          property: host
+      - key: POSTGRES_PORT
+        fromService:
+          type: pserv
+          name: atlas-db
+          property: port
+      
+      # API Keys
+      - key: VOYAGE_API_KEY
+        sync: false  # configured in the web panel
+      - key: HF_TOKEN
+        sync: false  # configured in the web panel
+      
+      # App settings
+      - key: APP_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+      - key: API_BASE_URL
+        fromService:
+          type: web
+          name: atlas-backend
+          property: url
+    
+    healthCheckPath: /health
+
+  # Frontend (Gradio)
+  - type: web
+    name: atlas-frontend
+    plan: free
+    env: docker
+    region: oregon
+    dockerfilePath: ./Dockerfile.frontend
+    envVars:
+      # API connection
+      - key: API_BASE_URL
+        fromService:
+          type: web
+          name: atlas-backend
+          property: url
+      
+      # Gradio settings
+      - key: GRADIO_SERVER_NAME
+        value: "0.0.0.0"
+      - key: GRADIO_SERVER_PORT
+        value: "7860"
+      - key: GRADIO_SHARE
+        value: "False"
+
+  # Dashboard (Streamlit)
+  - type: web
+    name: atlas-dashboard
+    plan: free
+    env: docker
+    region: oregon
+    dockerfilePath: ./Dockerfile.dashboard
+    envVars:
+      - key: API_BASE_URL
+        fromService:
+          type: web
+          name: atlas-dashboard
+          property: url
