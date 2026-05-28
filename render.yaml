@@ -50,7 +50,7 @@ services:
       - key: LOG_LEVEL
         value: INFO
       - key: API_BASE_URL
-        value: "https://atlas-backend.onrender.com"
+        value: "https://atlas-backend-qgq0.onrender.com"
     
     healthCheckPath: /health
 
@@ -64,7 +64,7 @@ services:
     envVars:
       # API connection
       - key: API_BASE_URL
-        value: "https://atlas-backend.onrender.com"
+        value: "https://atlas-backend-qgq0.onrender.com"
       
       # Gradio settings
       - key: GRADIO_SERVER_NAME
@@ -83,4 +83,4 @@ services:
     dockerfilePath: ./Dockerfile.dashboard
     envVars:
       - key: API_BASE_URL
-        value: "https://atlas-backend.onrender.com"
+        value: "https://atlas-backend-qgq0.onrender.com"
