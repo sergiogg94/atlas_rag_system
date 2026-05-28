@@ -31,7 +31,8 @@ def create_chat_tab(client: AtlasAPIClient):
                 max_tokens=max_tokens,
             )
 
-            history.append((query, result["response"]))
+            history.append({"role": "user", "content": query})
+            history.append({"role": "assistant", "content": result["response"]})
 
             # Construct sources details
             sources_md = "### 📚 Source References\n\n"
