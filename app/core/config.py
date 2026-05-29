@@ -16,11 +16,7 @@ class Settings:
         self.log_level = os.getenv("LOG_LEVEL", "INFO")
 
         # Database settings
-        self.postgres_user = os.getenv("POSTGRES_USER")
-        self.postgres_password = os.getenv("POSTGRES_PASSWORD")
-        self.postgres_db = os.getenv("POSTGRES_DB")
-        self.postgres_host = os.getenv("POSTGRES_HOST", "localhost")
-        self.postgres_port = os.getenv("POSTGRES_PORT", "5432")
+        self.database_url = os.getenv("DATABASE_URL")
 
         # API key's
         self.voyage_api_key = os.getenv("VOYAGE_API_KEY")

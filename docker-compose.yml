@@ -27,11 +27,7 @@ services:
     container_name: atlas_backend
     environment:
       # DB connection
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      POSTGRES_DB: ${POSTGRES_DB:-atlas_db}
-      POSTGRES_HOST: db
-      POSTGRES_PORT: 5432
+      DATABASE_URL: ${DATABASE_URL}
       # Externals API Keys
       VOYAGE_API_KEY: ${VOYAGE_API_KEY}
       HF_TOKEN: ${HF_TOKEN}
