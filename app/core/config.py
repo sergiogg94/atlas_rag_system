@@ -1,4 +1,5 @@
 import os
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -23,7 +24,7 @@ class Settings:
         self.hf_token = os.getenv("HF_TOKEN")
 
         # API settings
-        self.api_base_url = os.getenv("API_BASE_URL", "http://localhost:8000")
+        self.api_base_url = os.path.expandvars(os.getenv("API_BASE_URL", "http://localhost:8000"))
 
         # Gradio settings
         self.gradio_server_name = os.getenv("GRADIO_SERVER_NAME", "0.0.0.0")
