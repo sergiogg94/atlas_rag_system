@@ -107,12 +107,11 @@ async def ingest(payload: IngestRequest) -> IngestResponse:
     start_time = perf_counter()
 
     try:
-        rag_service = RAGService(
+        doc, chunk_count = await rag_service.ingest(
+            title=payload.title,
+            content=payload.content,
             chunk_size=payload.chunk_size,
             chunk_overlap=payload.chunk_overlap,
-        )
-        doc, chunk_count = await rag_service.ingest(
-            title=payload.title, content=payload.content
         )
 
         latency_ms = round((perf_counter() - start_time) * 1000, 2)
@@ -169,7 +168,7 @@ async def upload(
     start_time = perf_counter()
 
     try:
-        upload_service = UploadService()
+        upload_service = UploadService(rag_service=rag_service)
         doc, chunk_count, filename = await upload_service.process_upload(
             file=file,
             title=title,

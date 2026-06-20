@@ -17,7 +17,8 @@ from typing import Optional
 class UploadService:
     """Service for handling document uploads and ingestion."""
 
-    def __init__(self):
+    def __init__(self, rag_service: Optional[RAGService] = None):
+        self.rag_service = rag_service or RAGService()
         self.validator = validate_document
         self.parser = DocumentParser()
 
@@ -73,12 +74,11 @@ class UploadService:
             document_title = title or file.filename
 
             # Ingest the parsed content
-            rag_service = RAGService(
+            doc, chunk_count = await self.rag_service.ingest(
+                title=document_title,
+                content=parsed_content,
                 chunk_size=chunk_size,
                 chunk_overlap=chunk_overlap,
-            )
-            doc, chunk_count = await rag_service.ingest(
-                title=document_title, content=parsed_content
             )
 
             logger.info(

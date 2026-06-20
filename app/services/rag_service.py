@@ -1,3 +1,5 @@
+from typing import Optional
+
 from app.core.logging import logger
 from app.services.chunking import TextChunker
 from app.services.embeddings import EmbeddingsService
@@ -18,12 +20,20 @@ class RAGService:
         self.embeddings_service = EmbeddingsService()
         self.llm_service = LLMService()
 
-    async def ingest(self, title: str, content: str) -> tuple:
+    async def ingest(
+        self,
+        title: str,
+        content: str,
+        chunk_size: Optional[int] = None,
+        chunk_overlap: Optional[int] = None,
+    ) -> tuple:
         """Ingest a document to the database
 
         Args:
             title (str): Title of the document.
             content (str): Content of the document.
+            chunk_size (Optional[int]): Override chunk size for this ingest.
+            chunk_overlap (Optional[int]): Override chunk overlap for this ingest.
         """
         logger.info("Ingest document process started")
         from app.db.repository import Repository
@@ -32,7 +42,15 @@ class RAGService:
 
         doc = await repo.create_document(title=title)
 
-        chunks = self.chunker.chunk_text(content)
+        if chunk_size is not None or chunk_overlap is not None:
+            chunker = TextChunker(
+                chunk_size=chunk_size if chunk_size is not None else self.chunker.chunk_size,
+                chunk_overlap=chunk_overlap if chunk_overlap is not None else self.chunker.chunk_overlap,
+            )
+        else:
+            chunker = self.chunker
+
+        chunks = chunker.chunk_text(content)
         for chunk in chunks:
             embedding = await self.embeddings_service.encode(chunk)
             await repo.add_chunk(
