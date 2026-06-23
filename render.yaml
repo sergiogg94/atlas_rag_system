@@ -1,12 +1,3 @@
-databases:
-  # PostgreSQL Database
-  - name: atlas-db
-    plan: free
-    databaseName: atlas_db
-    user: atlas_user
-    region: oregon
-    ipAllowList: []
-
 services:
   # Backend API (FastAPI)
   - type: web
@@ -18,9 +9,7 @@ services:
     envVars:
       # Database connection
       - key: DATABASE_URL
-        fromDatabase:
-          name: atlas-db
-          property: connectionString
+        sync: false  # configured in the web panel
       
       # API Keys
       - key: VOYAGE_API_KEY
