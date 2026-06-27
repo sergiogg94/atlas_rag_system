@@ -1,9 +1,25 @@
 from typing import Optional
 
+from app.core.config import settings
 from app.core.logging import logger
 from app.services.chunking import TextChunker
 from app.services.embeddings import EmbeddingsService
+from app.services.llm.openai_provider import OpenAIProvider
 from app.services.llm_service import LLMService
+
+
+def _build_llm_provider():
+    if settings.llm_provider == "groq":
+        return OpenAIProvider(
+            model=settings.groq_model,
+            base_url="https://api.groq.com/openai/v1",
+            api_key=settings.groq_api_key,
+        )
+    return OpenAIProvider(
+        model=settings.openai_model,
+        base_url=settings.openai_base_url,
+        api_key=settings.hf_token,
+    )
 
 
 class RAGService:
@@ -18,7 +34,7 @@ class RAGService:
             chunk_overlap=chunk_overlap,
         )
         self.embeddings_service = EmbeddingsService()
-        self.llm_service = LLMService()
+        self.llm_service = LLMService(provider=_build_llm_provider())
 
     async def ingest(
         self,
@@ -44,8 +60,14 @@ class RAGService:
 
         if chunk_size is not None or chunk_overlap is not None:
             chunker = TextChunker(
-                chunk_size=chunk_size if chunk_size is not None else self.chunker.chunk_size,
-                chunk_overlap=chunk_overlap if chunk_overlap is not None else self.chunker.chunk_overlap,
+                chunk_size=(
+                    chunk_size if chunk_size is not None else self.chunker.chunk_size
+                ),
+                chunk_overlap=(
+                    chunk_overlap
+                    if chunk_overlap is not None
+                    else self.chunker.chunk_overlap
+                ),
             )
         else:
             chunker = self.chunker

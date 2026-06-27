@@ -23,8 +23,25 @@ class Settings:
         self.voyage_api_key = os.getenv("VOYAGE_API_KEY")
         self.hf_token = os.getenv("HF_TOKEN")
 
+        # LLM provider settings
+        self.llm_provider = os.getenv("LLM_PROVIDER", "groq")
+
+        # OpenAI-compatible provider (includes HuggingFace, Groq, etc.)
+        self.openai_base_url = os.getenv(
+            "OPENAI_BASE_URL", "https://router.huggingface.co/v1"
+        )
+        self.openai_model = os.getenv(
+            "OPENAI_MODEL", "katanemo/Arch-Router-1.5B:hf-inference"
+        )
+
+        # Groq (uses OpenAI-compatible API)
+        self.groq_api_key = os.getenv("GROQ_API_KEY", "")
+        self.groq_model = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+
         # API settings
-        self.api_base_url = os.path.expandvars(os.getenv("API_BASE_URL", "http://localhost:8000"))
+        self.api_base_url = os.path.expandvars(
+            os.getenv("API_BASE_URL", "http://localhost:8000")
+        )
 
         # Gradio settings
         self.gradio_server_name = os.getenv("GRADIO_SERVER_NAME", "0.0.0.0")
