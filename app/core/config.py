@@ -23,6 +23,13 @@ class Settings:
         self.voyage_api_key = os.getenv("VOYAGE_API_KEY")
         self.hf_token = os.getenv("HF_TOKEN")
 
+        # Embedding provider settings
+        self.embedding_provider = os.getenv("EMBEDDING_PROVIDER", "voyage")
+        self.voyage_model = os.getenv("VOYAGE_MODEL", "voyage-4")
+        self.voyage_embedding_dimension = int(
+            os.getenv("VOYAGE_EMBEDDING_DIMENSION", "1024")
+        )
+
         # LLM provider settings
         self.llm_provider = os.getenv("LLM_PROVIDER", "groq")
 

@@ -1,14 +1,21 @@
-from sklearn.metrics.pairwise import cosine_similarity
 from typing import List
 
-from app.services.embeddings import EmbeddingsService
+from sklearn.metrics.pairwise import cosine_similarity
+
+from app.core.config import settings
+from app.services.embeddings.voyage_provider import VoyageProvider
+from app.services.embeddings_service import EmbeddingsService
 
 
 class RAGMetrics:
-    """Calculate multiple metrics for RAG evaluation"""
 
     def __init__(self):
-        self.model = EmbeddingsService()
+        provider = VoyageProvider(
+            api_key=settings.voyage_api_key,
+            model=settings.voyage_model,
+            dimension=settings.voyage_embedding_dimension,
+        )
+        self.model = EmbeddingsService(provider=provider)
 
     ## Retrival metrics
 
