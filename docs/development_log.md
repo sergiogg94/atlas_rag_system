@@ -224,3 +224,26 @@ After 8 weeks of intensive development, **Atlas RAG System has achieved Minimum 
 - 🚀 **Sustainable pace** - Development will become a background activity rather than intensive sprints
 
 **The foundation is solid. The MVP works. Now we build intelligently, not just quickly.**
+
+---
+
+## 🚀 **June 2026: Provider Abstraction & Infrastructure Migration**
+
+This month focused on decoupling core services from specific vendors, migrating the database to an external provider, and solidifying the codebase for long-term maintainability — marking the first monthly entry now that the project has reached MVP status.
+
+### Key Implementations:
+
+1. **Agnostic LLM & Embeddings Providers**: Created abstract provider classes and refactored the service layer to support interchangeable LLM and embeddings providers, enabling the system to switch between OpenAI, Groq, VoyageAI, and others without code changes. This decouples the RAG pipeline from any single vendor and simplifies future provider integrations.
+
+2. **Groq LLM Integration**: Added a Groq LLM provider implementation with dedicated test coverage, expanding the range of supported language model backends and validating the provider abstraction pattern in practice.
+
+3. **Database Provider Migration**: Removed the Render-specific database configuration and migrated to an external database provider for greater flexibility, vendor independence, and simplified deployment workflows.
+
+4. **Code Quality & Documentation**: Added `AGENTS.md` to capture development workflow and project conventions for new contributors. Fixed environment variable handling for API base URLs. Refactored `RAGService` to use a singleton pattern with configurable chunk parameters, improving resource management and testability.
+
+### 📚 Key Learning Outcomes:
+- ✅ Provider abstraction patterns for vendor-agnostic service integration
+- ✅ Testing strategies for LLM provider implementations
+- ✅ Database migration patterns for infrastructure portability
+- ✅ Singleton pattern implementation for service layer optimization
+- ✅ Documentation practices for project onboarding and development workflows
