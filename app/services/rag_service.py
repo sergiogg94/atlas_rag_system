@@ -3,18 +3,10 @@ from typing import Optional
 from app.core.config import settings
 from app.core.logging import logger
 from app.services.chunking import TextChunker
-from app.services.embeddings.voyage_provider import VoyageProvider
+from app.services.embeddings.factory import get_embedding_provider
 from app.services.embeddings_service import EmbeddingsService
 from app.services.llm.factory import get_llm_provider
 from app.services.llm_service import LLMService
-
-
-def _build_embedding_provider():
-    return VoyageProvider(
-        api_key=settings.voyage_api_key,
-        model=settings.voyage_model,
-        dimension=settings.voyage_embedding_dimension,
-    )
 
 
 class RAGService:
@@ -28,9 +20,7 @@ class RAGService:
             chunk_size=chunk_size,
             chunk_overlap=chunk_overlap,
         )
-        self.embeddings_service = EmbeddingsService(
-            provider=_build_embedding_provider()
-        )
+        self.embeddings_service = EmbeddingsService(provider=get_embedding_provider())
         self.llm_service = LLMService(provider=get_llm_provider())
 
     async def ingest(
