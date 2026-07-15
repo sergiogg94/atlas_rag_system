@@ -5,7 +5,7 @@ from app.core.logging import logger
 from app.services.chunking import TextChunker
 from app.services.embeddings.voyage_provider import VoyageProvider
 from app.services.embeddings_service import EmbeddingsService
-from app.services.llm.openai_provider import OpenAIProvider
+from app.services.llm.factory import get_llm_provider
 from app.services.llm_service import LLMService
 
 
@@ -14,20 +14,6 @@ def _build_embedding_provider():
         api_key=settings.voyage_api_key,
         model=settings.voyage_model,
         dimension=settings.voyage_embedding_dimension,
-    )
-
-
-def _build_llm_provider():
-    if settings.llm_provider == "groq":
-        return OpenAIProvider(
-            model=settings.groq_model,
-            base_url="https://api.groq.com/openai/v1",
-            api_key=settings.groq_api_key,
-        )
-    return OpenAIProvider(
-        model=settings.openai_model,
-        base_url=settings.openai_base_url,
-        api_key=settings.hf_token,
     )
 
 
@@ -45,7 +31,7 @@ class RAGService:
         self.embeddings_service = EmbeddingsService(
             provider=_build_embedding_provider()
         )
-        self.llm_service = LLMService(provider=_build_llm_provider())
+        self.llm_service = LLMService(provider=get_llm_provider())
 
     async def ingest(
         self,
