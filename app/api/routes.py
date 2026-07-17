@@ -60,6 +60,7 @@ async def query(payload: QueryRequest) -> QueryResponse:
         result = await rag_service.query(
             question=payload.question,
             top_k=payload.top_k,
+            probes=payload.probes,
             max_distance=payload.max_distance,
             temperature=payload.temperature,
             max_tokens=payload.max_tokens,

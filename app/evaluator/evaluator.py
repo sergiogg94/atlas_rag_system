@@ -16,6 +16,7 @@ class RAGEvaluator:
         chunk_size: int = 500,
         chunk_overlap: int = 50,
         top_k: int = 5,
+        probes: int = 10,
         max_distance: float = 1.0,
         correctness_threshold: float = 0.8,
     ):
@@ -29,6 +30,7 @@ class RAGEvaluator:
             "chunk_overlap": chunk_overlap,
             # Search config
             "top_k": top_k,
+            "probes": probes,
             "max_distance": max_distance,
             "correctness_threshold": correctness_threshold,
         }
@@ -49,6 +51,7 @@ class RAGEvaluator:
             result = await self.rag_service.query(
                 question=test_case["question"],
                 top_k=self.config["top_k"],
+                probes=self.config["probes"],
                 max_distance=self.config["max_distance"],
                 temperature=0.0,
             )

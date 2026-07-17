@@ -100,6 +100,7 @@ class RAGService:
         self,
         question: str,
         top_k: int = 5,
+        probes: int = 10,
         max_distance: float = 1.0,
         temperature: float = 0.7,
         max_tokens: int = 512,
@@ -108,7 +109,7 @@ class RAGService:
 
         # Search for relevant chunks in the database
         search_results = await self.search(
-            query=question, top_k=top_k, max_distance=max_distance
+            query=question, top_k=top_k, probes=probes, max_distance=max_distance
         )
 
         # Build context for the LLM based on the search results

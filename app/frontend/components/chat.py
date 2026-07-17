@@ -4,6 +4,7 @@ import gradio as gr
 from app.frontend.api_client import AtlasAPIClient
 from app.frontend.config import (
     DEFAULT_TOP_K,
+    DEFAULT_PROBES,
     DEFAULT_MAX_DISTANCE,
     DEFAULT_TEMPERATURE,
     DEFAULT_MAX_TOKENS,
@@ -14,6 +15,7 @@ def create_chat_tab(client: AtlasAPIClient):
     async def chat(
         query: str,
         top_k: int = DEFAULT_TOP_K,
+        probes: int = DEFAULT_PROBES,
         max_distance: float = DEFAULT_MAX_DISTANCE,
         temperature: float = DEFAULT_TEMPERATURE,
         max_tokens: int = DEFAULT_MAX_TOKENS,
@@ -26,6 +28,7 @@ def create_chat_tab(client: AtlasAPIClient):
             result = await client.query(
                 question=query,
                 top_k=top_k,
+                probes=probes,
                 max_distance=max_distance,
                 temperature=temperature,
                 max_tokens=max_tokens,
@@ -58,11 +61,12 @@ def create_chat_tab(client: AtlasAPIClient):
             status = f"❌ Error during chat query\n**Error:** {str(e)}"
             return history, query, status, ""
 
-    def sync_chat(query, top_k, max_distance, temperature, max_tokens, history):
+    def sync_chat(query, top_k, probes, max_distance, temperature, max_tokens, history):
         return asyncio.run(
             chat(
                 query=query,
                 top_k=top_k,
+                probes=probes,
                 max_distance=max_distance,
                 temperature=temperature,
                 max_tokens=max_tokens,
@@ -98,6 +102,14 @@ def create_chat_tab(client: AtlasAPIClient):
                         value=DEFAULT_TOP_K,
                         step=1,
                         info="Number of chunks to retrieve",
+                    )
+                    probes_slider = gr.Slider(
+                        label="Probes",
+                        minimum=1,
+                        maximum=50,
+                        value=DEFAULT_PROBES,
+                        step=1,
+                        info="Search precision (higher = more accurate but slower)",
                     )
                     max_distance_slider = gr.Slider(
                         label="Max Distance",
@@ -135,6 +147,7 @@ def create_chat_tab(client: AtlasAPIClient):
             inputs=[
                 question_input,
                 top_k_slider,
+                probes_slider,
                 max_distance_slider,
                 temperature_slider,
                 max_tokens_slider,
@@ -148,6 +161,7 @@ def create_chat_tab(client: AtlasAPIClient):
             inputs=[
                 question_input,
                 top_k_slider,
+                probes_slider,
                 max_distance_slider,
                 temperature_slider,
                 max_tokens_slider,

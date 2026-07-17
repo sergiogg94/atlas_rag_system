@@ -21,6 +21,7 @@ class AtlasAPIClient:
         self,
         question: str,
         top_k: int = 5,
+        probes: int = 10,
         max_distance: float = 1.0,
         temperature: float = 0.7,
         max_tokens: int = 512,
@@ -29,6 +30,7 @@ class AtlasAPIClient:
         payload = {
             "question": question,
             "top_k": top_k,
+            "probes": probes,
             "max_distance": max_distance,
             "temperature": temperature,
             "max_tokens": max_tokens,

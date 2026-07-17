@@ -58,6 +58,13 @@ class QueryRequest(BaseModel):
         le=100,
     )
 
+    probes: int = Field(
+        10,
+        description="Number of probes to use for the search",
+        ge=1,
+        le=100,
+    )
+
     max_distance: float = Field(
         1.0,
         description="Maximum cosine distance for a chunk to be considered a match",
