@@ -8,7 +8,6 @@ from app.services.embeddings_service import EmbeddingsService
 
 
 class RAGMetrics:
-
     def __init__(self):
         provider = VoyageProvider(
             api_key=settings.voyage_api_key,
@@ -20,7 +19,7 @@ class RAGMetrics:
     ## Retrival metrics
 
     def precision_at_k(
-        slef, retrieved_docs: List[str], relevant_docs: List[str], k: int = 5
+        self, retrieved_docs: List[str], relevant_docs: List[str], k: int = 5
     ) -> float:
         """Ratio of relevant documents in the top-k retrieved docs"""
         retrieved_k = set(retrieved_docs[:k])
