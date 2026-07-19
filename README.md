@@ -8,7 +8,7 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
 ![License](https://img.shields.io/badge/License-GPLv3-blue)
 
-**Personal learning project focused on building a production-ready Retrieval-Augmented Generation (RAG) system from scratch. Used for semantic search and inteligent chat whit sources.**
+**Personal learning project focused on building a production-ready Retrieval-Augmented Generation (RAG) system from scratch. Used for semantic search and intelligent chat with sources.**
 
 [Live Demo](https://atlas-frontend-2cca.onrender.com) • [API Docs](https://atlas-backend-qgq0.onrender.com/docs) • [Dashboard](https://atlas-dashboard-pvib.onrender.com)
 
@@ -86,7 +86,7 @@ for modern AI applications.
 
 - Python 3.13+
 - Docker & Docker Compose
-- HuggingFace and VoyageAi API Key
+- HuggingFace and VoyageAI API Key
 
 ### 1. Clone the repository
 ```bash
@@ -108,7 +108,7 @@ DATABASE_URL=postgresql+asyncpg://USER:PASSWORD@HOST:PORT/DATABASE
 
 ### 3. Build and Run with Docker
 ```bash
-# Build ans start all services (API, DB, Frontend)
+# Build and start all services (API, DB, Frontend)
 docker-compose up
 
 # View logs
@@ -318,8 +318,6 @@ This project is licensed under the **GNU General Public License v3.0** (GPLv3). 
 </div>
 
 📧 Email: **gutierrez.galarza.s.402@gmail.com**
-
-This is a personal learning project developed to master RAG systems and ML engineering practices. Feel free to reach out with questions, suggestions, or collaboration ideas!
 
 This is a personal learning project developed to master RAG systems and ML engineering practices. Feel free to reach out with questions, suggestions, or collaboration ideas!
 
