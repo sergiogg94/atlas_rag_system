@@ -247,3 +247,23 @@ This month focused on decoupling core services from specific vendors, migrating 
 - ✅ Database migration patterns for infrastructure portability
 - ✅ Singleton pattern implementation for service layer optimization
 - ✅ Documentation practices for project onboarding and development workflows
+
+---
+
+## 🚀 **July 2026: Global Provider Factories & Search Tuning**
+
+This month focused on consolidating the provider abstraction work from the previous month into global factory modules, exposing the vector search `probes` parameter across the entire pipeline, and cleaning up code quality issues — a steady incremental month consistent with the post-MVP development pace.
+
+### Key Implementations:
+
+1. **Global Provider Factory Modules**: Extracted the provider-building logic out of `RAGService` into dedicated factory modules for both LLM and embeddings providers. The new `get_llm_provider()` and `get_embedding_provider()` factories centralize provider selection based on environment configuration, eliminating duplicated setup code and making the service layer cleaner and more testable. Provider selection is now defined globally instead of per service instance.
+
+2. **Probes Parameter Across the Pipeline**: Added `probes` — the pgvector HNSW search precision parameter — as a first-class configuration option threaded through every layer of the system: the `QueryRequest` schema, `RAGService.query()`, the API route, the evaluator configuration, the frontend API client, and a new Probes slider in the Gradio chat interface, giving users direct control over the search accuracy/performance trade-off.
+
+3. **Code Quality & Documentation Fixes**: Fixed a typo in the `precision_at_k` method signature (`slef` → `self`) that would have broken future refactoring, improved the LLM prompt's fallback response message for clarity, and corrected typos throughout the README.
+
+### 📚 Key Learning Outcomes:
+- ✅ Factory pattern for centralized, configuration-driven provider instantiation
+- ✅ Understanding of pgvector HNSW `probes` parameter and its impact on search quality vs. latency
+- ✅ End-to-end parameter propagation through API, service, evaluator, and UI layers
+- ✅ Importance of code review and cleanup for maintaining a healthy codebase
