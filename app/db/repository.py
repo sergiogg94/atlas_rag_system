@@ -1,8 +1,8 @@
 from sqlalchemy import select, text
-from app.db.engine import SessionLocal
-from app.db.models import Document, Chunk
-import numpy as np
+
 from app.core.logging import logger
+from app.db.engine import SessionLocal
+from app.db.models import Chunk, Document
 
 
 class Repository:
@@ -59,7 +59,10 @@ class Repository:
         """
         async with SessionLocal() as session:
             # Configure the number of probes for the search
-            await session.execute(text(f"SET ivfflat.probes = {probes}"))
+            await session.execute(
+                text("SET ivfflat.probes = :probes"),
+                {"probes": probes},
+            )
 
             # Add distance column
             distance_col = Chunk.embedding.cosine_distance(query_embedding).label(
