@@ -1,7 +1,8 @@
-from sqlalchemy import Column, Integer, Text, ForeignKey, Index
-from sqlalchemy.orm import relationship
-from app.db.engine import Base
 from pgvector.sqlalchemy import Vector
+from sqlalchemy import Column, ForeignKey, Index, Integer, Text
+from sqlalchemy.orm import relationship
+
+from app.db.engine import Base
 
 
 class Document(Base):
@@ -18,7 +19,9 @@ class Document(Base):
     id = Column(Integer, primary_key=True)
     title = Column(Text, nullable=False)
 
-    chunks = relationship("Chunk", back_populates="document")
+    chunks = relationship(
+        "Chunk", back_populates="document", cascade="all, delete-orphan"
+    )
 
 
 class Chunk(Base):
@@ -35,8 +38,8 @@ class Chunk(Base):
 
     id = Column(Integer, primary_key=True)
     document_id = Column(Integer, ForeignKey("documents.id"), nullable=False)
-    content = Column(Text)
-    embedding = Column(Vector(1024))
+    content = Column(Text, nullable=False)
+    embedding = Column(Vector(1024), nullable=False)
 
     document = relationship("Document", back_populates="chunks")
 
