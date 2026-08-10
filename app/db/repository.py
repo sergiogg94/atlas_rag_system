@@ -59,10 +59,8 @@ class Repository:
         """
         async with SessionLocal() as session:
             # Configure the number of probes for the search
-            await session.execute(
-                text("SET ivfflat.probes = :probes"),
-                {"probes": probes},
-            )
+            probes = max(1, int(probes))
+            await session.execute(text(f"SET LOCAL ivfflat.probes = {probes}"))
 
             # Add distance column
             distance_col = Chunk.embedding.cosine_distance(query_embedding).label(
