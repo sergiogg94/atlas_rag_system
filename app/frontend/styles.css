@@ -1,7 +1,7 @@
 #header {
-    text-align: center;
+    text-align: left;
     padding: 20px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    background: #667eea;
     color: white;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -16,7 +16,9 @@
 }
 
 .gradio-container {
-    max-width: 1400px !important;
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
 }
 
 .tab-nav button {

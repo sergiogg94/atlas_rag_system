@@ -21,7 +21,5 @@ DEFAULT_PROBES = 10
 THEME = "soft"
 TITLE = "Atlas RAG System"
 DESCRIPTION = """
-🚀 **RAG System for document management**
-
 Upload documents, ingest them into the vector database, and chat with your knowledge.
 """
