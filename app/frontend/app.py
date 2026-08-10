@@ -1,48 +1,24 @@
+from pathlib import Path
+
 import gradio as gr
 
 from app.frontend.api_client import AtlasAPIClient
+from app.frontend.components.chat import create_chat_tab
+from app.frontend.components.health import create_health_tab
+from app.frontend.components.ingest import create_ingest_tab
+from app.frontend.components.search import create_search_tab
+from app.frontend.components.upload import create_upload_tab
 from app.frontend.config import (
     API_BASE_URL,
+    DESCRIPTION,
     GRADIO_SERVER_NAME,
     GRADIO_SERVER_PORT,
     GRADIO_SHARE,
     THEME,
     TITLE,
-    DESCRIPTION,
 )
-from app.frontend.components.ingest import create_ingest_tab
-from app.frontend.components.upload import create_upload_tab
-from app.frontend.components.health import create_health_tab
-from app.frontend.components.search import create_search_tab
-from app.frontend.components.chat import create_chat_tab
 
-custom_css = """
-#header {
-    text-align: center;
-    padding: 20px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-#footer {
-    text-align: center;
-    padding: 15px;
-    color: #666;
-    margin-top: 30px;
-    border-top: 1px solid #ddd;
-}
-
-.gradio-container {
-    max-width: 1400px !important;
-}
-
-.tab-nav button {
-    font-size: 16px !important;
-    font-weight: 500 !important;
-}
-"""
+custom_css = (Path(__file__).parent / "styles.css").read_text()
 
 
 def create_app():
