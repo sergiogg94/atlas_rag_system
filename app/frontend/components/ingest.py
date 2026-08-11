@@ -1,8 +1,9 @@
 import asyncio
+
 import gradio as gr
 
 from app.frontend.api_client import AtlasAPIClient
-from app.frontend.config import DEFAULT_CHUNK_SIZE, DEFAULT_CHUNK_OVERLAP
+from app.frontend.config import DEFAULT_CHUNK_OVERLAP, DEFAULT_CHUNK_SIZE
 
 
 def create_ingest_tab(client: AtlasAPIClient):
@@ -27,21 +28,21 @@ def create_ingest_tab(client: AtlasAPIClient):
             details = f"""
 ### Result
 
-**Title:** {result['title']}
-**Document ID:** {result['document_id']}
-**Chunks created:** {result['chunk_count']}
+**Title:** {result["title"]}
+**Document ID:** {result["document_id"]}
+**Chunks created:** {result["chunk_count"]}
 
 **Metadata:**
-- Latency: {result['metadata']['latency_ms']} ms
-- Chunk size: {result['metadata']['chunk_size']}
-- Chunk overlap: {result['metadata']['chunk_overlap']}
-- Content length: {result['metadata']['content_length']} characters
+- Latency: {result["metadata"]["latency_ms"]} ms
+- Chunk size: {result["metadata"]["chunk_size"]}
+- Chunk overlap: {result["metadata"]["chunk_overlap"]}
+- Content length: {result["metadata"]["content_length"]} characters
             """
             return status, details
 
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             status = "❌ Error ingesting document"
-            details = f"**Error:** {str(e)}"
+            details = f"**Error:** {e!s}"
             return status, details
 
     def sync_ingest(title, content, chunk_size, chunk_overlap):
@@ -52,7 +53,7 @@ def create_ingest_tab(client: AtlasAPIClient):
         gr.Markdown("## Ingest document from plain text input")
 
         with gr.Row():
-            with gr.Column():
+            with gr.Column(scale=6):
                 ingest_title = gr.Textbox(
                     label="Document Title *", placeholder="Ex: SprintStep Sales Policy"
                 )
@@ -83,7 +84,7 @@ def create_ingest_tab(client: AtlasAPIClient):
 
                 ingest_btn = gr.Button("✨ Ingest Document", variant="primary")
 
-            with gr.Column():
+            with gr.Column(scale=1):
                 ingest_status = gr.Textbox(label="Status", interactive=False)
                 ingest_details = gr.Markdown()
 
