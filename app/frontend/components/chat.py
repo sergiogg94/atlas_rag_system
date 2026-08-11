@@ -1,13 +1,14 @@
 import asyncio
+
 import gradio as gr
 
 from app.frontend.api_client import AtlasAPIClient
 from app.frontend.config import (
-    DEFAULT_TOP_K,
-    DEFAULT_PROBES,
     DEFAULT_MAX_DISTANCE,
-    DEFAULT_TEMPERATURE,
     DEFAULT_MAX_TOKENS,
+    DEFAULT_PROBES,
+    DEFAULT_TEMPERATURE,
+    DEFAULT_TOP_K,
 )
 
 
@@ -19,7 +20,7 @@ def create_chat_tab(client: AtlasAPIClient):
         max_distance: float = DEFAULT_MAX_DISTANCE,
         temperature: float = DEFAULT_TEMPERATURE,
         max_tokens: int = DEFAULT_MAX_TOKENS,
-        history: list = [],
+        history: list = [],  # noqa: B006
     ):
         if not query:
             return history, "", "⚠️ Please enter a question to chat with", ""
@@ -41,24 +42,24 @@ def create_chat_tab(client: AtlasAPIClient):
             sources_md = "### 📚 Source References\n\n"
             for i, src in enumerate(result["sources"], start=1):
                 sources_md += f"""
-**Source {i}:** {src['document_title']}
-- **Document ID:** {src['document_id']}
-- **Chunk ID:** {src['chunk_id']}
-- **Relevance Score:** {1 - src['distance']:.2f}
-- **Content:** {src['content']}
+**Source {i}:** {src["document_title"]}
+- **Document ID:** {src["document_id"]}
+- **Chunk ID:** {src["chunk_id"]}
+- **Relevance Score:** {1 - src["distance"]:.2f}
+- **Content:** {src["content"]}
 ---
                 """
 
             # Construct metadata details
             metadata_md = f"""
 **Metadata:**
-- Latency: {result['metadata']['latency_ms']} ms
+- Latency: {result["metadata"]["latency_ms"]} ms
             """
 
             return history, "", metadata_md, sources_md
 
-        except Exception as e:
-            status = f"❌ Error during chat query\n**Error:** {str(e)}"
+        except Exception as e:  # noqa: BLE001
+            status = f"❌ Error during chat query\n**Error:** {e!s}"
             return history, query, status, ""
 
     def sync_chat(query, top_k, probes, max_distance, temperature, max_tokens, history):
@@ -79,7 +80,7 @@ def create_chat_tab(client: AtlasAPIClient):
         gr.Markdown("## Ask questions and get answers with source references")
 
         with gr.Row():
-            with gr.Column(scale=2):
+            with gr.Column(scale=6):
                 chatbot = gr.Chatbot(label="Conversation", height=500, buttons=["copy"])
 
                 with gr.Row():
@@ -87,14 +88,13 @@ def create_chat_tab(client: AtlasAPIClient):
                         label="Your question",
                         placeholder="¿What is the capital of France?",
                         lines=2,
-                        scale=4,
+                        scale=8,
                     )
-                    submit_btn = gr.Button("Submint", variant="primary", scale=1)
-
-                clear_btn = gr.Button("🗑️ Clear Chat")
+                    submit_btn = gr.Button("Submint", variant="primary", scale=2)
+                    clear_btn = gr.Button("🗑️ Clear Chat", scale=1)
 
             with gr.Column(scale=1):
-                with gr.Accordion("⚙️ Advanced Configuration", open=True):
+                with gr.Accordion("⚙️ Advanced Configuration", open=False):
                     top_k_slider = gr.Slider(
                         label="Top K",
                         minimum=1,
