@@ -1,17 +1,18 @@
 #header {
     text-align: left;
     padding: 20px;
-    background: #667eea;
+    background: #3b82f6;
     color: white;
-    border-radius: 10px;
-    margin-bottom: 20px;
+    border-radius: 20px;
+    width: fit-content;
+    display: inline-block;
 }
 
 #footer {
-    text-align: center;
-    padding: 15px;
+    text-align: left;
+    padding: 5px;
     color: #666;
-    margin-top: 30px;
+    margin-top: 5PX;
     border-top: 1px solid #ddd;
 }
 

@@ -18,8 +18,11 @@ DEFAULT_MAX_TOKENS = 512
 DEFAULT_PROBES = 10
 
 # UI Configuration
-THEME = "soft"
+THEME = "glass"
 TITLE = "Atlas RAG System"
 DESCRIPTION = """
 Upload documents, ingest them into the vector database, and chat with your knowledge.
 """
+FOOTER = """**Atlas RAG System** v1.0 | Developed with FastAPI + Gradio + PostgreSQL + pgvector  
+📚 [Documentation](https://github.com/sergiogg94/atlas_rag_system) | 
+🐛 [Report Bug](https://github.com/sergiogg94/atlas_rag_system/issues)"""

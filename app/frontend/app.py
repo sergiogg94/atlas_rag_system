@@ -11,6 +11,7 @@ from app.frontend.components.upload import create_upload_tab
 from app.frontend.config import (
     API_BASE_URL,
     DESCRIPTION,
+    FOOTER,
     GRADIO_SERVER_NAME,
     GRADIO_SERVER_PORT,
     GRADIO_SHARE,
@@ -34,10 +35,6 @@ def create_app():
 {DESCRIPTION}
             """)
 
-        # Connect info
-        with gr.Row():
-            gr.Markdown(f"🔗 **API Endpoint:** `{API_BASE_URL}`")
-
         # Tabs
         with gr.Tabs():
             # Chat with RAG system
@@ -55,14 +52,13 @@ def create_app():
             # Health check
             create_health_tab(client)
 
+        # Connect info
+        with gr.Row():
+            gr.Markdown(f"🔗 **API Endpoint:** `{API_BASE_URL}`")
+
         # Footer
         with gr.Row(elem_id="footer"):
-            gr.Markdown("""
----
-**Atlas RAG System** v1.0 | Developed with FastAPI + Gradio + PostgreSQL + pgvector  
-📚 [Documentation](https://github.com/sergiogg94/atlas_rag_system) | 
-🐛 [Report Bug](https://github.com/sergiogg94/atlas_rag_system/issues)
-            """)
+            gr.Markdown(FOOTER)
 
     return app
 
