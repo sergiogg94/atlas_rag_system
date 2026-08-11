@@ -1,8 +1,9 @@
 import asyncio
+
 import gradio as gr
 
 from app.frontend.api_client import AtlasAPIClient
-from app.frontend.config import DEFAULT_TOP_K, DEFAULT_PROBES, DEFAULT_MAX_DISTANCE
+from app.frontend.config import DEFAULT_MAX_DISTANCE, DEFAULT_PROBES, DEFAULT_TOP_K
 
 
 def create_search_tab(client: AtlasAPIClient):
@@ -44,28 +45,28 @@ def create_search_tab(client: AtlasAPIClient):
 
                 details += f"""
 #### {sim_emoji} Result {i}
-**Document ID:** {res['document_id']}
-**Chunk ID:** {res['chunk_id']}
+**Document ID:** {res["document_id"]}
+**Chunk ID:** {res["chunk_id"]}
 **Similarity:** {similarity:.2f}
 
 **Content:** 
-{res['content']}
+{res["content"]}
 
 ---
                 """
 
             details += f"""
 ### Metadata
-- Latency: {result['metadata']['latency_ms']} ms
-- Top K: {result['metadata']['top_k']}
-- Probes: {result['metadata']['probes']}
-- Max Distance: {result['metadata']['max_distance']}
+- Latency: {result["metadata"]["latency_ms"]} ms
+- Top K: {result["metadata"]["top_k"]}
+- Probes: {result["metadata"]["probes"]}
+- Max Distance: {result["metadata"]["max_distance"]}
 """
             return status, details, total
 
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             status = "❌ Error performing search"
-            details = f"**Error:** {str(e)}"
+            details = f"**Error:** {e!s}"
             return status, details, 0
 
     def sync_search(
@@ -81,7 +82,7 @@ def create_search_tab(client: AtlasAPIClient):
         gr.Markdown("## Search for relevant documents")
 
         with gr.Row():
-            with gr.Column(scale=2):
+            with gr.Column(scale=6):
                 query_input = gr.Textbox(
                     label="Search Query",
                     placeholder="Enter your search query here...",
@@ -97,7 +98,7 @@ def create_search_tab(client: AtlasAPIClient):
                         label="Results", interactive=False, scale=1
                     )
 
-            with gr.Column(scale=1):
+            with gr.Column(scale=1):  # noqa: SIM117
                 with gr.Accordion("⚙️ Search Parameters", open=False):
                     top_k_input = gr.Slider(
                         label="Top K",
