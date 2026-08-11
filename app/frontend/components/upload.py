@@ -1,9 +1,9 @@
 import asyncio
+
 import gradio as gr
-from typing import List
 
 from app.frontend.api_client import AtlasAPIClient
-from app.frontend.config import DEFAULT_CHUNK_SIZE, DEFAULT_CHUNK_OVERLAP
+from app.frontend.config import DEFAULT_CHUNK_OVERLAP, DEFAULT_CHUNK_SIZE
 
 
 def create_upload_tab(client: AtlasAPIClient):
@@ -28,25 +28,25 @@ def create_upload_tab(client: AtlasAPIClient):
             details = f"""
 ### Result
 
-**File:** {result['filename']}
-**Title:** {result['title']}
-**Document ID:** {result['document_id']}
-**Chunks created:** {result['chunk_count']}
+**File:** {result["filename"]}
+**Title:** {result["title"]}
+**Document ID:** {result["document_id"]}
+**Chunks created:** {result["chunk_count"]}
 
 **Metadata:**
-- Latency: {result['metadata']['latency_ms']} ms
-- Chunk size: {result['metadata']['chunk_size']}
-- Chunk overlap: {result['metadata']['chunk_overlap']}
+- Latency: {result["metadata"]["latency_ms"]} ms
+- Chunk size: {result["metadata"]["chunk_size"]}
+- Chunk overlap: {result["metadata"]["chunk_overlap"]}
             """
             return status, details
 
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             status = "❌ Error uploading document"
-            details = f"**Error:** {str(e)}"
+            details = f"**Error:** {e!s}"
             return status, details
 
     async def upload_batch(
-        file_paths: List[str],
+        file_paths: list[str],
         chunk_size: int = 500,
         chunk_overlap: int = 50,
     ):
@@ -64,29 +64,29 @@ def create_upload_tab(client: AtlasAPIClient):
             details = "### Results\n\n"
             for result in results:
                 if result["status"] == "success":
-                    details += f"""**File:** {result['file']}
-**Title:** {result['data']['title']}
-**Document ID:** {result['data']['document_id']}
-**Chunks created:** {result['data']['chunk_count']}
+                    details += f"""**File:** {result["file"]}
+**Title:** {result["data"]["title"]}
+**Document ID:** {result["data"]["document_id"]}
+**Chunks created:** {result["data"]["chunk_count"]}
 
 **Metadata:**
-- Latency: {result['data']['metadata']['latency_ms']} ms
-- Chunk size: {result['data']['metadata']['chunk_size']}
-- Chunk overlap: {result['data']['metadata']['chunk_overlap']}
+- Latency: {result["data"]["metadata"]["latency_ms"]} ms
+- Chunk size: {result["data"]["metadata"]["chunk_size"]}
+- Chunk overlap: {result["data"]["metadata"]["chunk_overlap"]}
 
 ---
 """
                 else:
-                    details += f"""**File:** {result['file']}
-**Error:** {result['error']}
+                    details += f"""**File:** {result["file"]}
+**Error:** {result["error"]}
 """
                 details += "\n---\n"
 
             return status, details
 
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             status = "❌ Error during batch upload"
-            details = f"**Error:** {str(e)}"
+            details = f"**Error:** {e!s}"
             return status, details
 
     def sync_upload(file_path, title, chunk_size, chunk_overlap):
@@ -103,7 +103,7 @@ def create_upload_tab(client: AtlasAPIClient):
             # Individual file upload
             with gr.Tab("Single Upload"):
                 with gr.Row():
-                    with gr.Column():
+                    with gr.Column(scale=6):
                         upload_file = gr.File(
                             label="Select a document file to upload",
                             file_types=[".pdf", ".txt", ".md"],
@@ -131,7 +131,7 @@ def create_upload_tab(client: AtlasAPIClient):
 
                         upload_btn = gr.Button("📤 Upload file", variant="primary")
 
-                    with gr.Column():
+                    with gr.Column(scale=1):
                         upload_status = gr.Textbox(label="Status", interactive=False)
                         upload_details = gr.Markdown()
 
@@ -149,7 +149,7 @@ def create_upload_tab(client: AtlasAPIClient):
             # Multiple file upload
             with gr.Tab("Batch Upload"):
                 with gr.Row():
-                    with gr.Column():
+                    with gr.Column(scale=6):
                         batch_files = gr.File(
                             label="Select multiple document files for batch upload",
                             file_types=[".pdf", ".txt", ".md"],
@@ -176,7 +176,7 @@ def create_upload_tab(client: AtlasAPIClient):
                             "📤 Upload Batch", variant="primary"
                         )
 
-                    with gr.Column():
+                    with gr.Column(scale=1):
                         batch_upload_status = gr.Textbox(
                             label="Status", interactive=False
                         )
