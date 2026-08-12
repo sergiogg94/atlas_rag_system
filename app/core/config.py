@@ -30,6 +30,13 @@ class Settings:
             os.getenv("VOYAGE_EMBEDDING_DIMENSION", "1024")
         )
 
+        self.local_embedding_model = os.getenv(
+            "LOCAL_EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2"
+        )
+        self.local_embedding_dimension = int(
+            os.getenv("LOCAL_EMBEDDING_DIMENSION", "384")
+        )
+
         # LLM provider settings
         self.llm_provider = os.getenv("LLM_PROVIDER", "groq")
 
