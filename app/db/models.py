@@ -31,7 +31,7 @@ class Chunk(Base):
         id (int): The primary key of the chunk.
         document_id (int): The foreign key referencing the associated document.
         content (str): The content of the chunk.
-        embedding (Vector(1024)): The embedding vector for the chunk.
+        embedding (Vector(384)): The embedding vector for the chunk.
     """
 
     __tablename__ = "chunks"
@@ -39,7 +39,7 @@ class Chunk(Base):
     id = Column(Integer, primary_key=True)
     document_id = Column(Integer, ForeignKey("documents.id"), nullable=False)
     content = Column(Text, nullable=False)
-    embedding = Column(Vector(1024), nullable=False)
+    embedding = Column(Vector(384), nullable=False)
 
     document = relationship("Document", back_populates="chunks")
 
