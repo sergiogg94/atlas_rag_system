@@ -129,7 +129,9 @@ def create_upload_tab(client: AtlasAPIClient):
                                 step=10,
                             )
 
-                        upload_btn = gr.Button("📤 Upload file", variant="primary")
+                        upload_btn = gr.Button(
+                            "📤 Upload file", variant="primary", scale=0
+                        )
 
                     with gr.Column(scale=1):
                         upload_status = gr.Textbox(label="Status", interactive=False)
@@ -173,7 +175,7 @@ def create_upload_tab(client: AtlasAPIClient):
                             )
 
                         batch_upload_btn = gr.Button(
-                            "📤 Upload Batch", variant="primary"
+                            "📤 Upload Batch", variant="primary", scale=0
                         )
 
                     with gr.Column(scale=1):

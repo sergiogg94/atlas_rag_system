@@ -88,7 +88,7 @@ def create_search_tab(client: AtlasAPIClient):
                     placeholder="Enter your search query here...",
                     lines=2,
                 )
-                search_btn = gr.Button("🔎 Search", variant="primary")
+                search_btn = gr.Button("🔎 Search", variant="primary", scale=0)
 
                 with gr.Row():
                     search_status = gr.Textbox(

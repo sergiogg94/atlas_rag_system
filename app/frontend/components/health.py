@@ -1,4 +1,5 @@
 import asyncio
+
 import gradio as gr
 
 from app.frontend.api_client import AtlasAPIClient
@@ -8,18 +9,18 @@ def create_health_tab(client: AtlasAPIClient):
     async def check_health():
         try:
             result = await client.health_check()
-            status = f"✅ The service is functioning properly"
+            status = "✅ The service is functioning properly"
             details = f"""
-**Status:** {result['status']}
-**Service Name:** {result['service']}
-**Version:** {result['version']}
-**Check Time:** {result['timestamp']}
+**Status:** {result["status"]}
+**Service Name:** {result["service"]}
+**Version:** {result["version"]}
+**Check Time:** {result["timestamp"]}
             """
             return status, details
 
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             status = "❌ Service is down or unreachable"
-            details = f"**Error:** {str(e)}"
+            details = f"**Error:** {e!s}"
             return status, details
 
     def sync_check_health():
@@ -28,7 +29,7 @@ def create_health_tab(client: AtlasAPIClient):
     with gr.Tab("🏥 Health Check"):
         gr.Markdown("## System status")
 
-        check_btn = gr.Button("🔄 Check Status", variant="primary")
+        check_btn = gr.Button("🔄 Check Status", variant="primary", scale=0)
 
         with gr.Row():
             with gr.Column():

@@ -82,7 +82,7 @@ def create_ingest_tab(client: AtlasAPIClient):
                         info="Overlap between chunks",
                     )
 
-                ingest_btn = gr.Button("✨ Ingest Document", variant="primary")
+                ingest_btn = gr.Button("✨ Ingest Document", variant="primary", scale=0)
 
             with gr.Column(scale=1):
                 ingest_status = gr.Textbox(label="Status", interactive=False)
