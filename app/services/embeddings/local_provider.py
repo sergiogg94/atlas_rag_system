@@ -49,4 +49,4 @@ class LocalProvider(EmbeddingProvider):
         embeddings = await asyncio.to_thread(
             model.encode, texts, normalize_embeddings=True
         )
-        return embeddings.tolist()
+        return [embeddings.tolist()]
