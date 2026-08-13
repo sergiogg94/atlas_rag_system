@@ -35,6 +35,10 @@ services:
       # LLM provider settings
       LLM_PROVIDER: ${LLM_PROVIDER:-groq}
       GROQ_MODEL: ${GROQ_MODEL:-llama3-70b-8192}
+      # Embeddings provider settings
+      EMBEDDING_PROVIDER: ${EMBEDDING_PROVIDER:-local}
+      LOCAL_EMBEDDING_MODEL: ${LOCAL_EMBEDDING_MODEL:-sentence-transformers/all-MiniLM-L6-v2}
+      LOCAL_EMBEDDING_DIMENSION: ${LOCAL_EMBEDDING_DIMENSION:-384}
     ports:
       - "${API_PORT:-8000}:8000"
     depends_on:
