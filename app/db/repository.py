@@ -2,11 +2,77 @@ from sqlalchemy import select, text
 
 from app.core.logging import logger
 from app.db.engine import SessionLocal
-from app.db.models import Chunk, Document
+from app.db.models import Chunk, Collection, Document
 
 
 class Repository:
     """Repository class for managing database interactions."""
+
+    ###########################################################################
+    # Collections
+    ###########################################################################
+
+    async def create_collection(
+        self,
+        name: str,
+        provider: str,
+        model: str,
+        dimension: int,
+        description: str | None = None,
+    ):
+        """Creates a new vector collection."""
+        async with SessionLocal() as session:
+            collection = Collection(
+                name=name,
+                provider=provider,
+                model=model,
+                dimension=dimension,
+                description=description,
+            )
+            session.add(collection)
+            await session.commit()
+            await session.refresh(collection)
+            logger.info("Collection created: '%s' (id=%s)", name, collection.id)
+
+            return collection
+
+    async def get_collection(self, collection_id: int) -> Collection | None:
+        """Get collection by ID."""
+        async with SessionLocal() as session:
+            result = await session.execute(
+                select(Collection).where(Collection.id == collection_id)
+            )
+            return result.scalar_one_or_none()
+
+    async def get_collection_by_name(self, name: str) -> Collection | None:
+        """Get collection by name."""
+        async with SessionLocal() as session:
+            result = await session.execute(
+                select(Collection).where(Collection.name == name)
+            )
+            return result.scalar_one_or_none()
+
+    async def list_collections(self) -> list[Collection]:
+        """List all collections"""
+        async with SessionLocal() as session:
+            result = await session.execute(
+                select(Collection).order_by(Collection.created_at.desc())
+            )
+            return list(result.scalars().all())
+
+    async def delete_collection(self, collection_id: int) -> bool:
+        """Deletes a collection and all its documents/chunks (cascade)."""
+        async with SessionLocal() as session:
+            result = await session.execute(
+                select(Collection).where(Collection.id == collection_id)
+            )
+            collection = result.scalar_one_or_none()
+            if not collection:
+                return False
+            await session.delete(collection)
+            await session.commit()
+            logger.info("Collection deleted: id=%s", collection_id)
+            return True
 
     async def create_document(self, title: str) -> Document:
         """Create a new document record in the database.

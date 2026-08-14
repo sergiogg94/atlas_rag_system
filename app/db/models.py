@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 from app.db.engine import Base
 
 
-class Collecion(Base):
+class Collection(Base):
     """Represents a collection of vectors with a specific provider and dimension.
 
     Each collection has its own embedding space: provider, model, and dimension
