@@ -1,7 +1,9 @@
-from sqlalchemy import select
+from pgvector.sqlalchemy import Vector
+from sqlalchemy import cast, select
 
 from app.core.logging import logger
 from app.db.engine import SessionLocal
+from app.db.indexes import ensure_vector_index
 from app.db.models import Chunk, Collection, Document
 
 
@@ -34,7 +36,10 @@ class Repository:
             await session.refresh(collection)
             logger.info("Collection created: '%s' (id=%s)", name, collection.id)
 
-            return collection
+        # Partial HNSW index for this collection's dimension (idempotent)
+        await ensure_vector_index(dimension)
+
+        return collection
 
     async def get_collection(self, collection_id: int) -> Collection | None:
         """Get collection by ID."""
@@ -78,16 +83,14 @@ class Repository:
     # Documents
     ###########################################################################
 
-    async def create_document(self, title: str, collecctiion_id: int) -> Document:
-        """Create a new document record in a collecon."""
+    async def create_document(self, title: str, collection_id: int) -> Document:
+        """Create a new document record in a collection."""
         async with SessionLocal() as session:
-            document = Document(title=title, collecctiion_id=collecctiion_id)
+            document = Document(title=title, collection_id=collection_id)
             session.add(document)
             await session.commit()
             await session.refresh(document)
-            logger.info(
-                "Document created: '%s' in collection %s", title, collecctiion_id
-            )
+            logger.info("Document created: '%s' in collection %s", title, collection_id)
             return document
 
     async def list_documents(self, collection_id: int) -> list[Document]:
@@ -104,10 +107,27 @@ class Repository:
     # Chunks
     ###########################################################################
 
-    async def add_chunk(self, document_id: int, content: str, embedding: list[float]):
-        """Add a new chunk associated with a document."""
+    async def add_chunk(
+        self,
+        document_id: int,
+        content: str,
+        embedding: list[float],
+        dimension: int | None = None,
+    ):
+        """Add a new chunk associated with a document.
+
+        ``dimension`` is denormalized on the chunk so partial per-dimension
+        indexes can match it. If not provided (temporary bridge while
+        RAGService does not know the collection yet), it is derived from the
+        embedding length.
+        """
         async with SessionLocal() as session:
-            chunk = Chunk(document_id=document_id, content=content, embedding=embedding)
+            chunk = Chunk(
+                document_id=document_id,
+                content=content,
+                embedding=embedding,
+                dimension=dimension if dimension is not None else len(embedding),
+            )
             session.add(chunk)
             await session.commit()
 
@@ -120,18 +140,28 @@ class Repository:
     ) -> list[str]:
         """Search stored chunks by cosine similarity against the query embedding
         inside a given collection.
-        """
-        async with SessionLocal() as session:
-            # Add distance column
-            distance_col = Chunk.embedding.cosine_distance(query_embedding).label(
-                "distance"
-            )
 
+        The distance is computed on the cast expression ``embedding::vector(N)``
+        (N = query embedding length) so the planner can use the partial HNSW
+        index ``chunks_embedding_hnsw_N_idx``; if no index exists for that
+        dimension, it falls back to a sequential scan without breaking.
+        """
+        dimension = len(query_embedding)
+
+        # Add distance column
+        distance_col = (
+            cast(Chunk.embedding, Vector(dimension))
+            .cosine_distance(query_embedding)
+            .label("distance")
+        )
+
+        async with SessionLocal() as session:
             logger.info("Executing search")
             result = await session.execute(
                 select(Chunk, Document.title, distance_col)
                 .join(Document, Chunk.document_id == Document.id)
                 .where(Document.collection_id == collection_id)
+                .where(Chunk.dimension == dimension)
                 .where(distance_col <= max_distance)
                 .order_by(distance_col)
                 .limit(top_k)

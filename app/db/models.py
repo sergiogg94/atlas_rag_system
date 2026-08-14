@@ -12,7 +12,7 @@ class Collection(Base):
     are immutable after creation because all chunks must be comparable.
     """
 
-    _tablename__ = "collections"
+    __tablename__ = "collections"
 
     id = Column(Integer, primary_key=True)
     name = Column(Text, nullable=False, unique=True)
@@ -55,7 +55,8 @@ class Chunk(Base):
         id (int): The primary key of the chunk.
         document_id (int): The foreign key referencing the associated document.
         content (str): The content of the chunk.
-        embedding (Vector(384)): The embedding vector for the chunk.
+        embedding (Vector): The embedding vector for the chunk.
+        dimension (int): Embedding dimension, denormalized for partial per-dimension indexes.
     """
 
     __tablename__ = "chunks"
@@ -64,5 +65,6 @@ class Chunk(Base):
     document_id = Column(Integer, ForeignKey("documents.id"), nullable=False)
     content = Column(Text, nullable=False)
     embedding = Column(Vector, nullable=False)
+    dimension = Column(Integer, nullable=False)
 
     document = relationship("Document", back_populates="chunks")
