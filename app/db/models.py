@@ -1,8 +1,30 @@
 from pgvector.sqlalchemy import Vector
-from sqlalchemy import Column, ForeignKey, Index, Integer, Text
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, Text, func
 from sqlalchemy.orm import relationship
 
 from app.db.engine import Base
+
+
+class Collecion(Base):
+    """Represents a collection of vectors with a specific provider and dimension.
+
+    Each collection has its own embedding space: provider, model, and dimension
+    are immutable after creation because all chunks must be comparable.
+    """
+
+    _tablename__ = "collections"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(Text, nullable=False, unique=True)
+    description = Column(Text, nullable=True)
+    provider = Column(Text, nullable=False)  # "voyage" | "local"
+    model = Column(Text, nullable=False)  # exac model name
+    dimension = Column(Integer, nullable=False)
+    created_at = Column(DateTime, default=func.now(), nullable=False)
+
+    documents = relationship(
+        "Document", back_populates="collection", cascade="all, delete-orphan"
+    )
 
 
 class Document(Base):
@@ -39,17 +61,6 @@ class Chunk(Base):
     id = Column(Integer, primary_key=True)
     document_id = Column(Integer, ForeignKey("documents.id"), nullable=False)
     content = Column(Text, nullable=False)
-    embedding = Column(Vector(384), nullable=False)
+    embedding = Column(Vector, nullable=False)
 
     document = relationship("Document", back_populates="chunks")
-
-    # Create index for similarity search
-    __table_args__ = (
-        Index(
-            "chunks_embedding_idx",
-            "embedding",
-            postgresql_using="ivfflat",
-            postgresql_ops={"embedding": "vector_cosine_ops"},
-            postgresql_with={"lists": 100},
-        ),
-    )
