@@ -1,8 +1,9 @@
 import asyncio
+
 from sqlalchemy import text
-from app.db.models import Document, Chunk
-from app.db.engine import engine, Base
+
 from app.core.logging import logger
+from app.db.engine import Base, engine
 
 
 async def init_db():
@@ -18,6 +19,18 @@ async def init_db():
         logger.info("Creating database tables...")
         await conn.run_sync(Base.metadata.create_all)
         logger.info("Database tables created successfully.")
+
+        # Create a general index for vectorial search
+        logger.info("Creating vector index...")
+        await conn.execute(
+            text("""
+            CREATE INDEX IF NOT EXISTS chunks_embedding_hnsw_idx
+            ON chunks
+            USING hnsw (embedding vector_cosine_ops)
+            WITH (m = 16, ef_construction = 64)
+        """)
+        )
+        logger.info("Index created successfuly")
 
 
 if __name__ == "__main__":
