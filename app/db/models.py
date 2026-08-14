@@ -39,8 +39,10 @@ class Document(Base):
     __tablename__ = "documents"
 
     id = Column(Integer, primary_key=True)
+    collection_id = Column(Integer, ForeignKey("collections.id"), nullable=False)
     title = Column(Text, nullable=False)
 
+    collection = relationship("Collection", back_populates="documents")
     chunks = relationship(
         "Chunk", back_populates="document", cascade="all, delete-orphan"
     )

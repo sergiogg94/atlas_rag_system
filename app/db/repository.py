@@ -1,4 +1,4 @@
-from sqlalchemy import select, text
+from sqlalchemy import select
 
 from app.core.logging import logger
 from app.db.engine import SessionLocal
@@ -74,32 +74,38 @@ class Repository:
             logger.info("Collection deleted: id=%s", collection_id)
             return True
 
-    async def create_document(self, title: str) -> Document:
-        """Create a new document record in the database.
+    ###########################################################################
+    # Documents
+    ###########################################################################
 
-        Args:
-            title (str): The title of the document to create.
-
-        Returns:
-            Document: The created Document instance.
-        """
+    async def create_document(self, title: str, collecctiion_id: int) -> Document:
+        """Create a new document record in a collecon."""
         async with SessionLocal() as session:
-            logger.info(f"Creating document with title: {title}")
-            document = Document(title=title)
+            document = Document(title=title, collecctiion_id=collecctiion_id)
             session.add(document)
             await session.commit()
             await session.refresh(document)
-            logger.info(f"Document created with ID: {document.id}")
+            logger.info(
+                "Document created: '%s' in collection %s", title, collecctiion_id
+            )
             return document
 
-    async def add_chunk(self, document_id: int, content: str, embedding: list[float]):
-        """Add a new chunk associated with a document.
+    async def list_documents(self, collection_id: int) -> list[Document]:
+        """List all documents in a collection."""
+        async with SessionLocal() as session:
+            result = await session.execute(
+                select(Document)
+                .where(Document.collection_id == collection_id)
+                .order_by(Document.id.desc())
+            )
+            return list(result.scalars().all())
 
-        Args:
-            document_id (int): The ID of the parent document.
-            content (str): The text content of the chunk.
-            embedding (list[float]): The vector embedding for the chunk.
-        """
+    ###########################################################################
+    # Chunks
+    ###########################################################################
+
+    async def add_chunk(self, document_id: int, content: str, embedding: list[float]):
+        """Add a new chunk associated with a document."""
         async with SessionLocal() as session:
             chunk = Chunk(document_id=document_id, content=content, embedding=embedding)
             session.add(chunk)
@@ -108,26 +114,14 @@ class Repository:
     async def search(
         self,
         query_embedding: list[float],
+        collection_id: int,
         top_k: int = 5,
-        probes: int = 10,
         max_distance: float = 1.0,
     ) -> list[str]:
-        """Search stored chunks by cosine similarity against the query embedding.
-
-        Args:
-            query_embedding (list[float]): The embedding vector for the query.
-            top_k (int, optional): The number of top matching chunks to return. Defaults to 5.
-            probes (int, optional): The number of probes to use for the search. Defaults to 10.
-            max_distance (float, optional): The maximum cosine distance for a chunk to be considered a match. Defaults to 0.5.
-
-        Returns:
-            list[str]: A list of chunk contents ranked by similarity to the query.
+        """Search stored chunks by cosine similarity against the query embedding
+        inside a given collection.
         """
         async with SessionLocal() as session:
-            # Configure the number of probes for the search
-            probes = max(1, int(probes))
-            await session.execute(text(f"SET LOCAL ivfflat.probes = {probes}"))
-
             # Add distance column
             distance_col = Chunk.embedding.cosine_distance(query_embedding).label(
                 "distance"
@@ -137,6 +131,7 @@ class Repository:
             result = await session.execute(
                 select(Chunk, Document.title, distance_col)
                 .join(Document, Chunk.document_id == Document.id)
+                .where(Document.collection_id == collection_id)
                 .where(distance_col <= max_distance)
                 .order_by(distance_col)
                 .limit(top_k)
