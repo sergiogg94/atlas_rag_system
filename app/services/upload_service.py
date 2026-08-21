@@ -1,23 +1,24 @@
+import os
+import tempfile
+from pathlib import Path
+
 from fastapi import UploadFile
-from app.core.logging import logger
+
 from app.core.exceptions import (
-    DocumentValidationError,
     DocumentParsingError,
+    DocumentValidationError,
     UploadProcessError,
 )
+from app.core.logging import logger
+from app.services.parsers import DocumentParser
 from app.services.rag_service import RAGService
 from app.services.validators import validate_document
-from app.services.parsers import DocumentParser
-from pathlib import Path
-import tempfile
-import os
-from typing import Optional
 
 
 class UploadService:
     """Service for handling document uploads and ingestion."""
 
-    def __init__(self, rag_service: Optional[RAGService] = None):
+    def __init__(self, rag_service: RAGService | None = None):
         self.rag_service = rag_service or RAGService()
         self.validator = validate_document
         self.parser = DocumentParser()
@@ -25,7 +26,8 @@ class UploadService:
     async def process_upload(
         self,
         file: UploadFile,
-        title: Optional[str] = None,
+        collection_id: int,
+        title: str | None = None,
         chunk_size: int = 500,
         chunk_overlap: int = 50,
     ) -> tuple:
@@ -54,7 +56,7 @@ class UploadService:
         try:
             # Save the uploaded file to the temporary directory
             logger.info(f"Saving file to temporary location: {file_path}")
-            with open(file_path, "wb") as temp_file:
+            with open(file_path, "wb") as temp_file:  # noqa: ASYNC230
                 content = await file.read()
                 temp_file.write(content)
 
@@ -77,6 +79,7 @@ class UploadService:
             doc, chunk_count = await self.rag_service.ingest(
                 title=document_title,
                 content=parsed_content,
+                collection_id=collection_id,
                 chunk_size=chunk_size,
                 chunk_overlap=chunk_overlap,
             )
@@ -90,7 +93,7 @@ class UploadService:
             raise
         except DocumentParsingError:
             raise
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             logger.error(f"Error during document upload: {e}")
             raise UploadProcessError(str(e))
 
@@ -100,5 +103,5 @@ class UploadService:
                 try:
                     os.remove(file_path)
                     logger.info(f"Temporary file removed: {file_path}")
-                except Exception as e:
+                except Exception as e:  # noqa: BLE001
                     logger.warning(f"Failed to remove temporary file {file_path}: {e}")
