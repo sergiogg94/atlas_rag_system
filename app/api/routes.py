@@ -1,26 +1,30 @@
-from fastapi import APIRouter, UploadFile, File, Form, HTTPException, status
-from app.core.logging import logger
+from time import perf_counter
+
+from fastapi import APIRouter, File, Form, HTTPException, UploadFile, status
+
 from app.core.exceptions import (
-    DocumentValidationError,
     DocumentParsingError,
+    DocumentValidationError,
     UploadProcessError,
 )
-from app.services.rag_service import RAGService
-from app.services.upload_service import UploadService
+from app.core.logging import logger
 from app.models.schemas import (
+    CollectionCreate,
+    CollectionListResponse,
+    CollectionResponse,
+    ErrorResponse,
+    HealthResponse,
+    IngestRequest,
+    IngestResponse,
     QueryRequest,
     QueryResponse,
-    IngestRequest,
     SearchRequest,
     SearchResponse,
     SearchResult,
-    HealthResponse,
-    ErrorResponse,
-    IngestResponse,
     UploadResponse,
 )
-from typing import Optional
-from time import perf_counter
+from app.services.rag_service import RAGService
+from app.services.upload_service import UploadService
 
 router = APIRouter()
 rag_service = RAGService()
@@ -37,9 +41,83 @@ async def health() -> HealthResponse:
     return HealthResponse(
         status="ok",
         version="1.0.0",
+        service="Atlas API",
     )
 
 
+###############################################################################
+# Collections
+###############################################################################
+@router.get(
+    "/collections",
+    response_model=CollectionListResponse,
+    summary="List all collections",
+    description="Get all the vector collections available in the database",
+)
+async def list_collections():
+    """List all available collections."""
+    collections = await rag_service.list_collections()
+    return CollectionListResponse(
+        collections=[
+            CollectionResponse(
+                id=c.id,
+                name=c.name,
+                description=c.description,
+                provider=c.provider,
+                model=c.model,
+                dimension=c.dimension,
+                created_at=c.created_at,
+            )
+            for c in collections
+        ],
+        total=len(collections),
+    )
+
+
+@router.post("/collections", response_model=CollectionResponse, status_code=201)
+async def create_collection(payload: CollectionCreate):
+    """Creates a new vector collection."""
+    try:
+        collection = await rag_service.create_collection(
+            name=payload.name,
+            provider=payload.provider,
+            model=payload.model,
+            dimension=payload.dimension,
+            description=payload.description,
+        )
+        return CollectionResponse(
+            status="success",
+            id=collection.id,
+            name=collection.name,
+            description=collection.description,
+            provider=collection.provider,
+            model=collection.model,
+            dimension=collection.dimension,
+            created_at=collection.created_at,
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@router.delete("/collections/{collection_id}", status_code=204)
+async def delete_collection(collection_id: int):
+    """Deletes a collection with all the assosiated documents and chunks."""
+    deleted = await rag_service.delete_collection(collection_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Colección no encontrada.")
+
+
+@router.get("/collections/catalog")
+async def get_provider_catalog():
+    """Returns all available providers and models for creating a collection."""
+    from app.services.embeddings.factory import get_provider_catalog
+
+    return {"catalog": get_provider_catalog()}
+
+
+###############################################################################
+# Query
+###############################################################################
 @router.post(
     "/query",
     response_model=QueryResponse,
@@ -59,8 +137,8 @@ async def query(payload: QueryRequest) -> QueryResponse:
     try:
         result = await rag_service.query(
             question=payload.question,
+            collection_id=payload.collection_id,
             top_k=payload.top_k,
-            probes=payload.probes,
             max_distance=payload.max_distance,
             temperature=payload.temperature,
             max_tokens=payload.max_tokens,
@@ -70,13 +148,14 @@ async def query(payload: QueryRequest) -> QueryResponse:
         logger.info(f"Query completed in {latency_ms} ms")
 
         return QueryResponse(
+            status="success",
             response=result["answer"],
             sources=result["sources"],
             metadata={
                 "latency_ms": latency_ms,
             },
         )
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         logger.error(f"Error during query: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -84,6 +163,9 @@ async def query(payload: QueryRequest) -> QueryResponse:
         )
 
 
+###############################################################################
+# Ingest
+###############################################################################
 @router.post(
     "/ingest",
     response_model=IngestResponse,
@@ -111,6 +193,7 @@ async def ingest(payload: IngestRequest) -> IngestResponse:
         doc, chunk_count = await rag_service.ingest(
             title=payload.title,
             content=payload.content,
+            collection_id=payload.collection_id,
             chunk_size=payload.chunk_size,
             chunk_overlap=payload.chunk_overlap,
         )
@@ -119,6 +202,7 @@ async def ingest(payload: IngestRequest) -> IngestResponse:
         logger.info(f"Ingestion completed in {latency_ms} ms")
 
         return IngestResponse(
+            status="success",
             document_id=doc.id,
             title=doc.title,
             chunk_count=chunk_count,
@@ -129,7 +213,7 @@ async def ingest(payload: IngestRequest) -> IngestResponse:
                 "content_length": len(payload.content),
             },
         )
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         logger.error(f"Error during ingestion: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -137,6 +221,9 @@ async def ingest(payload: IngestRequest) -> IngestResponse:
         )
 
 
+###############################################################################
+# Upload
+###############################################################################
 @router.post(
     "/upload",
     response_model=UploadResponse,
@@ -149,8 +236,9 @@ async def ingest(payload: IngestRequest) -> IngestResponse:
     },
 )
 async def upload(
-    file: UploadFile = File(..., description="Document file to upload"),
-    title: Optional[str] = Form(None, description="Optional document title"),
+    file: UploadFile = File(..., description="Document file to upload"),  # noqa: B008
+    title: str | None = Form(None, description="Optional document title"),
+    collection_id: int = Form(...),
     chunk_size: int = Form(500, ge=100, le=2000),
     chunk_overlap: int = Form(50, ge=0, le=500),
 ) -> UploadResponse:
@@ -173,6 +261,7 @@ async def upload(
         doc, chunk_count, filename = await upload_service.process_upload(
             file=file,
             title=title,
+            collection_id=collection_id,
             chunk_size=chunk_size,
             chunk_overlap=chunk_overlap,
         )
@@ -181,6 +270,7 @@ async def upload(
         logger.info(f"Upload and ingestion completed in {latency_ms} ms")
 
         return UploadResponse(
+            status="success",
             filename=filename,
             document_id=doc.id,
             title=doc.title,
@@ -211,6 +301,9 @@ async def upload(
         )
 
 
+###############################################################################
+# Search
+###############################################################################
 @router.post(
     "/search",
     response_model=SearchResponse,
@@ -237,8 +330,8 @@ async def search(payload: SearchRequest) -> SearchResponse:
     try:
         results = await rag_service.search(
             query=payload.query,
+            collection_id=payload.collection_id,
             top_k=payload.top_k,
-            probes=payload.probes,
             max_distance=payload.max_distance,
         )
 
@@ -256,16 +349,16 @@ async def search(payload: SearchRequest) -> SearchResponse:
         logger.info(f"Search completed in {latency_ms} ms with {len(results)} results")
 
         return SearchResponse(
+            status="success",
             results=formatted_results,
             total_results=len(formatted_results),
             metadata={
                 "latency_ms": latency_ms,
                 "top_k": payload.top_k,
-                "probes": payload.probes,
                 "max_distance": payload.max_distance,
             },
         )
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         logger.error(f"Search failed: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)

@@ -123,7 +123,7 @@ class RAGService:
         max_distance: float = 1.0,
         temperature: float = 0.7,
         max_tokens: int = 512,
-    ) -> str:
+    ) -> dict:
         logger.info("Query process started for question: %s...", question[:50])
 
         # Search for relevant chunks in the database
