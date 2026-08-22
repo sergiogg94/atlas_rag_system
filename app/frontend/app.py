@@ -4,6 +4,7 @@ import gradio as gr
 
 from app.frontend.api_client import AtlasAPIClient
 from app.frontend.components.chat import create_chat_tab
+from app.frontend.components.collections import create_collections_tab
 from app.frontend.components.health import create_health_tab
 from app.frontend.components.ingest import create_ingest_tab
 from app.frontend.components.search import create_search_tab
@@ -39,6 +40,9 @@ def create_app():
         with gr.Tabs():
             # Chat with RAG system
             create_chat_tab(client)
+
+            # Manage collections
+            create_collections_tab(client)
 
             # Ingest text
             create_ingest_tab(client)
